@@ -1,14 +1,23 @@
-// src/App.js
+// App.js
 
 import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import AuthProvider from './AuthProvider';
 import Homepage from './Components/Homepage';
-import './App.css';
+import Login from './Components/Login';
 
 function App() {
     return (
-        <div className="App">
-            <Homepage />
-        </div>
+        <AuthProvider>
+            <Router>
+                <div className="App">
+                    <Routes>
+                        <Route path="/" element={<Homepage />} />
+                        <Route path="/login" element={<Login />} />
+                    </Routes>
+                </div>
+            </Router>
+        </AuthProvider>
     );
 }
 
