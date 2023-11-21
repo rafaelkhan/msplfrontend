@@ -1,0 +1,20 @@
+body {
+    background-color: #1c1c1c;
+}
+
+.header {
+    background-color: #1c1c1c;
+    color: #fff;
+}
+
+.button {
+    background: linear-gradient(to right, #fff, #000);
+}
+
+.button.blue {
+    background: linear-gradient(to right, #fff, #007aff);
+}
+
+.button.red {
+    background: linear-gradient(to right, #fff, #ff7f7f);
+}
