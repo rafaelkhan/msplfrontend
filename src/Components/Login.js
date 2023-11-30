@@ -1,8 +1,13 @@
+// Login.js
+
 import React from 'react';
+import './Homepage.css';
 
 function Login(){
-    return(
-        <div className="login-container"><h1>Hallo Welt wie geht es euch Hasen</h1></div>
+    return (
+        <div>
+            <h1>Der Hase ist real</h1>
+        </div>
     );
 }
 
