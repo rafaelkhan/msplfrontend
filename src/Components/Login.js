@@ -6,7 +6,7 @@ import './Homepage.css';
 function Login(){
     return (
         <div>
-            <h1>Der Hase ist real</h1>
+            <h1>Microsoft</h1>
         </div>
     );
 }
