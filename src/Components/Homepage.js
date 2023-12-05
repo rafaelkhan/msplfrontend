@@ -2,18 +2,35 @@
 import React from 'react';
 import './Homepage.css';
 import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import Logo from './Images/pngimg.com - microsoft_PNG13.png';
+import { signIn, signOut } from './authProvider'; // Importiere MSAL-Funktionen
 
 function Homepage() {
+    const history = useHistory();
+    const handleSignIn = async () => {
+        try {
+            await signIn();
+            history.push('/Dashboard'); // Weiterleitung zur Dashboard-Seite
+        } catch (error) {
+            console.error('An error occurred during login:', error);
+        }
+    };
+
+    const handleSignOut = () => {
+        signOut();
+        // Führe nach dem Abmelden erforderliche Aktionen durch.
+    };
+
     return (
         <div className="homepage-container">
             <h1><span className="mspl-text">MSPL</span> - Materialverwaltung</h1>
             <p>Logge dich dafür mit deinem Microsoft Account ein</p>
-            <Link to="/Dashboard">
-                <button className="bubble-button">
-                    <img src={Logo} alt="Logo" className="microsoftlogo" />
-                </button>
-            </Link>
+            <button className="bubble-button" onClick={handleSignIn}>
+                <img src={Logo} alt="Logo" className="microsoftlogo" />
+            </button>
+            {/* Beispiel: Ein Logout-Button (optional) */}
+            {/* <button onClick={handleSignOut}>Sign Out</button> */}
         </div>
     );
 }
