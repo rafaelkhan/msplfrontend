@@ -1,0 +1,24 @@
+/* Sidebar.css */
+.drawer {
+    width: 240px;
+    flex-shrink: 0;
+}
+
+.drawerPaper {
+    width: 240px;
+    background-color: #66cdaa; /* Hintergrundfarbe anpassen */
+}
+
+.logo {
+    width: 50%;
+    max-width: 50%;
+}
+
+.sidebar-link {
+    color: #176B87; /* Textfarbe für Links anpassen */
+    text-decoration: none;
+}
+
+.sidebar-link:hover {
+    color: #176B87;
+}

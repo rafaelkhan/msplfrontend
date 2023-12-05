@@ -1,0 +1,25 @@
+
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+}
+
+.dashboard-header {
+    font-size: 2em;
+    margin-bottom: 10px;
+    color: #176B87; /* Farbe anpassen */
+}
+
+.dashboard-mspl-text {
+    font-weight: bold;
+    color: #176B87;
+}
+
+.dashboard-content {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
