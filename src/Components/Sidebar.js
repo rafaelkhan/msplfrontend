@@ -1,45 +1,45 @@
-import React from 'react';
-import styled from 'styled-components';
+// Sidebar.js
+
+import React, { useState } from 'react';
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
 import { Link } from 'react-router-dom';
-import Logo from './Images/MSPL_Logo.jpeg';
 
-const SidebarContainer = styled.div`
-    width: ${({ isHovered }) => (isHovered ? '240px' : '0')};
-    transition: width 0.3s;
-`;
+function Sidebar() {
+    const [isSidebarOpen, setSidebarOpen] = useState(false);
 
-const Sidebar = () => {
-    const [isHovered, setIsHovered] = React.useState(false);
+    const handleSidebarToggle = () => {
+        setSidebarOpen(!isSidebarOpen);
+    };
 
     return (
-        <SidebarContainer
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-            isHovered={isHovered}
-        >
+        <div>
+            <IconButton
+                edge="start"
+                color="inherit"
+                aria-label="menu"
+                onClick={handleSidebarToggle}
+            >
+                <MenuIcon />
+            </IconButton>
             <Drawer
-                className="drawer"
-                variant="temporary"
                 anchor="left"
-                open={isHovered}
-                onClose={() => setIsHovered(false)}
-                classes={{
-                    paper: 'drawerPaper',
-                }}
+                open={isSidebarOpen}
+                onClose={handleSidebarToggle}
             >
                 <List>
-                    <ListItem button className="sidebar-link">
+                    <ListItem button component={Link} to="/dashboard">
                         <ListItemText primary="Dashboard" />
                     </ListItem>
-                    {/* Weitere ListItems für andere Seiten */}
+                    {/* Weitere ListItems für zusätzliche Seiten */}
                 </List>
             </Drawer>
-        </SidebarContainer>
+        </div>
     );
-};
+}
 
 export default Sidebar;

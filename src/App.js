@@ -10,7 +10,6 @@ function App() {
     return (
         <Router>
             <div>
-                <Sidebar />
                 <Routes>
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/" element={<Homepage />} />
