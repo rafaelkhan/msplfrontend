@@ -2,16 +2,18 @@
 import React from 'react';
 import './Homepage.css';
 import { Link } from 'react-router-dom';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Logo from './Images/pngimg.com - microsoft_PNG13.png';
 import { signIn, signOut } from './authProvider'; // Importiere MSAL-Funktionen
 
 function Homepage() {
-    const history = useHistory();
+    const navigate = useNavigate();
     const handleSignIn = async () => {
         try {
+            console.log('Attempting sign in...')
             await signIn();
-            history.push('/Dashboard'); // Weiterleitung zur Dashboard-Seite
+            console.log('Sign in successful');
+            navigate('/Dashboard'); // Weiterleitung zur Dashboard-Seite
         } catch (error) {
             console.error('An error occurred during login:', error);
         }
