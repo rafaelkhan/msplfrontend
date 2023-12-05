@@ -7,35 +7,44 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Link } from 'react-router-dom';
+import Logo from './Images/MSPL_Logo.jpeg';
+import './Sidebar.css';
 
 function Sidebar() {
-    const [isSidebarOpen, setSidebarOpen] = useState(false);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-    const handleSidebarToggle = () => {
-        setSidebarOpen(!isSidebarOpen);
+    const handleToggleSidebar = () => {
+        setIsSidebarOpen(!isSidebarOpen);
     };
 
     return (
         <div>
-            <IconButton
-                edge="start"
-                color="inherit"
-                aria-label="menu"
-                onClick={handleSidebarToggle}
-            >
-                <MenuIcon />
-            </IconButton>
+            <div className="sidebar-header">
+                <IconButton
+                    className="menu-icon"
+                    onClick={handleToggleSidebar}
+                    color="inherit"
+                    aria-label="menu"
+                >
+                    <MenuIcon />
+                </IconButton>
+            </div>
             <Drawer
+                className="drawer"
+                variant="temporary"
                 anchor="left"
                 open={isSidebarOpen}
-                onClose={handleSidebarToggle}
+                onClose={handleToggleSidebar}
+                classes={{
+                    paper: 'drawerPaper',
+                }}
             >
+                <img src={Logo} className="sidebar-logo"></img>
                 <List>
-                    <ListItem button component={Link} to="/dashboard">
+                    {/* Deine Sidebar-ListItems hier */}
+                    <ListItem button className="sidebar-link">
                         <ListItemText primary="Dashboard" />
                     </ListItem>
-                    {/* Weitere ListItems für zusätzliche Seiten */}
                 </List>
             </Drawer>
         </div>

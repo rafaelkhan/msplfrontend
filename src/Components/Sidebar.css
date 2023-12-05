@@ -1,28 +1,43 @@
 /* Sidebar.css */
 
-.sidebar {
-    height: 100vh;
-    width: 240px;
-    background-color: #34495e;
-    color: #ecf0f1;
-    padding-top: 20px;
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    margin-left: 10px;
+    padding: 20px;
+    color: #2C3E50;
 }
 
-.sidebar a {
-    text-decoration: none;
-    color: #ecf0f1;
-    font-size: 1.2em;
-    padding: 10px;
-    display: block;
-    transition: background-color 0.3s;
+.menu-icon {
+    color: #ECF0F1;
+    margin-top: 20px;
 }
 
-.sidebar a:hover {
-    background-color: #2c3e50;
+.drawerPaper {
+    background-color: #2C3E50;
+    color: #176B87;
+    height: 100%;
+    max-width: 150px;
 }
 
-.sidebar-icon {
-    font-size: 24px;
-    margin-right: 10px;
+.sidebar-link {
+    display: flex;
+    justify-content: center; /* Zentriere den Text horizontal */
+    align-items: center; /* Zentriere den Text vertikal */
+    color: #176B87;
+    text-align: left; /* Dies ist optional, wenn du den Text innerhalb des Listenelements zentrieren möchtest */
+    height: 40px; /* Passe die Höhe nach Bedarf an */
 }
 
+.sidebar-link:hover {
+    background-color: #34495E;
+}
+
+.sidebar-logo {
+    width: 50%;
+    height: auto;
+    margin: 20px auto; /* Zentriere das Logo horizontal */
+    display: block; /* Verhindere, dass das Bild den gesamten Platz einnimmt */
+}

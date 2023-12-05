@@ -2,12 +2,16 @@
 
 .dashboard {
     display: flex;
-}
+    justify-content: space-between;
+    }
 
 .dashboard-content {
     padding: 20px;
     flex-grow: 1;
     background-color: #ecf0f1;
+}
+h1 {
+    transition: margin-left 0.3s;
 }
 
 /* Hier kannst du weitere Stile für den Dashboard-Inhalt hinzufügen */
