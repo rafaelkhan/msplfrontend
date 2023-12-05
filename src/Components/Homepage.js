@@ -9,7 +9,7 @@ function Homepage() {
         <div className="homepage-container">
             <h1><span className="mspl-text">MSPL</span> - Materialverwaltung</h1>
             <p>Logge dich dafür mit deinem Microsoft Account ein</p>
-            <Link to="/Login">
+            <Link to="/Dashboard">
                 <button className="bubble-button">
                     <img src={Logo} alt="Logo" className="microsoftlogo" />
                 </button>
