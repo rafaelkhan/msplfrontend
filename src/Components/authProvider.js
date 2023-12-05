@@ -4,6 +4,8 @@ import { msalConfig } from './authConfig';
 
 const msalInstance = new PublicClientApplication(msalConfig);
 
+msalInstance.initialize();
+
 export const signIn = async () => {
     const loginRequest = {
         scopes: ['user.read'],
