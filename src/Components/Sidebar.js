@@ -30,6 +30,10 @@ function Sidebar() {
             console.error('An error occurred during logout:', error);
         }
     };
+    const handleNavigateTo = (path) => {
+        navigate(path);
+        setIsSidebarOpen(false); // Schließe die Sidebar, wenn ein Link ausgewählt wird
+    };
 
     return (
         <div
@@ -58,10 +62,10 @@ function Sidebar() {
                 <img src={Logo} className="sidebar-logo"></img>
                 <List>
                     {/* Deine Sidebar-ListItems hier */}
-                    <ListItem button className="sidebar-link">
+                    <ListItem button className="sidebar-link" onClick={() => handleNavigateTo('/dashboard')}>
                         <ListItemText primary="Dashboard" className="Text-Bar"/>
                     </ListItem>
-                    <ListItem button className="sidebar-link">
+                    <ListItem button className="sidebar-link" onClick={() => handleNavigateTo('/Materialverwaltung')}>
                         <ListItemText primary="Materialverwaltung" className="Text-Bar"/>
                     </ListItem>
                     <ListItem button className="sidebar-link">
