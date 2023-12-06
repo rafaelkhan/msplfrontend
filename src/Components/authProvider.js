@@ -20,6 +20,14 @@ export const signIn = async () => {
     }
 };
 
-export const signOut = () => {
-    msalInstance.logout();
+export const signOut = async () => {
+    try {
+        await msalInstance.logout();
+    } catch (error) {
+        console.error('An error occurred during sign out:', error);
+        throw error;
+    }
+
+    // Nach dem Abmelden zur Homepage weiterleiten
+    window.location.href = '/';
 };
