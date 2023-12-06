@@ -63,7 +63,7 @@ function Sidebar() {
                         <ListItemText primary="Materialverwaltung" />
                     </ListItem>
                     <ListItem button className="sidebar-link">
-                        <ListItemText primary="Materialverwaltung" />
+                        <ListItemText primary="Benutzerverwaltung   " />
                     </ListItem>
                 </List>
                 <Button variant="outlined" color="error" className="logout-button" onClick={handleLogout}>
