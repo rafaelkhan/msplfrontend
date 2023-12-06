@@ -19,11 +19,6 @@ function Homepage() {
         }
     };
 
-    const handleSignOut = () => {
-        signOut();
-        // Führe nach dem Abmelden erforderliche Aktionen durch.
-    };
-
     return (
         <div className="homepage-container">
             <h1><span className="mspl-text">MSPL</span> - Materialverwaltung</h1>
