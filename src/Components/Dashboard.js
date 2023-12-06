@@ -4,6 +4,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import './Dashboard.css';
+import Button from '@mui/material/Button'
 import { signOut } from './authProvider';
 
 function Dashboard() {
@@ -25,9 +26,9 @@ function Dashboard() {
                 <h1>Dashboard Content</h1>
 
                 {/* Hier ist der Logout-Button */}
-                <button className="logout-button" onClick={handleLogout}>
+                <Button variant="outlined" color="Error" className="logout-button" onClick={handleLogout}>
                     Logout
-                </button>
+                </Button>
             </div>
         </div>
     );
