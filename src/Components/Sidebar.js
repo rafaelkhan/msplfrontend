@@ -15,15 +15,17 @@ import './Sidebar.css';
 
 
 function Sidebar() {
+    const navigate = useNavigate();
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     const handleToggleSidebar = () => {
         setIsSidebarOpen(!isSidebarOpen);
+
     };
     const handleLogout = async () => {
         try {
             await signOut();
-            //navigate('/Homepage')
+            navigate('/Homepage')
         } catch (error) {
             console.error('An error occurred during logout:', error);
         }
@@ -57,13 +59,13 @@ function Sidebar() {
                 <List>
                     {/* Deine Sidebar-ListItems hier */}
                     <ListItem button className="sidebar-link">
-                        <ListItemText primary="Dashboard" />
+                        <ListItemText primary="Dashboard" className="Text-Bar"/>
                     </ListItem>
                     <ListItem button className="sidebar-link">
-                        <ListItemText primary="Materialverwaltung" />
+                        <ListItemText primary="Materialverwaltung" className="Text-Bar"/>
                     </ListItem>
                     <ListItem button className="sidebar-link">
-                        <ListItemText primary="Benutzerverwaltung   " />
+                        <ListItemText primary="Benutzerverwaltung" className="Text-Bar"/>
                     </ListItem>
                 </List>
                 <Button variant="outlined" color="error" className="logout-button" onClick={handleLogout}>

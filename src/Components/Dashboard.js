@@ -12,16 +12,6 @@ function Dashboard() {
     const handleToggleSidebar = () => {
         setIsSidebarOpen(!isSidebarOpen);
     };
-
-    const handleLogout = async () => {
-        try {
-            await signOut();
-            // navigate('/Homepage'); // Je nach Bedarf
-        } catch (error) {
-            console.error('An error occurred during logout:', error);
-        }
-    };
-
     return (
         <div style={{ display: 'flex' }}>
             <Sidebar />

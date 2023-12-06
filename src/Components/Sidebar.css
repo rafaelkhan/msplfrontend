@@ -13,25 +13,32 @@
     margin-top: 20px;
 }
 .logout-button{
-    max-width: ;
+    max-width: 50px;
+    align-self: center;
+    margin-bottom: 50px;
 }
 
 .drawerPaper {
     background-color: #2C3E50;
     color: #176B87;
     height: 100%;
-    max-width: 200px;
+    max-width: min-content;
 }
 
 .sidebar-link {
     display: flex;
     justify-content: center; /* Zentriere den Text horizontal */
-    align-items: center; /* Zentriere den Text vertikal */
     color: #176B87;
+    align-self: center;
     text-align: left; /* Dies ist optional, wenn du den Text innerhalb des Listenelements zentrieren möchtest */
     height: 40px; /* Passe die Höhe nach Bedarf an */
 }
 
+.Text-Bar{
+    justify-content: center;
+    align-self: center;
+    text-align: left
+}
 .sidebar-link:hover {
     background-color: #34495E;
 }
