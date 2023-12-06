@@ -28,9 +28,9 @@ function Homepage() {
         <div className="homepage-container">
             <h1><span className="mspl-text">MSPL</span> - Materialverwaltung</h1>
             <p>Logge dich dafür mit deinem Microsoft Account ein</p>
-            <Button variant="outlined" className="bubble-button" onClick={handleSignIn}>
+            <button className="bubble-button" onClick={handleSignIn}>
                 <img src={Logo} alt="Logo" className="microsoftlogo" />
-            </Button>
+            </button>
             {/* Beispiel: Ein Logout-Button (optional) */}
             {/* <button onClick={handleSignOut}>Sign Out</button> */}
         </div>

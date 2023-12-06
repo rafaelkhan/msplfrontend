@@ -1,34 +1,32 @@
 // Dashboard.js
 
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import Sidebar from './Sidebar';
-import './Dashboard.css';
-import Button from '@mui/material/Button'
+import Button from '@mui/material/Button';
 import { signOut } from './authProvider';
+import './Dashboard.css';
 
 function Dashboard() {
-    const navigate = useNavigate();
+    const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
+
+    const handleToggleSidebar = () => {
+        setIsSidebarOpen(!isSidebarOpen);
+    };
 
     const handleLogout = async () => {
         try {
             await signOut();
-            navigate('/Homepage');
+            // navigate('/Homepage'); // Je nach Bedarf
         } catch (error) {
             console.error('An error occurred during logout:', error);
         }
     };
 
     return (
-        <div className="dashboard">
+        <div style={{ display: 'flex' }}>
             <Sidebar />
-            <div className="dashboard-content">
-                <h1>Dashboard Content</h1>
-
-                {/* Hier ist der Logout-Button */}
-                <Button variant="outlined" color="Error" className="logout-button" onClick={handleLogout}>
-                    Logout
-                </Button>
+            <div className="dashboard-content" >
+                <h1>Dashboard</h1>
             </div>
         </div>
     );
