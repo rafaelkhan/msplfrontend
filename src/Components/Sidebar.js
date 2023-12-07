@@ -13,6 +13,7 @@ import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
 import './Sidebar.css';
 
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function Sidebar() {
     const navigate = useNavigate();
@@ -31,9 +32,11 @@ function Sidebar() {
         }
     };
     const handleNavigateTo = (path) => {
+        console.log('Navigating to:', path);
         navigate(path);
         setIsSidebarOpen(false); // Schließe die Sidebar, wenn ein Link ausgewählt wird
     };
+
 
     return (
         <div
@@ -70,6 +73,15 @@ function Sidebar() {
                     </ListItem>
                     <ListItem button className="sidebar-link" onClick={() => handleNavigateTo('/Benutzerverwaltung')}>
                         <ListItemText primary="Benutzerverwaltung" className="Text-Bar"/>
+                    </ListItem>
+                    <ListItem button className="sidebar-link" onClick={() => handleNavigateTo('/Ueberuns')}>
+                        <ListItemText primary="Über uns" className="Text-Bar"/>
+                    </ListItem>
+                    <ListItem button className="sidebar-link" onClick={() => handleNavigateTo('/Support')}>
+                        <ListItemText primary="Support" className="Text-Bar"/>
+                    </ListItem>
+                    <ListItem button className="sidebar-link" onClick={() => handleNavigateTo('/Help')}>
+                        <ListItemText primary="Help" className="Text-Bar"/>
                     </ListItem>
                 </List>
                 <Button variant="outlined" color="error" className="logout-button" onClick={handleLogout}>
