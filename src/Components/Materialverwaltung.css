@@ -1,13 +1,11 @@
 .Search-ID {
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* Änderung für die obere Hälfte */
     height: 20vh; /* Verwenden Sie 50vh, um es auf die obere Hälfte zu begrenzen */
 }
-
 
 .edit {
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* Änderung für die obere Hälfte */
-   }
+}
+

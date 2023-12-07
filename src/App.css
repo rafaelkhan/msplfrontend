@@ -1,6 +1,12 @@
-body {
-    background-color: #EEEEEE;
-    margin: 0;
-    font-family: "Rubiks", monospace;
-}
 
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: linear-gradient(to bottom, #5e666d, #7c8388, #9ba0a5, #bbbfc2, #dddfe0, #ffffff);
+    font-family: Arial, sans-serif;
+    color: #fff;
+}
