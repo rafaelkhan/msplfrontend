@@ -55,6 +55,7 @@ function Materialverwaltung() {
                         }}
                     >
                         <div className="edit">
+
                             <Badge color="secondary" badgeContent={count}>
                                 <LocalGroceryStoreIcon style={{ color: 'black' }} />
                             </Badge>
