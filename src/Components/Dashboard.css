@@ -1,0 +1,25 @@
+
+
+.dashboard {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 0; /* Initialer Wert */
+    transition: margin-left 0.3s; /* Füge eine Transition für ein sanftes Verschieben hinzu */
+}
+
+.sidebar-open .dashboard {
+    margin-left: 250px; /* Oder den gewünschten Wert basierend auf der Sidebar-Breite */
+}
+
+.dashboard-content {
+    margin-left: 90px;
+    margin-top: 10px;
+    flex-grow: 1;
+    background-color: #ecf0f1;
+}
+
+h1 {
+    transition: margin-left 0.3s;
+}
+
+

@@ -1,0 +1,51 @@
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    margin-left: 10px;
+    padding: 20px;
+    color: #2C3E50;
+}
+
+.menu-icon {
+    color: #ECF0F1;
+    margin-top: 20px;
+}
+.logout-button{
+    max-width: 50px;
+    align-self: center;
+    margin-bottom: 50px;
+}
+
+.drawerPaper {
+    background-color: #2C3E50;
+    color: #176B87;
+    height: 100%;
+    max-width: min-content;
+}
+
+.sidebar-link {
+    display: flex;
+    justify-content: center; /* Zentriere den Text horizontal */
+    color: #176B87;
+    align-self: center;
+    text-align: left; /* Dies ist optional, wenn du den Text innerhalb des Listenelements zentrieren möchtest */
+    height: 40px; /* Passe die Höhe nach Bedarf an */
+}
+
+.Text-Bar{
+    justify-content: center;
+    align-self: center;
+    text-align: left
+}
+.sidebar-link:hover {
+    background-color: #34495E;
+}
+
+.sidebar-logo {
+    width: 50%;
+    height: auto;
+    margin: 20px auto; /* Zentriere das Logo horizontal */
+    display: block; /* Verhindere, dass das Bild den gesamten Platz einnimmt */
+}
