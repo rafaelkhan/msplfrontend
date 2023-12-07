@@ -1,6 +1,6 @@
 import React from 'react';
 import Sidebar from './Sidebar';
-import './Dashboard.css';
+import './General.css';
 import './Materialverwaltung.css'
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';

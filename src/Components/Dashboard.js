@@ -4,7 +4,7 @@ import React from 'react';
 import Sidebar from './Sidebar';
 import Button from '@mui/material/Button';
 import { signOut } from './authProvider';
-import './Dashboard.css';
+import './General.css';
 
 function Dashboard() {
     const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
