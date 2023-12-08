@@ -1,13 +1,13 @@
 // App.js
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Homepage from './Components/Homepage';
-import Dashboard from './Components/Dashboard';
-import Materialverwaltung from './Components/Materialverwaltung';
-import Benutzerverwaltung from './Components/Benutzerverwaltung';
-import Ueberuns from './Components/Ueberuns';
-import Support from './Components/Support';
-import Help from './Components/Help';
+import Homepage from './pages/Homepage';
+import Dashboard from './pages/Dashboard';
+import Materialverwaltung from './pages/Materialverwaltung';
+import Benutzerverwaltung from './pages/Benutzerverwaltung';
+import Ueberuns from './pages/Ueberuns';
+import Support from './pages/Support';
+import Help from './pages/Help';
 import Sidebar from './Components/Sidebar';
 import './App.css';
 
