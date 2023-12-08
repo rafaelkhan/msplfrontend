@@ -1,6 +1,6 @@
 import React from 'react';
 import Sidebar from '../Components/Sidebar';
-import './General.css';
+import '../CSS/General.css';
 
 function Ueberuns() {
     return (

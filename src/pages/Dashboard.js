@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Sidebar from '../Components/Sidebar';
-import './General.css';
+import '../CSS/General.css';
 
 function Dashboard() {
     const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);

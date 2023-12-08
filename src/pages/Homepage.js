@@ -1,6 +1,6 @@
 // Homepage.js
 import React from 'react';
-import './Homepage.css';
+import '../CSS/Homepage.css';
 import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button'
 import Logo from '../Assets/pngimg.com - microsoft_PNG13.png';

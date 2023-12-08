@@ -1,7 +1,7 @@
 import React from 'react';
 import Sidebar from '../Components/Sidebar';
-import './General.css';
-import './Materialverwaltung.css'
+import '../CSS/General.css';
+import '../CSS/Materialverwaltung.css'
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
