@@ -6,7 +6,7 @@ const port = 3001;
 
 // MySQL-Verbindung herstellen
 const db = mysql.createConnection({
-    host: 'localhost:6003099',
+    host: 'localhost:3000',
     user: 'dein_mysql_benutzername',
     password: 'dein_mysql_passwort',
     database: 'deine_datenbank',
