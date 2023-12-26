@@ -15,6 +15,7 @@ function Dashboard() {
             <Sidebar />
             <div className="dashboard-content" >
                 <h1>Dashboard-Hase</h1>
+
             </div>
         </div>
     );
