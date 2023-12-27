@@ -12,6 +12,7 @@ export const signIn = async () => {
     };
 
     try {
+        sessionStorage.clear();
         const response = await msalInstance.loginPopup(loginRequest);
         return response.account;
     } catch (error) {
