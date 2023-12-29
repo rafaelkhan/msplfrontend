@@ -6,10 +6,10 @@ const port = 5000;
 
 // MySQL-Verbindung herstellen
 const db = mysql.createConnection({
-    host: 'localhost:3000',
-    user: 'dein_mysql_benutzername',
-    password: 'dein_mysql_passwort',
-    database: 'deine_datenbank',
+    host: 'mspl.cpg00wwyge82.eu-north-1.rds.amazonaws.com',
+    user: 'admin',
+    password: 'Mspl2024',
+    database: 'mspl',
     port: 3306,
 });
 
@@ -23,7 +23,7 @@ db.connect(err => {
 
 // Beispiel-Endpunkt
 app.get('/api/example', (req, res) => {
-    db.query('SELECT * FROM beispiel_tabelle', (err, result) => {
+    db.query('SELECT * FROM Materialattribut', (err, result) => {
         if (err) {
             console.error('Fehler beim Abrufen von Daten aus der Tabelle: ', err);
             res.status(500).send('Interner Serverfehler');

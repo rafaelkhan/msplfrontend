@@ -12,7 +12,7 @@ export const signIn = async () => {
     };
 
     try {
-        sessionStorage.clear();
+        sessionStorage.removeItem("msal.interaction.status")
         const response = await msalInstance.loginPopup(loginRequest);
         return response.account;
     } catch (error) {
