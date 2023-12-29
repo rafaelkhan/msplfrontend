@@ -8,10 +8,21 @@ import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
 import Switch from '@mui/material/Switch';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { Box, Badge, Button, ButtonGroup, TextField } from '@mui/material';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 function Materialverwaltung() {
     const [count, setCount] = React.useState(1);
     const [invisible, setInvisible] = React.useState(false);
+    const [materialien, setMaterialien] = useState([]);
+
+    useEffect(() => {
+        const apiUrl = 'http://localhost:3100/api/example';
+
+        axios.get(apiUrl)
+            .then((response) => setMaterialien(response.data))
+            .catch((error) => console.error('Fehler beim Abrufen der Materialdaten:', error));
+    }, []);
 
     const handleBadgeVisibility = () => {
         setInvisible(!invisible);
@@ -23,6 +34,22 @@ function Materialverwaltung() {
                 <Sidebar />
                 <div className="dashboard-content">
                     <h1>Materialverwaltung</h1>
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Verfügbar</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {materialien.map((Materialattribut) => (
+                            <tr key={Materialattribut.AttributName}>
+                                <td>{Materialattribut.AttributName}</td>
+                                <td>{Materialattribut.Einheit}</td>
+                            </tr>
+                        ))}
+                        </tbody>
+                    </table>
                     <div className="Search-ID">
                         <Box
                             component="form"
