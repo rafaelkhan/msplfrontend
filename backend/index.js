@@ -1,8 +1,9 @@
 const express = require('express');
 const mysql = require('mysql');
+const cors = require('cors')
 
 const app = express();
-const port = 5000;
+const port = 3100;
 
 // MySQL-Verbindung herstellen
 const db = mysql.createConnection({
@@ -20,7 +21,7 @@ db.connect(err => {
         console.log('Verbunden mit der MySQL-Datenbank');
     }
 });
-
+app.use(cors());
 // Beispiel-Endpunkt
 app.get('/api/example', (req, res) => {
     db.query('SELECT * FROM Materialattribut', (err, result) => {
