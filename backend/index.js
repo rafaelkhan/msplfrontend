@@ -6,10 +6,10 @@ const port = 5000;
 
 // MySQL-Verbindung herstellen
 const db = mysql.createConnection({
-    host: 'localhost:3000',
-    user: 'dein_mysql_benutzername',
-    password: 'dein_mysql_passwort',
-    database: 'deine_datenbank',
+    host: 'mspl.cpg00wwyge82.eu-north-1.rds.amazonaws.com',
+    user: 'admin',
+    password: 'Mspl2024',
+    database: 'mspl',
     port: 3306,
 });
 
