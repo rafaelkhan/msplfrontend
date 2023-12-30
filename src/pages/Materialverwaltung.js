@@ -9,20 +9,16 @@ import TableCell from '@mui/material/TableCell';
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
-import Badge from '@mui/material/Badge';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
-import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
 
 import Sidebar from '../Components/Sidebar';
 import '../CSS/General.css';
 import '../CSS/Materialverwaltung.css';
 
 function Materialverwaltung() {
-    const [count, setCount] = useState(1);
-    const [invisible, setInvisible] = useState(false);
     const [materialien, setMaterialien] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
 
@@ -34,11 +30,26 @@ function Materialverwaltung() {
             .catch((error) => console.error('Fehler beim Abrufen der Materialdaten:', error));
     }, []);
 
-    const handleBadgeVisibility = () => {
-        setInvisible(!invisible);
+    const increaseStock = (id) => {
+        axios.put(`http://localhost:3100/api/Materialtyp/${id}/increase`)
+            .then(() => {
+                axios.get('http://localhost:3100/api/Materialtyp')
+                    .then((response) => setMaterialien(response.data))
+                    .catch((error) => console.error('Fehler beim Abrufen der Materialdaten:', error));
+            })
+            .catch((error) => console.error('Fehler beim Erhöhen des Bestands:', error));
     };
 
-    // Filtere Materialien basierend auf dem Suchbegriff
+    const decreaseStock = (id) => {
+        axios.put(`http://localhost:3100/api/Materialtyp/${id}/decrease`)
+            .then(() => {
+                axios.get('http://localhost:3100/api/Materialtyp')
+                    .then((response) => setMaterialien(response.data))
+                    .catch((error) => console.error('Fehler beim Abrufen der Materialdaten:', error));
+            })
+            .catch((error) => console.error('Fehler beim Verringern des Bestands:', error));
+    };
+
     const filteredMaterialien = materialien.filter(
         (material) => material.Bezeichnung.toLowerCase().startsWith(searchTerm.toLowerCase())
     );
@@ -61,7 +72,6 @@ function Materialverwaltung() {
                         />
                     </Box>
                     <Paper sx={{ width: '40%', overflow: 'hidden' }}>
-                        {/* Searchbar */}
                         <TableContainer component={Paper}>
                             <Table>
                                 <TableHead>
@@ -69,6 +79,7 @@ function Materialverwaltung() {
                                         <TableCell>ID</TableCell>
                                         <TableCell>Name</TableCell>
                                         <TableCell>Verfügbar</TableCell>
+                                        <TableCell>Aktionen</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -77,41 +88,32 @@ function Materialverwaltung() {
                                             <TableCell>{Materialtyp.MaterialtypID}</TableCell>
                                             <TableCell>{Materialtyp.Bezeichnung}</TableCell>
                                             <TableCell>{Materialtyp.SollBestand}</TableCell>
+                                            <TableCell>
+                                                <ButtonGroup>
+                                                    <Button
+                                                        variant="contained"
+                                                        color="success"
+                                                        onClick={() => increaseStock(Materialtyp.MaterialtypID)}
+                                                        startIcon={<AddIcon />}
+                                                    >
+                                                        Erhöhen
+                                                    </Button>
+                                                    <Button
+                                                        variant="contained"
+                                                        color="error"
+                                                        onClick={() => decreaseStock(Materialtyp.MaterialtypID)}
+                                                        startIcon={<RemoveIcon />}
+                                                    >
+                                                        Verringern
+                                                    </Button>
+                                                </ButtonGroup>
+                                            </TableCell>
                                         </TableRow>
                                     ))}
                                 </TableBody>
                             </Table>
                         </TableContainer>
                     </Paper>
-                    <div className="Search-ID">
-                        <Box
-                            component="form"
-                            sx={{
-                                '& .MuiTextField-root': { m: 1, width: '25ch' },
-                            }}
-                            noValidate
-                            autoComplete="off"
-                        >
-                            {/* Rest des Codes bleibt unverändert */}
-                            {/* ... */}
-                        </Box>
-                    </div>
-                    <Box
-                        sx={{
-                            color: 'action.active',
-                            display: 'flex',
-                            flexDirection: 'column',
-                            '& > *': {
-                                marginBottom: 2,
-                            },
-                            '& .MuiBadge-root': {
-                                marginRight: 4,
-                            },
-                        }}
-                    >
-                        {/* Rest des Codes bleibt unverändert */}
-                        {/* ... */}
-                    </Box>
                 </div>
             </div>
         </div>

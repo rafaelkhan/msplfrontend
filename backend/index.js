@@ -33,6 +33,36 @@ app.get('/api/Materialtyp', (req, res) => {
         }
     });
 });
+// ...
+
+// Beispiel-Endpunkt für Aktualisierung der Verfügbarkeit
+app.put('/api/Materialtyp/:id/increase', (req, res) => {
+    const { id } = req.params;
+
+    db.query('UPDATE Materialtyp SET SollBestand = SollBestand + 1 WHERE MaterialtypID = ?', [id], (err, result) => {
+        if (err) {
+            console.error('Fehler beim Aktualisieren des Bestands: ', err);
+            res.status(500).send('Interner Serverfehler');
+        } else {
+            res.status(200).send('Bestand erfolgreich erhöht');
+        }
+    });
+});
+
+app.put('/api/Materialtyp/:id/decrease', (req, res) => {
+    const { id } = req.params;
+
+    db.query('UPDATE Materialtyp SET SollBestand = SollBestand - 1 WHERE MaterialtypID = ?', [id], (err, result) => {
+        if (err) {
+            console.error('Fehler beim Aktualisieren des Bestands: ', err);
+            res.status(500).send('Interner Serverfehler');
+        } else {
+            res.status(200).send('Bestand erfolgreich verringert');
+        }
+    });
+});
+
+// ...
 
 app.listen(port, () => {
     console.log(`Server läuft auf http://localhost:${port}`);
