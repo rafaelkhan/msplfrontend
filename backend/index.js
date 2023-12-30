@@ -23,8 +23,8 @@ db.connect(err => {
 });
 app.use(cors());
 // Beispiel-Endpunkt
-app.get('/api/example', (req, res) => {
-    db.query('SELECT * FROM Materialattribut', (err, result) => {
+app.get('/api/Materialtyp', (req, res) => {
+    db.query('SELECT MaterialtypID,Bezeichnung,SollBestand FROM Materialtyp', (err, result) => {
         if (err) {
             console.error('Fehler beim Abrufen von Daten aus der Tabelle: ', err);
             res.status(500).send('Interner Serverfehler');
