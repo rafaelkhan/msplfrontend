@@ -6,7 +6,7 @@ function Help() {
     return (
         <div style={{ display: 'flex' }}>
             <Sidebar/>
-            <div className="dashboard-content">
+            <div className="content">
                 <h1>Help</h1>
             </div>
         </div>

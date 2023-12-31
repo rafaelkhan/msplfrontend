@@ -6,7 +6,7 @@ function Ueberuns() {
     return (
         <div style={{ display: 'flex' }}>
             <Sidebar/>
-            <div className="dashboard-content">
+            <div className="content">
                 <h1>Über Uns</h1>
                 <div className="about-us-container">
                 <p>

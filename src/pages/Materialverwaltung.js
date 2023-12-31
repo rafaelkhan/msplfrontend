@@ -51,19 +51,21 @@ function Materialverwaltung() {
     };
 
     const filteredMaterialien = materialien.filter(
-        (material) => material.Bezeichnung.toLowerCase().startsWith(searchTerm.toLowerCase())
+        (material) =>
+            material.Bezeichnung.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            material.MaterialtypID.toString().includes(searchTerm.toLowerCase())
     );
 
     return (
         <div className="body">
             <div style={{ display: 'flex' }}>
                 <Sidebar />
-                <div className="dashboard-content">
+                <div className="content">
                     <h1>Materialverwaltung</h1>
                     <Box sx={{ width: '60%', marginTop: '16px' }}>
                         <TextField
                             id="outlined-search"
-                            label="Suche nach Anfangsbuchstaben"
+                            label="Suche nach Name oder ID"
                             type="search"
                             variant="outlined"
                             value={searchTerm}
@@ -71,7 +73,7 @@ function Materialverwaltung() {
                             sx={{ width: '100%' }}
                         />
                     </Box>
-                    <Paper sx={{ display: 'flex' ,width: '60%', overflow: 'hidden' }}>
+                    <Paper sx={{ width: '60%', overflow: 'hidden' }}>
                         <TableContainer component={Paper}>
                             <Table>
                                 <TableHead>

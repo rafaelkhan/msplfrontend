@@ -13,7 +13,7 @@ function Dashboard() {
     return (
         <div style={{ display: 'flex' }}>
             <Sidebar />
-            <div className="dashboard-content" >
+            <div className="content" >
                 <h1>Dashboard-Hase</h1>
 
             </div>
