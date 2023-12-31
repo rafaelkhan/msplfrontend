@@ -64,6 +64,10 @@ app.put('/api/Materialtyp/:id/decrease', (req, res) => {
 
 // ...
 
+app.use((req, res) => {
+    res.status(404).send('Not Found');
+});
+
 app.listen(port, () => {
     console.log(`Server läuft auf http://localhost:${port}`);
 });

@@ -60,7 +60,7 @@ function Materialverwaltung() {
                 <Sidebar />
                 <div className="dashboard-content">
                     <h1>Materialverwaltung</h1>
-                    <Box sx={{ width: '40%', marginTop: '16px' }}>
+                    <Box sx={{ width: '60%', marginTop: '16px' }}>
                         <TextField
                             id="outlined-search"
                             label="Suche nach Anfangsbuchstaben"
@@ -71,7 +71,7 @@ function Materialverwaltung() {
                             sx={{ width: '100%' }}
                         />
                     </Box>
-                    <Paper sx={{ width: '40%', overflow: 'hidden' }}>
+                    <Paper sx={{ display: 'flex' ,width: '60%', overflow: 'hidden' }}>
                         <TableContainer component={Paper}>
                             <Table>
                                 <TableHead>
