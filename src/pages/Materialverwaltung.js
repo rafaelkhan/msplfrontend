@@ -23,7 +23,7 @@ function Materialverwaltung() {
     const [searchTerm, setSearchTerm] = useState('');
 
     useEffect(() => {
-        const apiUrl = 'http://localhost:3100/api/Materialtyp';
+        const apiUrl = '/api/Materialtyp';
 
         axios.get(apiUrl)
             .then((response) => setMaterialien(response.data))
@@ -31,9 +31,9 @@ function Materialverwaltung() {
     }, []);
 
     const increaseStock = (id) => {
-        axios.put(`http://localhost:3100/api/Materialtyp/${id}/increase`)
+        axios.put(`/api/Materialtyp/${id}/increase`)
             .then(() => {
-                axios.get('http://localhost:3100/api/Materialtyp')
+                axios.get('/api/Materialtyp')
                     .then((response) => setMaterialien(response.data))
                     .catch((error) => console.error('Fehler beim Abrufen der Materialdaten:', error));
             })
@@ -41,9 +41,9 @@ function Materialverwaltung() {
     };
 
     const decreaseStock = (id) => {
-        axios.put(`http://localhost:3100/api/Materialtyp/${id}/decrease`)
+        axios.put(`/api/Materialtyp/${id}/decrease`)
             .then(() => {
-                axios.get('http://localhost:3100/api/Materialtyp')
+                axios.get('/api/Materialtyp')
                     .then((response) => setMaterialien(response.data))
                     .catch((error) => console.error('Fehler beim Abrufen der Materialdaten:', error));
             })
