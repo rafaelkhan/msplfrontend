@@ -74,9 +74,6 @@ function Sidebar() {
                     <ListItem button className="sidebar-link" onClick={() => handleNavigateTo('/Ueberuns')}>
                         <ListItemText primary="Über uns" className="Text-Bar"/>
                     </ListItem>
-                    <ListItem button className="sidebar-link" onClick={() => handleNavigateTo('/Support')}>
-                        <ListItemText primary="Support" className="Text-Bar"/>
-                    </ListItem>
                     <ListItem button className="sidebar-link" onClick={() => handleNavigateTo('/Help')}>
                         <ListItemText primary="Help" className="Text-Bar"/>
                     </ListItem>
