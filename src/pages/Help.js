@@ -7,7 +7,7 @@ function Help() {
         <div style={{ display: 'flex' }}>
             <Sidebar/>
             <div className="content">
-                <h1>Help</h1>
+                <h1 className="Titel">Help</h1>
             </div>
         </div>
     );

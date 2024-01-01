@@ -61,61 +61,63 @@ function Materialverwaltung() {
             <div style={{ display: 'flex' }}>
                 <Sidebar />
                 <div className="content">
-                    <h1>Materialverwaltung</h1>
-                    <Box sx={{ width: '60%', marginTop: '16px' }}>
-                        <TextField
-                            id="outlined-search"
-                            label="Suche nach Name oder ID"
-                            type="search"
-                            variant="outlined"
-                            value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
-                            sx={{ width: '100%' }}
-                        />
-                    </Box>
-                    <Paper sx={{ width: '60%', overflow: 'hidden' }}>
-                        <TableContainer component={Paper}>
-                            <Table>
-                                <TableHead>
-                                    <TableRow>
-                                        <TableCell>ID</TableCell>
-                                        <TableCell>Name</TableCell>
-                                        <TableCell>Verfügbar</TableCell>
-                                        <TableCell>Aktionen</TableCell>
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    {filteredMaterialien.map((Materialtyp) => (
-                                        <TableRow key={Materialtyp.MaterialtypID}>
-                                            <TableCell>{Materialtyp.MaterialtypID}</TableCell>
-                                            <TableCell>{Materialtyp.Bezeichnung}</TableCell>
-                                            <TableCell>{Materialtyp.SollBestand}</TableCell>
-                                            <TableCell>
-                                                <ButtonGroup>
-                                                    <Button
-                                                        variant="contained"
-                                                        color="success"
-                                                        onClick={() => increaseStock(Materialtyp.MaterialtypID)}
-                                                        startIcon={<AddIcon />}
-                                                    >
-                                                        Erhöhen
-                                                    </Button>
-                                                    <Button
-                                                        variant="contained"
-                                                        color="error"
-                                                        onClick={() => decreaseStock(Materialtyp.MaterialtypID)}
-                                                        startIcon={<RemoveIcon />}
-                                                    >
-                                                        Verringern
-                                                    </Button>
-                                                </ButtonGroup>
-                                            </TableCell>
+                    <h1 className="Titel">Materialverwaltung</h1>
+                    <div className="specific-content">
+                        <Box sx={{ width: '100%', marginTop: '16px' }}>
+                            <TextField
+                                id="outlined-search"
+                                label="Suche nach Name oder ID"
+                                type="search"
+                                variant="outlined"
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                                sx={{ width: '100%' }}
+                            />
+                        </Box>
+                        <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+                            <TableContainer component={Paper}>
+                                <Table>
+                                    <TableHead>
+                                        <TableRow>
+                                            <TableCell>ID</TableCell>
+                                            <TableCell>Name</TableCell>
+                                            <TableCell>Verfügbar</TableCell>
+                                            <TableCell>Aktionen</TableCell>
                                         </TableRow>
-                                    ))}
-                                </TableBody>
-                            </Table>
-                        </TableContainer>
-                    </Paper>
+                                    </TableHead>
+                                    <TableBody>
+                                        {filteredMaterialien.map((Materialtyp) => (
+                                            <TableRow key={Materialtyp.MaterialtypID}>
+                                                <TableCell>{Materialtyp.MaterialtypID}</TableCell>
+                                                <TableCell>{Materialtyp.Bezeichnung}</TableCell>
+                                                <TableCell>{Materialtyp.SollBestand}</TableCell>
+                                                <TableCell>
+                                                    <ButtonGroup>
+                                                        <Button
+                                                            variant="contained"
+                                                            color="success"
+                                                            onClick={() => increaseStock(Materialtyp.MaterialtypID)}
+                                                            startIcon={<AddIcon />}
+                                                        >
+                                                            Erhöhen
+                                                        </Button>
+                                                        <Button
+                                                            variant="contained"
+                                                            color="error"
+                                                            onClick={() => decreaseStock(Materialtyp.MaterialtypID)}
+                                                            startIcon={<RemoveIcon />}
+                                                        >
+                                                            Verringern
+                                                        </Button>
+                                                    </ButtonGroup>
+                                                </TableCell>
+                                            </TableRow>
+                                        ))}
+                                    </TableBody>
+                                </Table>
+                            </TableContainer>
+                        </Paper>
+                    </div>
                 </div>
             </div>
         </div>

@@ -26,5 +26,22 @@ p {
     line-height: 1.5;
     margin-bottom: 15px;
 }
+.content {
+    margin-left: 90px;
+    margin-top: 10px;
+    flex-grow: 1;
+}
 
+@media (max-width: 768px) {
+    body {
+        font-size: 16px;
+    }
+    .content {
+        margin-left: 90px;
+    }
+    /* Weitere Anpassungen für kleinere Bildschirme */
+    .specific-content {
+        font-size: 2px;
+    }
+}
 

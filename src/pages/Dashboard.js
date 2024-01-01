@@ -16,21 +16,23 @@ function Dashboard() {
         <div style={{ display: 'flex' }}>
             <Sidebar />
             <div className="content">
-                <h1>Dashboard</h1>
-                <Paper
-                    sx={{
-                        p: 2,
-                        borderRadius: 4,
-                        cursor: 'pointer',
-                        '&:hover': {
-                            backgroundColor: '#f1f1f1',
-                        },
-                        width: 'fit-content',
-                    }}
-                >
-                    <Typography variant="h6">Materialübersicht</Typography>
-                    <MaterialChart />
-                </Paper>
+                <h1 className="Titel">Dashboard</h1>
+                <div className="specific-content">
+                    <Paper
+                        sx={{
+                            p: 2,
+                            borderRadius: 4,
+                            cursor: 'pointer',
+                            '&:hover': {
+                                backgroundColor: '#f1f1f1',
+                            },
+                            width: 'fit-content',
+                        }}
+                    >
+                        <Typography variant="h6">Materialübersicht</Typography>
+                        <MaterialChart />
+                    </Paper>
+                </div>
             </div>
         </div>
     );

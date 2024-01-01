@@ -7,7 +7,7 @@ function Ueberuns() {
         <div style={{ display: 'flex' }}>
             <Sidebar/>
             <div className="content">
-                <h1>Über Uns</h1>
+                <h1 className="Titel">Über Uns</h1>
                 <div className="about-us-container">
                 <p>
                 Willkommen auf der Website unseres Schülerteams der HTL SZU Ungargasse! Wir sind eine Gruppe von engagierten Schülern in unserer Abschlussklasse, die sich leidenschaftlich der Materialverwaltung im Bereich Smart Production Lap widmet.</p>
