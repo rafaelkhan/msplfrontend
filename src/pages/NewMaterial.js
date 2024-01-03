@@ -3,7 +3,7 @@ import Sidebar from '../Components/Sidebar';
 import '../CSS/General.css';
 
 const NewMaterial = () => {
-    const [newMateria, setNewMaterial] = useState({
+    const [newMateriaL, setNewMaterial] = useState({
         MaterialTypId:"",
         Bezeichnung:"",
         SollBestand:"",

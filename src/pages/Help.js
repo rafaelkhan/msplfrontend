@@ -8,7 +8,7 @@ function Help() {
         title: "FAQ",
         rows: [
             {
-                title: "Wie funktioniert die Webaplikation?",
+                title: "Wie funktioniert die Webapplikation?",
                 content: `Die Website ist mit einer Datenbank im Backend verbunden. In der Datenbank sind Materialien des SPL 
                 des SZU gespeichert. Wenn Sie ein Material entnehmen, dann kennzeichnen Sie dies bitte in der Materialverwaltung.`,
             },
