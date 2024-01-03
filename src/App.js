@@ -6,6 +6,7 @@ import Dashboard from './pages/Dashboard';
 import Materialverwaltung from './pages/Materialverwaltung';
 import Ueberuns from './pages/Ueberuns';
 import Help from './pages/Help';
+import NewMaterial from './pages/NewMaterial';
 import Sidebar from './Components/Sidebar';
 import './App.css';
 
@@ -19,7 +20,8 @@ function App() {
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/materialverwaltung" element={<Materialverwaltung />} />
                     <Route path="/ueberuns" element={<Ueberuns />} />
-                    <Route path="/Help" element={<Help />} />
+                    <Route path="/help" element={<Help />} />
+                    <Route path="/newmaterial" element={<NewMaterial />} />
                 </Routes>
             </div>
         </Router>

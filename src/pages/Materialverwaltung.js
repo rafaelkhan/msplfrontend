@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Table from '@mui/material/Table';
+import { Link } from 'react-router-dom';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableBody from '@mui/material/TableBody';
@@ -63,7 +64,7 @@ function Materialverwaltung() {
                 <div className="content">
                     <h1 className="Titel">Materialverwaltung</h1>
                     <div className="specific-content">
-                        <Box sx={{ width: '100%', marginTop: '16px' }}>
+                        <Box sx={{ width: '60%', marginTop: '16px' }}>
                             <TextField
                                 id="outlined-search"
                                 label="Suche nach Name oder ID"
@@ -74,7 +75,14 @@ function Materialverwaltung() {
                                 sx={{ width: '100%' }}
                             />
                         </Box>
-                        <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+                        <Box sx={{ width: '60%'}}>
+                            <Link to="/newmaterial">
+                            <Button sx={{ width: '100%', height: '3vw'}} variant="outlined" color="secondary">
+                            Neues Material hinzufügen
+                            </Button>
+                            </Link>
+                        </Box>
+                        <Paper sx={{ width: '60%', overflow: 'hidden' }}>
                             <TableContainer component={Paper}>
                                 <Table>
                                     <TableHead>
@@ -82,7 +90,7 @@ function Materialverwaltung() {
                                             <TableCell>ID</TableCell>
                                             <TableCell>Name</TableCell>
                                             <TableCell>Verfügbar</TableCell>
-                                            <TableCell>Aktionen</TableCell>
+                                            <TableCell sx={{textAlign: 'center'}}>Aktionen</TableCell>
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
@@ -91,23 +99,21 @@ function Materialverwaltung() {
                                                 <TableCell>{Materialtyp.MaterialtypID}</TableCell>
                                                 <TableCell>{Materialtyp.Bezeichnung}</TableCell>
                                                 <TableCell>{Materialtyp.SollBestand}</TableCell>
-                                                <TableCell>
+                                                <TableCell sx={{textAlign: 'center'}}>
                                                     <ButtonGroup>
                                                         <Button
-                                                            variant="contained"
+                                                            variant="text"
                                                             color="success"
                                                             onClick={() => increaseStock(Materialtyp.MaterialtypID)}
                                                             startIcon={<AddIcon />}
                                                         >
-                                                            Erhöhen
                                                         </Button>
                                                         <Button
-                                                            variant="contained"
+                                                            variant="text"
                                                             color="error"
                                                             onClick={() => decreaseStock(Materialtyp.MaterialtypID)}
-                                                            startIcon={<RemoveIcon />}
+                                                            endIcon={<RemoveIcon/>}
                                                         >
-                                                            Verringern
                                                         </Button>
                                                     </ButtonGroup>
                                                 </TableCell>
