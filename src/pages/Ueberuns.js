@@ -1,6 +1,9 @@
 import React from 'react';
 import Sidebar from '../Components/Sidebar';
 import '../CSS/General.css';
+import Materiallager from "./img/Materiallager.jpg";
+import Person from "./img/Person.jpg";
+
 
 function Ueberuns() {
     return (
@@ -8,16 +11,44 @@ function Ueberuns() {
             <Sidebar/>
             <div className="content">
                 <h1 className="Titel">Über Uns</h1>
+                <img
+                    src={Materiallager}
+                    alt="Materiallager-img"
+                    style={{ width: '95%' }}
+                />
                 <div className="about-us-container">
-                <p>
-                Willkommen auf der Website unseres Schülerteams der HTL SZU Ungargasse! Wir sind eine Gruppe von engagierten Schülern in unserer Abschlussklasse, die sich leidenschaftlich der Materialverwaltung im Bereich Smart Production Lap widmet.</p>
-                <p>
-                Die HTL SZU Ungargasse hat uns nicht nur eine herausragende technische Ausbildung ermöglicht, sondern auch die Gelegenheit geboten, unser erworbenes Wissen in praxisnahen Projekten anzuwenden. In unserer Abschlussklasse setzen wir nun unser gesammeltes Know-how ein, um an unserer Diplomarbeit über die Materialverwaltung im Kontext der Smarten Produktion zu arbeiten.</p>
-                <p>
-                    Unser Fokus liegt darauf, effiziente und innovative Methoden zur Materialverwaltung zu erforschen und zu entwickeln, um den Anforderungen im Bereich Smart Production Lap gerecht zu werden. Durch die Integration modernster Technologien und praxisnaher Ansätze streben wir nach Lösungen, die nicht nur den aktuellen Standards entsprechen, sondern auch die zukünftigen Bedürfnisse dieser aufstrebenden Industrie antizipieren.</p>
-                <p>
-                    Unser Team setzt sich aus individuellen Talenten, kreativen Ideen und verschiedenen Perspektiven zusammen, um ein umfassendes und leistungsstarkes Projekt zu gestalten. Wir sind stolz darauf, gemeinsam an dieser herausfordernden Aufgabe zu arbeiten und einen Beitrag zur Entwicklung der Smarten Produktion zu leisten.</p>
+                    <div>
+                        <p>Unser engagiertes Team besteht aus fünf Personen, die sich in der abschließenden Phase ihrer Schulausbildung im Bereich Betriebsinformatik und Wirtschaftsingenieurwesen befinden. Gemeinsam haben wir uns die anspruchsvolle Aufgabe gestellt, im Rahmen unserer Diplomarbeit ein innovatives Inventursystem für das SZU zu konzipieren und zu programmieren.</p>
 
+                        <p>Das von uns entwickelte System wird als unverzichtbares Instrument im Materialverwaltungslager des MSPL (Material- und Servicezentrum für Projektlehre) eingesetzt. Es ermöglicht die effiziente Erfassung und Verwaltung von Materialien, die von Schülern für unterschiedlichste Projekte genutzt werden. Unsere Zielsetzung ist es, durch die Implementierung dieses Systems einen bedeutenden Beitrag zur Optimierung der Materialentnahme und -rückgabe zu leisten, und somit die Arbeitsabläufe für die Schülerprojekte am SZU nachhaltig zu verbessern.</p>
+                    </div>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '20px', marginBottom: '50px' }}>
+                    <img
+                        src={Person}
+                        alt="Person-img"
+                        style={{ width: '10%', height: '10%', borderRadius: '50%' }}
+                    />
+                    <img
+                        src={Person}
+                        alt="Person-img"
+                        style={{ width: '10%', height: '10%', borderRadius: '50%' }}
+                    />
+                    <img
+                        src={Person}
+                        alt="Person-img"
+                        style={{ width: '10%', height: '10%', borderRadius: '50%' }}
+                    />
+                    <img
+                        src={Person}
+                        alt="Person-img"
+                        style={{ width: '10%', height: '10%', borderRadius: '50%' }}
+                    />
+                    <img
+                        src={Person}
+                        alt="Person-img"
+                        style={{ width: '10%', height: '10%', borderRadius: '50%' }}
+                    />
                 </div>
             </div>
         </div>
