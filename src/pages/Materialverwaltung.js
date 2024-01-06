@@ -13,7 +13,9 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import AddIcon from '@mui/icons-material/Add';
+import IconButton from '@mui/material/IconButton';
 import RemoveIcon from '@mui/icons-material/Remove';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 import Sidebar from '../Components/Sidebar';
 import '../CSS/General.css';
@@ -51,6 +53,17 @@ function Materialverwaltung() {
             .catch((error) => console.error('Fehler beim Verringern des Bestands:', error));
     };
 
+    const deleteMaterial = async (id) => {
+        try {
+            await axios.delete(`/api/Materialtyp/delete/${id}`);
+            // Nach dem Löschen aktualisiere die Materialien
+            const response = await axios.get('/api/Materialtyp');
+            setMaterialien(response.data);
+        } catch (error) {
+            console.error('Fehler beim Löschen des Materials: ', error);
+        }
+    };
+
     const filteredMaterialien = materialien.filter(
         (material) =>
             material.Bezeichnung.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -75,11 +88,11 @@ function Materialverwaltung() {
                                 sx={{ width: '100%' }}
                             />
                         </Box>
-                        <Box sx={{ width: '60%'}}>
+                        <Box sx={{ width: '60%' }}>
                             <Link to="/newmaterial">
-                            <Button sx={{ width: '100%', height: '3vw'}} variant="outlined" color="secondary">
-                            Neues Material hinzufügen
-                            </Button>
+                                <Button sx={{ width: '100%', height: '3vw'}} variant="outlined" color="secondary">
+                                    Neues Material hinzufügen
+                                </Button>
                             </Link>
                         </Box>
                         <Paper sx={{ width: '60%', overflow: 'hidden' }}>
@@ -91,6 +104,7 @@ function Materialverwaltung() {
                                             <TableCell>Name</TableCell>
                                             <TableCell>Verfügbar</TableCell>
                                             <TableCell sx={{textAlign: 'center'}}>Aktionen</TableCell>
+                                            <TableCell sx={{textAlign: 'center'}}>Löschen</TableCell>
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
@@ -99,7 +113,7 @@ function Materialverwaltung() {
                                                 <TableCell>{Materialtyp.MaterialtypID}</TableCell>
                                                 <TableCell>{Materialtyp.Bezeichnung}</TableCell>
                                                 <TableCell>{Materialtyp.SollBestand}</TableCell>
-                                                <TableCell sx={{textAlign: 'center'}}>
+                                                <TableCell sx={{ textAlign: 'center' }}>
                                                     <ButtonGroup>
                                                         <Button
                                                             variant="text"
@@ -112,10 +126,15 @@ function Materialverwaltung() {
                                                             variant="text"
                                                             color="error"
                                                             onClick={() => decreaseStock(Materialtyp.MaterialtypID)}
-                                                            endIcon={<RemoveIcon/>}
+                                                            endIcon={<RemoveIcon />}
                                                         >
                                                         </Button>
                                                     </ButtonGroup>
+                                                </TableCell>
+                                                <TableCell sx={{ textAlign: 'center' }}>
+                                                    <IconButton onClick={() => deleteMaterial(Materialtyp.MaterialtypID)}>
+                                                        <DeleteIcon />
+                                                    </IconButton>
                                                 </TableCell>
                                             </TableRow>
                                         ))}

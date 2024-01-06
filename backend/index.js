@@ -1,11 +1,10 @@
 const express = require('express');
 const mysql = require('mysql');
-const cors = require('cors')
+const cors = require('cors');
 
 const app = express();
 const port = 3100;
 
-// MySQL-Verbindung herstellen
 const db = mysql.createConnection({
     host: 'mspl.cpg00wwyge82.eu-north-1.rds.amazonaws.com',
     user: 'admin',
@@ -14,17 +13,19 @@ const db = mysql.createConnection({
     port: 3306,
 });
 
-db.connect(err => {
+db.connect((err) => {
     if (err) {
         console.error('Fehler beim Verbinden zur MySQL-Datenbank: ', err);
     } else {
         console.log('Verbunden mit der MySQL-Datenbank');
     }
 });
+
+app.use(express.json());
 app.use(cors());
-// Beispiel-Endpunkt
+
 app.get('/api/Materialtyp', (req, res) => {
-    db.query('SELECT MaterialtypID,Bezeichnung,SollBestand FROM Materialtyp', (err, result) => {
+    db.query('SELECT MaterialtypID, Bezeichnung, SollBestand FROM Materialtyp', (err, result) => {
         if (err) {
             console.error('Fehler beim Abrufen von Daten aus der Tabelle: ', err);
             res.status(500).send('Interner Serverfehler');
@@ -33,9 +34,7 @@ app.get('/api/Materialtyp', (req, res) => {
         }
     });
 });
-// ...
 
-// Beispiel-Endpunkt für Aktualisierung der Verfügbarkeit
 app.put('/api/Materialtyp/:id/increase', (req, res) => {
     const { id } = req.params;
 
@@ -62,8 +61,52 @@ app.put('/api/Materialtyp/:id/decrease', (req, res) => {
     });
 });
 
-// ...
+app.post('/api/Materialtyp/create', (req, res) => {
+    const newMaterial = { ...req.body, Kontingent: 0 };
 
+    db.query(
+        'INSERT INTO Materialtyp (MaterialtypID, Bezeichnung, SollBestand, Kontingent) VALUES (?, ?, ?, ?)',
+        [newMaterial.MaterialtypID, newMaterial.Bezeichnung, newMaterial.SollBestand, newMaterial.Kontingent],
+        (err, result) => {
+            if (err) {
+                console.error('Fehler beim Einfügen von neuem Material: ', err);
+                res.status(500).send('Interner Serverfehler');
+            } else {
+                res.status(201).send('Material erfolgreich hinzugefügt');
+            }
+        }
+    );
+});
+
+app.get('/api/Materialtyp/check-duplicate', (req, res) => {
+    const { MaterialtypID, Bezeichnung } = req.query;
+
+    db.query(
+        'SELECT COUNT(*) AS count FROM Materialtyp WHERE MaterialtypID = ? OR Bezeichnung = ?',
+        [MaterialtypID, Bezeichnung],
+        (err, result) => {
+            if (err) {
+                console.error('Fehler beim Überprüfen von Duplikaten: ', err);
+                res.status(500).send('Interner Serverfehler');
+            } else {
+                const duplicate = result[0].count > 0;
+                res.json({ duplicate });
+            }
+        }
+    );
+});
+app.delete('/api/Materialtyp/delete/:id', (req, res) => {
+    const { id } = req.params;
+
+    db.query('DELETE FROM Materialtyp WHERE MaterialtypID = ?', [id], (err, result) => {
+        if (err) {
+            console.error('Fehler beim Löschen des Materials: ', err);
+            res.status(500).send('Interner Serverfehler');
+        } else {
+            res.status(200).send('Material erfolgreich gelöscht');
+        }
+    });
+});
 app.use((req, res) => {
     res.status(404).send('Not Found');
 });
