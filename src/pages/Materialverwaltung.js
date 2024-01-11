@@ -48,7 +48,7 @@ function Materialverwaltung() {
             .then(() => {
                 axios.get('/api/Materialtyp')
                     .then((response) => setMaterialien(response.data))
-                    .catch((error) => console.error('Fehler beim Abrufen der Materialdaten:', error));
+                    .catch((error) => console.error('Fehler beim Abrufen der Material-Daten:', error));
             })
             .catch((error) => console.error('Fehler beim Verringern des Bestands:', error));
     };
