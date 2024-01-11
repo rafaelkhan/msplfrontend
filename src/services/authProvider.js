@@ -1,4 +1,5 @@
 // authProvider.js
+import axios from 'axios';
 import { PublicClientApplication } from '@azure/msal-browser';
 import { msalConfig } from './authConfig';
 
@@ -14,7 +15,22 @@ export const signIn = async () => {
     try {
         sessionStorage.removeItem("msal.interaction.status")
         const response = await msalInstance.loginPopup(loginRequest);
-        return response.account;
+        const user = response.account;
+
+        // Aufteilen des Namens in Vor- und Nachname
+        const fullName = user.name;
+        const splitName = fullName.split(' ');
+        const firstName = splitName[0];
+        const lastName = splitName.length > 1 ? splitName.slice(1).join(' ') : '';
+
+        // Senden der Daten an das Backend mit Axios
+        await axios.post('/api/user/login', {
+            email: user.username,
+            firstName: firstName,
+            lastName: lastName
+        });
+
+        return user;
     } catch (error) {
         console.error('An error occurred during login:', error);
         throw error;
@@ -24,11 +40,10 @@ export const signIn = async () => {
 export const signOut = async () => {
     try {
         await msalInstance.logout();
+        // Nach dem Abmelden zur Homepage weiterleiten
+        window.location.href = '/';
     } catch (error) {
         console.error('An error occurred during sign out:', error);
         throw error;
     }
-
-    // Nach dem Abmelden zur Homepage weiterleiten
-    window.location.href = '/';
 };

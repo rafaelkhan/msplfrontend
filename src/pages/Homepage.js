@@ -3,8 +3,9 @@ import React from 'react';
 import '../CSS/Homepage.css';
 import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button'
+import axios from 'axios';
 import Logo from '../Assets/pngimg.com - microsoft_PNG13.png';
-import { signIn, signOut } from '../services/authProvider'; // Importiere MSAL-Funktionen
+import { signIn } from '../services/authProvider'; // Importiere MSAL-Funktionen
 
 function Homepage() {
     const navigate = useNavigate();

@@ -24,6 +24,49 @@ db.connect((err) => {
 app.use(express.json());
 app.use(cors());
 
+
+app.post('/api/user/login', (req, res) => {
+    const { email, firstName, lastName } = req.body;
+
+    // Überprüfen, ob der Benutzer bereits in der Account-Tabelle existiert
+    db.query('SELECT NutzerID FROM Account WHERE Email = ?', [email], (err, result) => {
+        if (err) {
+            console.error('Fehler bei der Datenbankabfrage: ', err);
+            res.status(500).send('Interner Serverfehler');
+            return;
+        }
+
+        if (result.length === 0) {
+            // Neuen Nutzer in Nutzer-Tabelle einfügen
+            const insertNutzerQuery = 'INSERT INTO Nutzer (Vorname, Nachname) VALUES (?, ?)';
+            db.query(insertNutzerQuery, [firstName, lastName], (err, result) => {
+                if (err) {
+                    console.error('Fehler beim Einfügen des Nutzers: ', err);
+                    res.status(500).send('Interner Serverfehler');
+                    return;
+                }
+
+                const nutzerID = result.insertId;
+
+                // Neuen Account für den Nutzer in Account-Tabelle einfügen
+                const insertAccountQuery = 'INSERT INTO Account (Email, NutzerID, Zugabe, EntnahmeLimit) VALUES (?, ?, ?, ?)';
+                db.query(insertAccountQuery, [email, nutzerID, 0, 0], (err, result) => {
+                    if (err) {
+                        console.error('Fehler beim Einfügen des Accounts: ', err);
+                        res.status(500).send('Interner Serverfehler');
+                        return;
+                    }
+                    res.status(201).send('Neuer Benutzer und Account erfolgreich erstellt');
+                });
+            });
+        } else {
+            // Benutzer existiert bereits in Account-Tabelle
+            res.status(200).send('Benutzer bereits vorhanden');
+        }
+    });
+});
+
+
 app.get('/api/Materialtyp', (req, res) => {
     db.query('SELECT MaterialtypID, Bezeichnung, SollBestand FROM Materialtyp', (err, result) => {
         if (err) {
