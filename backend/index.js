@@ -98,7 +98,7 @@ app.get('/api/Materialtyp/check-duplicate', (req, res) => {
 app.delete('/api/Materialtyp/delete/:id', (req, res) => {
     const { id } = req.params;
 
-    db.query('DELETE FROM Materialtyp WHERE MaterialtypID = ?', [id], (err, result) => {
+    db.query('DELETE FROM Box AND Materialtyp WHERE MaterialtypID = ?', [id], (err, result) => {
         if (err) {
             console.error('Fehler beim Löschen des Materials: ', err);
             res.status(500).send('Interner Serverfehler');
