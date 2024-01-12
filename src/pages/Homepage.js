@@ -14,7 +14,6 @@ function Homepage() {
             console.log('Attempting sign in...')
             await signIn();
             console.log('Sign in successful');
-            navigate('/Dashboard'); // Weiterleitung zur Dashboard-Seite
         } catch (error) {
             console.error('An error occurred during login:', error);
         }

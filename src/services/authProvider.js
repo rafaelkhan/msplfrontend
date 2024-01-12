@@ -17,6 +17,8 @@ export const signIn = async () => {
         const response = await msalInstance.loginPopup(loginRequest);
         const user = response.account;
 
+        window.location.href = '/Dashboard';
+
         // Aufteilen des Namens in Vor- und Nachname
         const fullName = user.name;
         const splitName = fullName.split(' ');
@@ -46,4 +48,8 @@ export const signOut = async () => {
         console.error('An error occurred during sign out:', error);
         throw error;
     }
+};
+export const isAuthenticated = () => {
+    const accounts = msalInstance.getAllAccounts();
+    return accounts && accounts.length > 0;
 };

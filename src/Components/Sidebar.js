@@ -65,13 +65,13 @@ function Sidebar() {
                 <img src={Logo} className="sidebar-logo"></img>
                 <List>
                     {/* Deine Sidebar-ListItems hier */}
-                    <ListItem button className="sidebar-link" onClick={() => handleNavigateTo('/dashboard')}>
+                    <ListItem button className="sidebar-link" onClick={() => handleNavigateTo('/Dashboard')}>
                         <ListItemText primary="Dashboard" className="Text-Bar"/>
                     </ListItem>
                     <ListItem button className="sidebar-link" onClick={() => handleNavigateTo('/Materialverwaltung')}>
                         <ListItemText primary="Materialverwaltung" className="Text-Bar"/>
                     </ListItem>
-                    <ListItem button className="sidebar-link" onClick={() => handleNavigateTo('/benutzerverwaltung')}>
+                    <ListItem button className="sidebar-link" onClick={() => handleNavigateTo('/Benutzerverwaltung')}>
                         <ListItemText primary="Benutzerverwaltung" className="Text-Bar"/>
                     </ListItem>
                     <ListItem button className="sidebar-link" onClick={() => handleNavigateTo('/Ueberuns')}>
