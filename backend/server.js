@@ -1,6 +1,8 @@
 const express = require('express');
 const mysql = require('mysql');
 const cors = require('cors');
+const jwt = require('jsonwebtoken');
+require('dotenv').config({path: 'token.env'})
 
 const app = express();
 const port = 3100;
@@ -76,9 +78,10 @@ app.get('/api/user/class', async (req, res) => {
             res.status(500).send('Interner Serverfehler');
             return;
         }
-
         if (result.length > 0) {
-            res.json({ Schulklasse: result[0].Schulklasse });
+            const userPayload = { userClass: result[0].Schulklasse };
+            const accessToken = jwt.sign(userPayload, process.env.ACCESS_TOKEN_SECRET);
+            res.json({ accessToken: accessToken });
         } else {
             res.status(404).send('Nutzer nicht gefunden');
         }
@@ -157,16 +160,30 @@ app.get('/api/Materialtyp/check-duplicate', (req, res) => {
     );
 });
 app.delete('/api/Materialtyp/delete/:id', (req, res) => {
-    const { id } = req.params;
-
-    db.query('DELETE FROM Box AND Materialtyp WHERE MaterialtypID = ?', [id], (err, result) => {
+    const {id} = req.params;
+    db.query('DELETE FROM MaterialEntnahmeRecht WHERE MaterialtypID = ?', [id], (err, result) => {
         if (err) {
-            console.error('Fehler beim Löschen des Materials: ', err);
+            console.error('Fehler beim Löschen in MaterialEntnahmeRecht: ', err);
             res.status(500).send('Interner Serverfehler');
-        } else {
-            res.status(200).send('Material erfolgreich gelöscht');
+            return;
         }
+    db.query('DELETE FROM Box WHERE MaterialtypID = ?', [id], (err, result) => {
+        if (err) {
+            console.error('Fehler beim Löschen in Box: ', err);
+            res.status(500).send('Interner Serverfehler');
+            return;
+        }
+
+        db.query('DELETE FROM Materialtyp WHERE MaterialtypID = ?', [id], (err, result) => {
+            if (err) {
+                console.error('Fehler beim Löschen des Materials: ', err);
+                res.status(500).send('Interner Serverfehler');
+            } else {
+                res.status(200).send('Material erfolgreich gelöscht');
+            }
+        });
     });
+});
 });
 app.use((req, res) => {
     res.status(404).send('Not Found');
