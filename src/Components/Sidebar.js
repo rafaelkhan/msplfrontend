@@ -18,6 +18,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 function Sidebar() {
     const navigate = useNavigate();
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const userClass = sessionStorage.getItem('userClass');
 
     const handleToggleSidebar = () => {
         setIsSidebarOpen(!isSidebarOpen);
@@ -68,12 +69,18 @@ function Sidebar() {
                     <ListItem button className="sidebar-link" onClick={() => handleNavigateTo('/Dashboard')}>
                         <ListItemText primary="Dashboard" className="Text-Bar"/>
                     </ListItem>
+
                     <ListItem button className="sidebar-link" onClick={() => handleNavigateTo('/Materialverwaltung')}>
                         <ListItemText primary="Materialverwaltung" className="Text-Bar"/>
                     </ListItem>
+
+                    {userClass === 'LEHRER' && (
                     <ListItem button className="sidebar-link" onClick={() => handleNavigateTo('/Benutzerverwaltung')}>
                         <ListItemText primary="Benutzerverwaltung" className="Text-Bar"/>
                     </ListItem>
+                    )
+
+                    }
                     <ListItem button className="sidebar-link" onClick={() => handleNavigateTo('/Ueberuns')}>
                         <ListItemText primary="Über uns" className="Text-Bar"/>
                     </ListItem>

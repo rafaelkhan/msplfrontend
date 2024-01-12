@@ -65,7 +65,25 @@ app.post('/api/user/login', (req, res) => {
         }
     });
 });
+app.get('/api/user/class', async (req, res) => {
+    const { email } = req.query;
 
+    // Verbindung zur Datenbank herstellen
+    // Hier wird angenommen, dass `db` Ihre Datenbankverbindung ist
+    db.query('SELECT Nutzer.Schulklasse FROM Nutzer INNER JOIN Account ON Nutzer.NutzerID = Account.NutzerID WHERE Account.Email = ?', [email], (err, result) => {
+        if (err) {
+            console.error('Fehler bei der Datenbankabfrage: ', err);
+            res.status(500).send('Interner Serverfehler');
+            return;
+        }
+
+        if (result.length > 0) {
+            res.json({ Schulklasse: result[0].Schulklasse });
+        } else {
+            res.status(404).send('Nutzer nicht gefunden');
+        }
+    });
+});
 
 app.get('/api/Materialtyp', (req, res) => {
     db.query('SELECT MaterialtypID, Bezeichnung, SollBestand FROM Materialtyp', (err, result) => {

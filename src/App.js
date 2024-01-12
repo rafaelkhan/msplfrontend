@@ -13,6 +13,8 @@ import './App.css';
 
 
 function App() {
+    const userClass = sessionStorage.getItem('userClass')
+
     return (
         <Router>
             <div>
@@ -20,7 +22,7 @@ function App() {
                     <Route path="/" element={<Homepage/>} />
                     <Route path="/dashboard" element={isAuthenticated() ? <Dashboard /> : <Navigate replace to="/" />} />
                     <Route path="/materialverwaltung" element={isAuthenticated() ? <Materialverwaltung /> : <Navigate replace to="/" />} />
-                    <Route path="/benutzerverwaltung" element={isAuthenticated() ? <Benutzerverwaltung /> : <Navigate replace to="/" />} />
+                    {userClass === 'LEHRER' && <Route path="/benutzerverwaltung" element={isAuthenticated() ? <Benutzerverwaltung /> : <Navigate replace to="/" />} />}
                     <Route path="/ueberuns" element={<Ueberuns />} />
                     <Route path="/help" element={<Help />} />
                     <Route path="/newmaterial" element={isAuthenticated() ? <NewMaterial /> : <Navigate replace to="/" />} />

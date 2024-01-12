@@ -14,8 +14,20 @@ export const signIn = async () => {
 
     try {
         sessionStorage.removeItem("msal.interaction.status")
+        sessionStorage.removeItem('user');
+        sessionStorage.removeItem('userClass')
         const response = await msalInstance.loginPopup(loginRequest);
         const user = response.account;
+
+        try {
+            const email = user.username;
+            const response = await axios.get('/api/user/class', { params: { email } });
+            const userClass = response.data.Schulklasse;
+            sessionStorage.setItem('userClass', userClass);
+        } catch (error) {
+            console.error('Fehler beim Abrufen der Nutzerklasse', error);
+            // Optional: Handhabung des Fehlers oder Festlegen eines Standardwerts
+        }
 
         window.location.href = '/Dashboard';
 
@@ -42,7 +54,10 @@ export const signIn = async () => {
 export const signOut = async () => {
     try {
         await msalInstance.logout();
-        // Nach dem Abmelden zur Homepage weiterleiten
+        // Nach dem Abmelden zur Homepage weiterleiten;
+        sessionStorage.removeItem("msal.interaction.status")
+        sessionStorage.removeItem('user');
+        sessionStorage.removeItem('userClass')
         window.location.href = '/';
     } catch (error) {
         console.error('An error occurred during sign out:', error);
