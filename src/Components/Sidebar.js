@@ -11,6 +11,8 @@ import Logo from '../Assets/MSPL_Logo.jpeg';
 import { signOut } from '../services/authProvider';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode';
+
 import './Sidebar.css';
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -18,7 +20,12 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 function Sidebar() {
     const navigate = useNavigate();
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-    const userClass = sessionStorage.getItem('userClass');
+    let userClass = null;
+    const token = localStorage.getItem('accessToken');
+    if (token) {
+        const decodedToken = jwtDecode(token);
+        userClass = decodedToken.userClass;
+    }
 
     const handleToggleSidebar = () => {
         setIsSidebarOpen(!isSidebarOpen);

@@ -13,17 +13,15 @@ export const signIn = async () => {
     };
 
     try {
-        sessionStorage.removeItem("msal.interaction.status")
-        sessionStorage.removeItem('user');
-        sessionStorage.removeItem('userClass')
+        localStorage.removeItem("msal.interaction.status")
+        localStorage.removeItem('accessToken');
         const response = await msalInstance.loginPopup(loginRequest);
         const user = response.account;
 
         try {
             const email = user.username;
-            const response = await axios.get('/api/user/class', { params: { email } });
-            const userClass = response.data.Schulklasse;
-            sessionStorage.setItem('userClass', userClass);
+            const classResponse = await axios.get('/api/user/class', { params: { email } });
+            localStorage.setItem('accessToken', classResponse.data.accessToken);
         } catch (error) {
             console.error('Fehler beim Abrufen der Nutzerklasse', error);
             // Optional: Handhabung des Fehlers oder Festlegen eines Standardwerts

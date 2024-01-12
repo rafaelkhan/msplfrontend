@@ -9,11 +9,17 @@ import Ueberuns from './pages/Ueberuns';
 import Help from './pages/Help';
 import NewMaterial from './pages/NewMaterial';
 import { isAuthenticated } from './services/authProvider';
+import { jwtDecode } from 'jwt-decode';
 import './App.css';
 
 
 function App() {
-    const userClass = sessionStorage.getItem('userClass')
+    let userClass = null;
+    const token = localStorage.getItem('accessToken');
+    if (token) {
+        const decodedToken = jwtDecode(token);
+        userClass = decodedToken.userClass;
+    }
 
     return (
         <Router>

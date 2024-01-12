@@ -1,6 +1,8 @@
 const express = require('express');
 const mysql = require('mysql');
 const cors = require('cors');
+const jwt = require('jsonwebtoken');
+require('dotenv').config({path: 'token.env'})
 
 const app = express();
 const port = 3100;
@@ -76,9 +78,10 @@ app.get('/api/user/class', async (req, res) => {
             res.status(500).send('Interner Serverfehler');
             return;
         }
-
         if (result.length > 0) {
-            res.json({ Schulklasse: result[0].Schulklasse });
+            const userPayload = { userClass: result[0].Schulklasse };
+            const accessToken = jwt.sign(userPayload, process.env.ACCESS_TOKEN_SECRET);
+            res.json({ accessToken: accessToken });
         } else {
             res.status(404).send('Nutzer nicht gefunden');
         }
