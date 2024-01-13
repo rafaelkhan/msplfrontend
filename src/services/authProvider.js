@@ -13,7 +13,7 @@ export const signIn = async () => {
     };
 
     try {
-        localStorage.removeItem("msal.interaction.status")
+        sessionStorage.removeItem("msal.interaction.status")
         localStorage.removeItem('accessToken');
         const response = await msalInstance.loginPopup(loginRequest);
         const user = response.account;

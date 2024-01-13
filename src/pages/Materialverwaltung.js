@@ -90,7 +90,7 @@ function Materialverwaltung() {
                         </Box>
                         <Box sx={{ width: '60%' }}>
                             <Link to="/newmaterial">
-                                <Button sx={{ width: '100%', height: '5vw'}} variant="outlined" color="secondary">
+                                <Button sx={{ width: '100%', height: '3vw'}} variant="outlined" color="secondary">
                                     Neues Material hinzufügen
                                 </Button>
                             </Link>

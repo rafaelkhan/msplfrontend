@@ -26,10 +26,9 @@ db.connect((err) => {
 app.use(express.json());
 app.use(cors());
 
-
+//User nach login speichern
 app.post('/api/user/login', (req, res) => {
     const { email, firstName, lastName } = req.body;
-
     // Überprüfen, ob der Benutzer bereits in der Account-Tabelle existiert
     db.query('SELECT NutzerID FROM Account WHERE Email = ?', [email], (err, result) => {
         if (err) {
@@ -67,11 +66,35 @@ app.post('/api/user/login', (req, res) => {
         }
     });
 });
+//-----------------------------------------------------------------------
+// API-Endpunkt, um alle Benutzer abzurufen
+app.get('/api/benutzer', (req, res) => {
+    db.query('SELECT * FROM Account JOIN Nutzer ON Account.NutzerID = Nutzer.NutzerID', (err, results) => {
+        if (err) throw err;
+        res.json(results);
+    });
+});
+
+app.get('/api/schulklassen', (req, res) => {
+    db.query('SELECT * FROM Schulklasse', (err, results) => {
+        if (err) throw err;
+        res.json(results);
+    });
+});
+
+// API-Endpunkt, um Benutzerdaten zu aktualisieren
+app.put('/api/benutzer/:id', (req, res) => {
+    const { id } = req.params;
+    const { schulklasse } = req.body;
+    db.query('UPDATE Nutzer SET Schulklasse = ? WHERE NutzerID = ?', [schulklasse, id], (err, results) => {
+        if (err) throw err;
+        res.json(results);
+    });
+});
+//-----------------------------------------------------------------------
+
 app.get('/api/user/class', async (req, res) => {
     const { email } = req.query;
-
-    // Verbindung zur Datenbank herstellen
-    // Hier wird angenommen, dass `db` Ihre Datenbankverbindung ist
     db.query('SELECT Nutzer.Schulklasse FROM Nutzer INNER JOIN Account ON Nutzer.NutzerID = Account.NutzerID WHERE Account.Email = ?', [email], (err, result) => {
         if (err) {
             console.error('Fehler bei der Datenbankabfrage: ', err);
@@ -144,7 +167,6 @@ app.post('/api/Materialtyp/create', (req, res) => {
 
 app.get('/api/Materialtyp/check-duplicate', (req, res) => {
     const { MaterialtypID, Bezeichnung } = req.query;
-
     db.query(
         'SELECT COUNT(*) AS count FROM Materialtyp WHERE MaterialtypID = ? OR Bezeichnung = ?',
         [MaterialtypID, Bezeichnung],
