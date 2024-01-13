@@ -7,6 +7,7 @@ import Materialverwaltung from './pages/Materialverwaltung';
 import Benutzerverwaltung from './pages/Benutzerverwaltung';
 import Ueberuns from './pages/Ueberuns';
 import Help from './pages/Help';
+import Footer from './Components/Footer';
 import NewMaterial from './pages/NewMaterial';
 import { isAuthenticated } from './services/authProvider';
 import { jwtDecode } from 'jwt-decode';
@@ -35,6 +36,7 @@ function App() {
                     {/* Fügen Sie hier weitere Routen hinzu, falls benötigt */}
                 </Routes>
             </div>
+            <Footer />
         </Router>
     );
 }
