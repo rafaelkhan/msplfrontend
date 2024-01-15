@@ -3,7 +3,6 @@
     margin-top: 10px;
     flex-grow: 1;
 }
-
 h1 {
     transition: margin-left 0.3s;
 }

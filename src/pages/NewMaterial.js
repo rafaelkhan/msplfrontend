@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { Button, TextField, Container, Typography, Snackbar } from '@mui/material';
+import {Paper, Button, TextField, Container, Typography, Snackbar } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Sidebar from '../Components/Sidebar'
+import '../CSS/General.css';
 
 const NewMaterial = () => {
     const [materialData, setMaterialData] = useState({
@@ -58,52 +60,59 @@ const NewMaterial = () => {
     };
 
     return (
-        <Container>
-            <Typography variant="h4" gutterBottom>
-                Neues Material hinzufügen
-            </Typography>
-            <form onSubmit={handleFormSubmit}>
-                <TextField
-                    name="MaterialtypID"
-                    label="MaterialtypID"
-                    variant="outlined"
-                    fullWidth
-                    margin="normal"
-                    type="text"
-                    value={materialData.MaterialtypID}
-                    onChange={handleInputChange}
-                    required
-                />
-                <TextField
-                    name="Bezeichnung"
-                    label="Bezeichnung"
-                    variant="outlined"
-                    fullWidth
-                    margin="normal"
-                    value={materialData.Bezeichnung}
-                    onChange={handleInputChange}
-                    required
-                />
-                <TextField
-                    name="SollBestand"
-                    label="Soll-Bestand"
-                    variant="outlined"
-                    fullWidth
-                    margin="normal"
-                    type="number"
-                    value={materialData.SollBestand}
-                    onChange={handleInputChange}
-                    required
-                />
-                <Button type="submit" variant="contained" color="primary">
-                    Material hinzufügen
-                </Button>
-                <Button variant="outlined" color="primary" onClick={handleNavigateBack}>
-                    Zurück zur Materialverwaltung
-                </Button>
-            </form>
-            <Snackbar open={snackbarOpen} autoHideDuration={6000} onClose={handleSnackbarClose} message={snackbarMessage} />
-        </Container>
+        <div style={{ display: 'flex'}}>
+            <Sidebar/>
+            <div className="content">
+                <h1 className="Titel">
+                    Neues Material hinzufügen
+                </h1>
+                <form onSubmit={handleFormSubmit}>
+                    <TextField
+                        name="MaterialtypID"
+                        label="MaterialtypID"
+                        variant="outlined"
+                        sx={{width:'80%'}}
+                        margin="normal"
+                        type="text"
+                        value={materialData.MaterialtypID}
+                        onChange={handleInputChange}
+                        required
+                    />
+                    <TextField
+                        name="Bezeichnung"
+                        label="Bezeichnung"
+                        variant="outlined"
+                        fullWidth
+                        sx={{width:'80%'}}
+                        margin="normal"
+                        value={materialData.Bezeichnung}
+                        onChange={handleInputChange}
+                        required
+                    />
+                    <TextField
+                        name="SollBestand"
+                        label="Soll-Bestand"
+                        variant="outlined"
+                        fullWidth
+                        sx={{width:'80%'}}
+                        margin="normal"
+                        type="number"
+                        value={materialData.SollBestand}
+                        onChange={handleInputChange}
+                        required
+                    />
+                    <div style={{ display: 'flex', width: '80%'}}>
+                        <Button type="submit" variant="contained" color="primary">
+                            Material hinzufügen
+                        </Button>
+                        <Button variant="outlined" color="primary" onClick={handleNavigateBack}>
+                            Zurück zur Materialverwaltung
+                        </Button>
+                    </div>
+                </form>
+                <Snackbar open={snackbarOpen} autoHideDuration={6000} onClose={handleSnackbarClose} message={snackbarMessage} />
+            </div>
+        </div>
     );
 };
 

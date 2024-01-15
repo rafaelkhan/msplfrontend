@@ -1,6 +1,7 @@
 import React from 'react';
 import Sidebar from '../Components/Sidebar';
 import Faq from "react-faq-component";
+import '../CSS/General.css'
 
 function Help() {
 
@@ -54,23 +55,23 @@ function Help() {
 
     const config = {
         animate: true,
-        arrowIcon: "^",
+        arrowIcon: "-",
         tabFocus: true
     };
 
     return (
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <div style={{ display: 'flex'}}>
             <Sidebar />
             <div className="content">
-                <h1 className="Titel">Help</h1>
-                <div className="content" style={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto' }}>
+                    <h1 className="Titel">Help</h1>
+                <div style={{width: '60%'}}>
                     <Faq
                         data={data}
                         styles={styles}
                         config={config}
                     />
-                </div>
             </div>
+                </div>
         </div>
     );
 }

@@ -102,7 +102,7 @@ function Materialverwaltung() {
                                         <TableRow>
                                             <TableCell>ID</TableCell>
                                             <TableCell>Name</TableCell>
-                                            <TableCell>Verfügbar</TableCell>
+                                            <TableCell sx={{textAlign: 'center'}}>Soll-Bestand</TableCell>
                                             <TableCell sx={{textAlign: 'center'}}>Aktionen</TableCell>
                                             <TableCell sx={{textAlign: 'center'}}>Löschen</TableCell>
                                         </TableRow>
@@ -112,7 +112,7 @@ function Materialverwaltung() {
                                             <TableRow key={Materialtyp.MaterialtypID}>
                                                 <TableCell>{Materialtyp.MaterialtypID}</TableCell>
                                                 <TableCell>{Materialtyp.Bezeichnung}</TableCell>
-                                                <TableCell>{Materialtyp.SollBestand}</TableCell>
+                                                <TableCell sx={{ textAlign: 'center' }}>{Materialtyp.SollBestand}</TableCell>
                                                 <TableCell sx={{ textAlign: 'center' }}>
                                                     <ButtonGroup>
                                                         <Button
