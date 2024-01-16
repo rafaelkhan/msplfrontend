@@ -16,19 +16,62 @@ module.exports = function(db) {
 
     router.post('/create', (req, res) => {
         const newMaterial = { ...req.body, Kontingent: 0 };
+
+        db.query('ALTER TABLE Materialtyp AUTO_INCREMENT = 1');
+        // Einfügen in Materialtyp
         db.query(
             'INSERT INTO Materialtyp (Bezeichnung, SollBestand, Kontingent) VALUES (?, ?, ?)',
             [newMaterial.Bezeichnung, newMaterial.SollBestand, newMaterial.Kontingent],
-            (err, result) => {
+            (err, insertResult) => {
                 if (err) {
-                    console.error('Fehler beim Einfügen von neuem Material: ', err);
-                    res.status(500).send('Interner Serverfehler');
-                } else {
-                    res.status(201).send('Material erfolgreich hinzugefügt');
+                    console.error('Fehler beim Einfügen in Materialtyp: ', err);
+                    return res.status(500).send('Interner Serverfehler');
                 }
+
+                // Abrufen der MaterialtypID
+                db.query(
+                    'SELECT MaterialtypID FROM Materialtyp WHERE Bezeichnung= ?',
+                    [newMaterial.Bezeichnung],
+                    (err, materialResults) => {
+                        if (err) {
+                            console.error('Fehler beim Abrufen der MaterialtypID: ', err);
+                            return res.status(500).send('Interner Serverfehler');
+                        }
+
+                        const MaterialtypID = materialResults[0].MaterialtypID;
+                        const attributes = ['Durchmesser', 'Kraft', 'Länge', 'Stärke'];
+
+                        let completedQueries = 0;
+                        attributes.forEach((attribute) => {
+                            if (newMaterial[attribute] !== '' && newMaterial[attribute] !== undefined) {
+                                db.query(
+                                    'INSERT INTO Materialtyp_Materialattribute (MaterialtypID, AttributName, Quantitaet) VALUES (?, ?, ?)',
+                                    [MaterialtypID, attribute, newMaterial[attribute]],
+                                    (err, result) => {
+                                        if (err) {
+                                            console.error(`Fehler beim Einfügen des Attributs ${attribute}: `, err);
+                                            return res.status(500).send('Interner Serverfehler');
+                                        }
+                                        completedQueries++;
+                                        if (completedQueries === attributes.length) {
+                                            res.status(201).send('Material und seine Attribute erfolgreich hinzugefügt');
+                                        }
+                                    }
+                                );
+                            } else {
+                                completedQueries++;
+                                if (completedQueries === attributes.length) {
+                                    res.status(201).send('Material und seine Attribute erfolgreich hinzugefügt');
+                                }
+                            }
+                        });
+                    }
+                );
             }
         );
     });
+
+
 
     router.get('/check-duplicate', (req, res) => {
         const { Bezeichnung } = req.query;
@@ -89,18 +132,28 @@ module.exports = function(db) {
                     return;
                 }
 
-                // Schließlich löschen aus Materialtyp
-                db.query('DELETE FROM Materialtyp WHERE MaterialtypID = ?', [id], (err, result) => {
+                // Dann löschen aus Materialtyp_Materialattribute
+                db.query('DELETE FROM Materialtyp_Materialattribute WHERE MaterialtypID = ?', [id], (err, result) => {
                     if (err) {
-                        console.error('Fehler beim Löschen des Materials: ', err);
+                        console.error('Fehler beim Löschen in Materialtyp_Materialattribute: ', err);
                         res.status(500).send('Interner Serverfehler');
-                    } else {
-                        res.status(200).send('Material erfolgreich gelöscht');
+                        return;
                     }
+
+                    // Schließlich löschen aus Materialtyp
+                    db.query('DELETE FROM Materialtyp WHERE MaterialtypID = ?', [id], (err, result) => {
+                        if (err) {
+                            console.error('Fehler beim Löschen des Materials: ', err);
+                            res.status(500).send('Interner Serverfehler');
+                        } else {
+                            res.status(200).send('Material erfolgreich gelöscht');
+                        }
+                    });
                 });
             });
         });
     });
+
 
     return router;
 };

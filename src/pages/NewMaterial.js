@@ -1,5 +1,11 @@
 import React, { useState } from 'react';
 import {Paper, Button, TextField, Container, Typography, Snackbar } from '@mui/material';
+import Table from '@mui/material/Table';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableBody from '@mui/material/TableBody';
+import TableRow from '@mui/material/TableRow';
+import TableCell from '@mui/material/TableCell';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Sidebar from '../Components/Sidebar'
@@ -7,9 +13,13 @@ import '../CSS/General.css';
 
 const NewMaterial = () => {
     const [materialData, setMaterialData] = useState({
-        MaterialtypID: '',
         Bezeichnung: '',
         SollBestand: 0,
+
+        Durchmesser: '',
+        Kraft: '',
+        Länge: '',
+        Stärke: '',
     });
     const [snackbarOpen, setSnackbarOpen] = useState(false);
     const [snackbarMessage, setSnackbarMessage] = useState('');
@@ -26,13 +36,12 @@ const NewMaterial = () => {
         try {
             const checkDuplicateResponse = await axios.get('/api/Materialtyp/check-duplicate', {
                 params: {
-                    MaterialtypID: materialData.MaterialtypID,
                     Bezeichnung: materialData.Bezeichnung,
                 },
             });
 
             if (checkDuplicateResponse.data.duplicate) {
-                setSnackbarMessage('MaterialtypID or Bezeichnung already exists');
+                setSnackbarMessage('Bezeichnung already exists');
                 setSnackbarOpen(true);
             } else {
                 const response = await axios.post('/api/Materialtyp/create', materialData);
@@ -68,17 +77,6 @@ const NewMaterial = () => {
                 </h1>
                 <form onSubmit={handleFormSubmit}>
                     <TextField
-                        name="MaterialtypID"
-                        label="MaterialtypID"
-                        variant="outlined"
-                        sx={{width:'80%'}}
-                        margin="normal"
-                        type="text"
-                        value={materialData.MaterialtypID}
-                        onChange={handleInputChange}
-                        required
-                    />
-                    <TextField
                         name="Bezeichnung"
                         label="Bezeichnung"
                         variant="outlined"
@@ -101,6 +99,75 @@ const NewMaterial = () => {
                         onChange={handleInputChange}
                         required
                     />
+                    <Paper sx={{ width: '80%', overflow: 'hidden' }}>
+                    <TableContainer component={Paper}>
+                        <Table>
+                            <TableHead>
+                                <TableRow>
+                                <TableCell>Attribute</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                            <TableRow>
+                                <TableCell>
+                                    <TextField
+                                        name="Durchmesser"
+                                        label="Durchmesser"
+                                        variant="outlined"
+                                        fullWidth
+                                        sx={{width:'80%'}}
+                                        margin="normal"
+                                        value={materialData.Durchmesser}
+                                        onChange={handleInputChange}
+                                    />
+                                </TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableCell>
+                                    <TextField
+                                        name="Kraft"
+                                        label="Kraft"
+                                        variant="outlined"
+                                        fullWidth
+                                        sx={{width:'80%'}}
+                                        margin="normal"
+                                        value={materialData.Kraft}
+                                        onChange={handleInputChange}
+                                    />
+                                </TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableCell>
+                                    <TextField
+                                        name="Länge"
+                                        label="Länge"
+                                        variant="outlined"
+                                        fullWidth
+                                        sx={{width:'80%'}}
+                                        margin="normal"
+                                        value={materialData.Länge}
+                                        onChange={handleInputChange}
+                                    />
+                                </TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableCell>
+                                    <TextField
+                                        name="Stärke"
+                                        label="Stärke"
+                                        variant="outlined"
+                                        fullWidth
+                                        sx={{width:'80%'}}
+                                        margin="normal"
+                                        value={materialData.Stärke}
+                                        onChange={handleInputChange}
+                                    />
+                                </TableCell>
+                            </TableRow>
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                    </Paper>
                     <div style={{ display: 'flex', width: '80%'}}>
                         <Button type="submit" variant="contained" color="primary">
                             Material hinzufügen
