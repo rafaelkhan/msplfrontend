@@ -32,7 +32,6 @@ function App() {
                     <Route path="/ueberuns" element={<Ueberuns />} />
                     <Route path="/help" element={<Help />} />
                     <Route path="/newmaterial" element={isAuthenticated() ? <NewMaterial /> : <Navigate replace to="/" />} />
-                    {/* Fügen Sie hier weitere Routen hinzu, falls benötigt */}
                 </Routes>
             </div>
         </Router>
