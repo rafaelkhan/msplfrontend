@@ -11,12 +11,12 @@ function Dashboard() {
     const handleToggleSidebar = () => {
         setIsSidebarOpen(!isSidebarOpen);
     };
-
+    const name=localStorage.getItem('Name');
     return (
         <div style={{ display: 'flex' }}>
             <Sidebar />
             <div className="content">
-                <h1 className="Titel">Dashboard</h1>
+                <h1 className="Titel">Dashboard {name}</h1>
                 <div className="specific-content">
                     <Paper
                         sx={{

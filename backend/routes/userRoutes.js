@@ -56,5 +56,8 @@ module.exports = function(db) {
             }
         });
     });
+
+    router.get('/')
+
     return router;
 };
