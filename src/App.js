@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import Homepage from './pages/Homepage';
 import Dashboard from './pages/Dashboard';
 import Materialansicht from './pages/Materialansicht';
+import Materialdetails from './pages/Materialdetails';
 import Materialverwaltung from './pages/Materialverwaltung';
 import Benutzerverwaltung from './pages/Benutzerverwaltung';
 import Ueberuns from './pages/Ueberuns';
@@ -29,6 +30,7 @@ function App() {
                     <Route path="/" element={<Homepage/>} />
                     <Route path="/dashboard" element={isAuthenticated() ? <Dashboard /> : <Navigate replace to="/" />} />
                     <Route path="/materialansicht" element={isAuthenticated() ? <Materialansicht /> : <Navigate replace to="/" />} />
+                    <Route path="/material-detail/:MaterialTypID" element={isAuthenticated() ? <Materialdetails /> : <Navigate replace to="/" />} />
                     {userClass === 'LEHRER' && <Route path="/materialverwaltung" element={isAuthenticated() ? <Materialverwaltung /> : <Navigate replace to="/" />} />}
                     {userClass === 'LEHRER' && <Route path="/benutzerverwaltung" element={isAuthenticated() ? <Benutzerverwaltung /> : <Navigate replace to="/" />} />}
                     <Route path="/ueberuns" element={<Ueberuns />} />
