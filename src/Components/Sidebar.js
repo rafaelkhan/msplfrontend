@@ -76,17 +76,20 @@ function Sidebar() {
                     <ListItem button className="sidebar-link" onClick={() => handleNavigateTo('/Dashboard')}>
                         <ListItemText primary="Dashboard" className="Text-Bar"/>
                     </ListItem>
-
+                    <ListItem button className="sidebar-link" onClick={() => handleNavigateTo('/Materialansicht')}>
+                        <ListItemText primary="Materialansicht" className="Text-Bar"/>
+                    </ListItem>
+                    {userClass === 'LEHRER' && (
                     <ListItem button className="sidebar-link" onClick={() => handleNavigateTo('/Materialverwaltung')}>
                         <ListItemText primary="Materialverwaltung" className="Text-Bar"/>
                     </ListItem>
-
+                    )
+                    }
                     {userClass === 'LEHRER' && (
                     <ListItem button className="sidebar-link" onClick={() => handleNavigateTo('/Benutzerverwaltung')}>
                         <ListItemText primary="Benutzerverwaltung" className="Text-Bar"/>
                     </ListItem>
                     )
-
                     }
                     <ListItem button className="sidebar-link" onClick={() => handleNavigateTo('/Ueberuns')}>
                         <ListItemText primary="Über uns" className="Text-Bar"/>

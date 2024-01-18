@@ -1,0 +1,43 @@
+/* Stellen Sie sicher, dass die Boxen eine feste Breite und Höhe haben */
+.box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: 100px; /* Oder jede gewünschte feste Höhe */
+    margin-bottom: 8px; /* Gleichmäßiger Abstand nach unten */
+}
+
+/* Stile für die Hover-Inhalte */
+.hoverContent {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+}
+
+/* Zeigt die Hover-Inhalte, wenn man über die Box fährt */
+.box:hover .hoverContent {
+    display: flex;
+}
+
+/* Link-Stil innerhalb der Box */
+.box-link {
+    text-decoration: none;
+    color: black;
+    text-align: center;
+}
+
+/* Überschrift für die Box-Nummer */
+.box-number {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    z-index: 3;
+}

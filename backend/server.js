@@ -6,7 +6,8 @@ require('dotenv').config({ path: 'token.env' });
 
 const userRoutes = require('./routes/userRoutes');
 const classRoutes = require('./routes/classRoutes');
-const materialTypeRoutes = require('./routes/materialTypeRoutes');
+const LehrerMaterialRoutes = require('./routes/LehrerMaterialRoutes');
+const BoxandMaterialRoutes = require('./routes/BoxandMaterialRoutes');
 
 const app = express();
 const port = 3100;
@@ -32,7 +33,8 @@ app.use(cors());
 
 app.use('/api/user', userRoutes(db));
 app.use('/api', classRoutes(db));
-app.use('/api/Materialtyp', materialTypeRoutes(db));
+app.use('/api/Materialtyp', LehrerMaterialRoutes(db));
+app.use('/api/BoxMaterial', BoxandMaterialRoutes(db))
 
 app.use((req, res) => {
     res.status(404).send('Not Found');
