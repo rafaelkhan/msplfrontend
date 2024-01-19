@@ -16,7 +16,7 @@ import AddIcon from '@mui/icons-material/Add';
 import IconButton from '@mui/material/IconButton';
 import RemoveIcon from '@mui/icons-material/Remove';
 import DeleteIcon from '@mui/icons-material/Delete';
-
+import Input from '@mui/material/Input';
 import Sidebar from '../Components/Sidebar';
 import '../CSS/General.css';
 import '../CSS/Materialverwaltung.css';
@@ -24,13 +24,28 @@ import '../CSS/Materialverwaltung.css';
 function Materialverwaltung() {
     const [materialien, setMaterialien] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
+    const [bestaende, setBestaende] = useState({}); // State für den aktuellen Bestand
 
     useEffect(() => {
-        const apiUrl = '/api/Materialtyp';
+        const apiUrlMaterialien = '/api/Materialtyp';
+        const apiUrlBox = '/api/Materialtyp/Box';
 
-        axios.get(apiUrl)
+        // Daten für Materialtypen abrufen
+        axios.get(apiUrlMaterialien)
             .then((response) => setMaterialien(response.data))
             .catch((error) => console.error('Fehler beim Abrufen der Materialdaten:', error));
+
+        // Daten für den aktuellen Bestand abrufen
+        axios.get(apiUrlBox)
+            .then((response) => {
+                // Erstellen eines Objekts für den einfachen Zugriff auf den Bestand
+                const bestandObj = {};
+                response.data.forEach((box) => {
+                    bestandObj[box.MaterialtypID] = box.Menge;
+                });
+                setBestaende(bestandObj);
+            })
+            .catch((error) => console.error('Fehler beim Abrufen des aktuellen Bestands:', error));
     }, []);
 
     const increaseStock = (id) => {
@@ -64,6 +79,12 @@ function Materialverwaltung() {
         }
     };
 
+    const handleSollBestandChange = (materialId, newValue) => {
+        // Hier kannst du die Logik hinzufügen, um den geänderten Wert zu verarbeiten
+        // z.B., den geänderten Wert im State zu aktualisieren oder an die API zu senden
+        console.log(`Material ID ${materialId} - Neuer Soll-Bestand: ${newValue}`);
+    };
+
     const filteredMaterialien = materialien.filter(
         (material) =>
             material.Bezeichnung.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -95,7 +116,7 @@ function Materialverwaltung() {
                                 </Button>
                             </Link>
                         </Box>
-                        <Paper sx={{ width: '60%', overflow: 'hidden' }}>
+                        <Paper sx={{ width: '80%', overflow: 'hidden' }}>
                             <TableContainer component={Paper}>
                                 <Table>
                                     <TableHead>
@@ -103,7 +124,8 @@ function Materialverwaltung() {
                                             <TableCell>ID</TableCell>
                                             <TableCell>Name</TableCell>
                                             <TableCell sx={{textAlign: 'center'}}>Soll-Bestand</TableCell>
-                                            <TableCell sx={{textAlign: 'center'}}>Aktionen</TableCell>
+                                            <TableCell sx={{textAlign: 'center'}}>Aktueller Bestand</TableCell> {/* Neue Spalte */}
+                                            <TableCell sx={{textAlign: 'center'}}>Soll-Bestand ändern</TableCell>
                                             <TableCell sx={{textAlign: 'center'}}>Löschen</TableCell>
                                         </TableRow>
                                     </TableHead>
@@ -112,7 +134,18 @@ function Materialverwaltung() {
                                             <TableRow key={Materialtyp.MaterialtypID}>
                                                 <TableCell>{Materialtyp.MaterialtypID}</TableCell>
                                                 <TableCell>{Materialtyp.Bezeichnung}</TableCell>
-                                                <TableCell sx={{ textAlign: 'center' }}>{Materialtyp.SollBestand}</TableCell>
+                                                <TableCell sx={{ textAlign: 'center' }}>
+                                                    {/* Input-Feld für den Soll-Bestand */}
+                                                    <Input
+                                                        type="number"
+                                                        value={Materialtyp.SollBestand}
+                                                        onChange={(e) => handleSollBestandChange(Materialtyp.MaterialtypID, e.target.value)}
+                                                        sx={{ textAlign: 'center' }}
+                                                    />
+                                                </TableCell>
+                                                <TableCell sx={{ textAlign: 'center' }}>
+                                                    {bestaende[Materialtyp.MaterialtypID] || 0} {Materialtyp.Zähleinheit}
+                                                </TableCell>
                                                 <TableCell sx={{ textAlign: 'center' }}>
                                                     <ButtonGroup>
                                                         <Button

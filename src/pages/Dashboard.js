@@ -11,12 +11,15 @@ function Dashboard() {
     const handleToggleSidebar = () => {
         setIsSidebarOpen(!isSidebarOpen);
     };
-    const name=localStorage.getItem('Name');
+    const fullname=localStorage.getItem('fullname');
+    const firstname=localStorage.getItem('firstname');
+    const email=localStorage.getItem('email');
     return (
         <div style={{ display: 'flex' }}>
             <Sidebar />
             <div className="content">
-                <h1 className="Titel">Dashboard {name}</h1>
+                <h1 className="Titel">Dashboard</h1>
+                <h2>Willkommen {firstname}.</h2>
                 <div className="specific-content">
                     <Paper
                         sx={{
