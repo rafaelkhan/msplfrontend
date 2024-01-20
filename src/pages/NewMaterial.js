@@ -38,6 +38,10 @@ const NewMaterial = () => {
                 if (response.status === 201) {
                     setSnackbarMessage('Material erfolgreich hinzugefügt');
                     setSnackbarOpen(true);
+
+                    setTimeout(() => {
+                        handleNavigateBack();
+                    }, 1000);
                 } else {
                     console.error('Fehler beim Hinzufügen des Materials');
                 }

@@ -63,6 +63,9 @@ function Materialverwaltung() {
         axios.put('/api/Materialtyp/updateBoxAssignment', { materialtypId: materialId, boxId: newBoxId })
             .then(response => console.log('Box-Zuweisung erfolgreich aktualisiert'))
             .catch(error => console.error('Fehler beim Aktualisieren der Box-Zuweisung', error));
+        axios.get('/api/Materialtyp/occupiedBoxes').then(response => {
+            setOccupiedBoxes(response.data);
+        }).catch(error => console.error('Fehler beim Abrufen besetzter Boxen:', error));
     };
 
     const handleStockChange = (materialId, newValue, updateFunction) => {

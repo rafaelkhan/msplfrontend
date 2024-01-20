@@ -125,7 +125,7 @@ module.exports = function(db) {
     });
     router.put('/updateBoxAssignment', (req, res) => {
         const { materialtypId, boxId } = req.body;
-        db.query('UPDATE Box SET MaterialtypID = ? WHERE BoxID = ?', [materialtypId, boxId], (err, result) => {
+        db.query('UPDATE Box SET BoxID = ? WHERE MaterialtypID = ?', [boxId, materialtypId], (err, result) => {
             if (err) {
                 console.error('Fehler beim Aktualisieren der Box-Zuweisung: ', err);
                 res.status(500).send('Interner Serverfehler');

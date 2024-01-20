@@ -7,7 +7,7 @@ const BoxGrid = ({ boxes }) => {
     const boxWidth = { flexBasis: '12.5%', flexGrow: 0 };
 
     return (
-        <Grid container spacing={1} sx={{ padding: 1 }}>
+        <Grid container spacing={1} sx={{ padding: 1 , width: '40%'}}>
             {boxes.map((box, index) => (
                 <Grid item sx={boxWidth} key={index}>
                     <BoxComponent box={box} />
