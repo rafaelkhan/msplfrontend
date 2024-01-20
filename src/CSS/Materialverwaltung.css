@@ -1,11 +1,96 @@
-.Search-ID {
-    display: flex;
-    justify-content: center;
-    height: 20vh; /* Verwenden Sie 50vh, um es auf die obere Hälfte zu begrenzen */
+/* styles.css */
+
+.content {
+    padding: 20px;
 }
 
-.edit {
-    display: flex;
-    justify-content: center;
+.Titel {
+    color: black;
 }
 
+.specific-content {
+    margin-top: 20px;
+}
+
+.search-box {
+    width: 80%;
+    margin-bottom: 16px;
+}
+
+.button-container {
+    width: 80%;
+}
+
+.paper-container {
+    width: 80%;
+    overflow: hidden;
+    margin-top: 16px;
+}
+
+.table-container {
+    max-height: 400px;
+    overflow: auto;
+}
+
+.table-cell-center {
+    text-align: center;
+}
+
+.input-number {
+    width: 80px;
+    text-align: center;
+}
+
+.select-container {
+    width: 100%;
+}
+/* Stile für Bildschirmbreite bis 768 Pixel */
+@media (max-width: 768px) {
+    .content {
+        padding: 10px; /* Beispiel: Änderung der Polsterung für kleinere Bildschirme */
+    }
+
+    .Titel {
+        color: black; /* Beispiel: Änderung der Textfarbe für kleinere Bildschirme */
+    }
+
+    .specific-content {
+        margin-top: 16px; /* Beispiel: Änderung des oberen Randes für kleinere Bildschirme */
+    }
+
+    .search-box {
+        width: 98%; /* Beispiel: Vollständige Breite für Suchfeld auf kleineren Bildschirmen */
+        margin-bottom: 16px;
+    }
+
+    .button-container {
+        width: 98%; /* Beispiel: Vollständige Breite für Button-Container auf kleineren Bildschirmen */
+    }
+
+    .paper-container {
+        width: 98%; /* Beispiel: Vollständige Breite für Papier-Container auf kleineren Bildschirmen */
+        overflow: hidden;
+        margin-top: 16px;
+    }
+
+    .table-container {
+        max-height: 768px; /* Beispiel: Reduziere die maximale Höhe für Tabellencontainer auf kleineren Bildschirmen */
+        overflow: auto;
+    }
+
+    .table-cell-center {
+        text-align: center;
+    }
+
+    .input-number {
+        width: 60px; /* Beispiel: Verringere die Breite des Eingabefelds für Zahlen auf kleineren Bildschirmen */
+        text-align: center;
+    }
+
+    .select-container {
+        width: 100%;
+    }
+}
+
+
+/* Weitere benutzerdefinierte Stile können hier hinzugefügt werden */

@@ -7,6 +7,7 @@ import {
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Sidebar from '../Components/Sidebar';
+import '../CSS/Materialverwaltung.css';
 
 function Materialverwaltung() {
     const [materialien, setMaterialien] = useState([]);
@@ -93,7 +94,7 @@ function Materialverwaltung() {
                 <div className="content">
                     <h1 className="Titel">Materialverwaltung</h1>
                     <div className="specific-content">
-                        <Box sx={{ width: '80%', marginTop: '16px' }}>
+                        <Box className="search-box">
                             <TextField
                                 id="outlined-search"
                                 label="Suche nach Name oder ID"
@@ -101,27 +102,27 @@ function Materialverwaltung() {
                                 variant="outlined"
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
-                                sx={{ width: '100%' }}
+                                fullWidth
                             />
                         </Box>
-                        <Box sx={{ width: '80%' }}>
+                        <Box className="button-container">
                             <Link to="/newmaterial">
-                                <Button sx={{ width: '100%', height: '55px'}} variant="outlined" color="secondary">
+                                <Button variant="outlined" color="secondary" sx={{ width: '100%', height: '55px' }}>
                                     Neues Material hinzufügen
                                 </Button>
                             </Link>
                         </Box>
-                        <Paper sx={{ width: '80%', overflow: 'hidden' }}>
-                            <TableContainer component={Paper}>
+                        <Paper className="paper-container">
+                            <TableContainer component={Paper} className="table-container">
                                 <Table>
                                     <TableHead>
                                         <TableRow>
                                             <TableCell>ID</TableCell>
                                             <TableCell>Name</TableCell>
-                                            <TableCell sx={{ textAlign: 'center' }}>Soll-Bestand</TableCell>
-                                            <TableCell sx={{ textAlign: 'center' }}>Aktueller Bestand</TableCell>
-                                            <TableCell sx={{ textAlign: 'center' }}>Box</TableCell>
-                                            <TableCell sx={{ textAlign: 'center' }}>Löschen</TableCell>
+                                            <TableCell className="table-cell-center">Soll-Bestand</TableCell>
+                                            <TableCell className="table-cell-center">Aktueller Bestand</TableCell>
+                                            <TableCell className="table-cell-center">Box</TableCell>
+                                            <TableCell className="table-cell-center">Löschen</TableCell>
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
@@ -129,7 +130,7 @@ function Materialverwaltung() {
                                             <TableRow key={material.MaterialtypID}>
                                                 <TableCell>{material.MaterialtypID}</TableCell>
                                                 <TableCell>{material.Bezeichnung}</TableCell>
-                                                <TableCell sx={{ textAlign: 'center' }}>
+                                                <TableCell className="table-cell-center">
                                                     <Input
                                                         type="number"
                                                         defaultValue={material.SollBestand}
@@ -137,7 +138,7 @@ function Materialverwaltung() {
                                                         onKeyDown={(e) => handleKeyDown(e, material.MaterialtypID, updateTargetStock)}
                                                     />
                                                 </TableCell>
-                                                <TableCell sx={{ textAlign: 'center' }}>
+                                                <TableCell className="table-cell-center">
                                                     <Input
                                                         key={material.MaterialtypID + '-' + (bestaende[material.MaterialtypID] || 0)}
                                                         type="number"
@@ -146,8 +147,8 @@ function Materialverwaltung() {
                                                         onKeyDown={(e) => handleKeyDown(e, material.MaterialtypID, updateBoxStock)}
                                                     />
                                                 </TableCell>
-                                                <TableCell sx={{ textAlign: 'center' }}>
-                                                    <FormControl fullWidth>
+                                                <TableCell className="table-cell-center">
+                                                    <FormControl fullWidth className="select-container">
                                                         <Select
                                                             value={boxAssignments[material.MaterialtypID] || ''}
                                                             onChange={(e) => updateBoxAssignment(material.MaterialtypID, e.target.value)}
@@ -160,7 +161,7 @@ function Materialverwaltung() {
                                                         </Select>
                                                     </FormControl>
                                                 </TableCell>
-                                                <TableCell sx={{ textAlign: 'center' }}>
+                                                <TableCell className="table-cell-center">
                                                     <IconButton onClick={() => deleteMaterial(material.MaterialtypID)}>
                                                         <DeleteIcon />
                                                     </IconButton>

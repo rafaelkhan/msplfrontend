@@ -40,9 +40,13 @@ p {
     body {
         font-size: 16px;
     }
+
     .content {
         margin-left: 90px;
+        margin-top: 10px;
+        flex-grow: 1;
     }
+
     /* Weitere Anpassungen für kleinere Bildschirme */
     .specific-content {
         font-size: 2px;
