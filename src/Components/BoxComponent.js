@@ -47,7 +47,7 @@ const BoxComponent = ({ box }) => {
                         open={overlayVisible}
                         placement="top"
                     >
-                        <Link to={`/material-detail/${box.MaterialtypID}`} style={{ textDecoration: 'none', position: 'absolute', top: 0, left: 0, height: '100%', width: '100%', zIndex: 1000 }} />
+                        <Link to={`/material-detail/${box.BoxID}`} style={{ textDecoration: 'none', position: 'absolute', top: 0, left: 0, height: '100%', width: '100%', zIndex: 1000 }} />
                     </Tooltip>
                 )}
             </Card>

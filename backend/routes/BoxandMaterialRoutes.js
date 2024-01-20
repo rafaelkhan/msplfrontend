@@ -13,8 +13,16 @@ module.exports = function(db) {
             }
         });
     });
-
-    // Weitere Endpunkte je nach Anforderung
-
+    router.get('/materialdaten/:BoxID', (req, res) => {
+        const { BoxID } = req.params;
+        db.query('SELECT Box.BoxID, Box.Menge, Materialtyp.Bezeichnung, Materialtyp.MaterialtypID FROM Box INNER JOIN Materialtyp ON Box.MaterialtypID = Materialtyp.MaterialtypID WHERE Box.BoxID= ?', [BoxID] , (err, results) => {
+            if (err) {
+                console.error('Fehler beim Abrufen der Box-Daten: ', err);
+                res.status(500).send('Interner Serverfehler');
+            } else {
+                res.json(results);
+            }
+        });
+    });
     return router;
 };
