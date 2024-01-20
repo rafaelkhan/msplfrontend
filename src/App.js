@@ -30,7 +30,7 @@ function App() {
                     <Route path="/" element={<Homepage/>} />
                     <Route path="/dashboard" element={isAuthenticated() ? <Dashboard /> : <Navigate replace to="/" />} />
                     <Route path="/materialansicht" element={isAuthenticated() ? <Materialansicht /> : <Navigate replace to="/" />} />
-                    <Route path="/material-detail/:MaterialTypID" element={isAuthenticated() ? <Materialdetails /> : <Navigate replace to="/" />} />
+                    <Route path="/material-detail/:BoxID" element={isAuthenticated() ? <Materialdetails /> : <Navigate replace to="/" />} />
                     {userClass === 'LEHRER' && <Route path="/materialverwaltung" element={isAuthenticated() ? <Materialverwaltung /> : <Navigate replace to="/" />} />}
                     {userClass === 'LEHRER' && <Route path="/benutzerverwaltung" element={isAuthenticated() ? <Benutzerverwaltung /> : <Navigate replace to="/" />} />}
                     <Route path="/ueberuns" element={<Ueberuns />} />
