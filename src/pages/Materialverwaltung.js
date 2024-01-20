@@ -1,94 +1,86 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Table from '@mui/material/Table';
 import { Link } from 'react-router-dom';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableBody from '@mui/material/TableBody';
-import TableRow from '@mui/material/TableRow';
-import TableCell from '@mui/material/TableCell';
-import Paper from '@mui/material/Paper';
-import TextField from '@mui/material/TextField';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import ButtonGroup from '@mui/material/ButtonGroup';
-import AddIcon from '@mui/icons-material/Add';
-import IconButton from '@mui/material/IconButton';
-import RemoveIcon from '@mui/icons-material/Remove';
+import {
+    Table, TableContainer, TableHead, TableBody, TableRow, TableCell,
+    Paper, TextField, Box, Button, IconButton, Input, Select, MenuItem, FormControl, InputLabel
+} from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import Input from '@mui/material/Input';
 import Sidebar from '../Components/Sidebar';
-import '../CSS/General.css';
-import '../CSS/Materialverwaltung.css';
 
 function Materialverwaltung() {
     const [materialien, setMaterialien] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
-    const [bestaende, setBestaende] = useState({}); // State für den aktuellen Bestand
+    const [bestaende, setBestaende] = useState({});
+    const [occupiedBoxes, setOccupiedBoxes] = useState([]);
+    const [boxAssignments, setBoxAssignments] = useState({});
 
     useEffect(() => {
-        const apiUrlMaterialien = '/api/Materialtyp';
-        const apiUrlBox = '/api/Materialtyp/Box';
+        axios.get('/api/Materialtyp').then(response => {
+            setMaterialien(response.data);
+        }).catch(error => console.error('Fehler beim Abrufen der Materialdaten:', error));
 
-        // Daten für Materialtypen abrufen
-        axios.get(apiUrlMaterialien)
-            .then((response) => setMaterialien(response.data))
-            .catch((error) => console.error('Fehler beim Abrufen der Materialdaten:', error));
+        axios.get('/api/Materialtyp/Box').then(response => {
+            const bestandObj = {};
+            const initialBoxAssignments = {};
+            response.data.forEach(box => {
+                bestandObj[box.MaterialtypID] = box.Menge;
+                initialBoxAssignments[box.MaterialtypID] = box.BoxID;
+            });
+            setBestaende(bestandObj);
+            setBoxAssignments(initialBoxAssignments);
+        }).catch(error => console.error('Fehler beim Abrufen des aktuellen Bestands:', error));
 
-        // Daten für den aktuellen Bestand abrufen
-        axios.get(apiUrlBox)
-            .then((response) => {
-                // Erstellen eines Objekts für den einfachen Zugriff auf den Bestand
-                const bestandObj = {};
-                response.data.forEach((box) => {
-                    bestandObj[box.MaterialtypID] = box.Menge;
-                });
-                setBestaende(bestandObj);
-            })
-            .catch((error) => console.error('Fehler beim Abrufen des aktuellen Bestands:', error));
+        axios.get('/api/Materialtyp/occupiedBoxes').then(response => {
+            setOccupiedBoxes(response.data);
+        }).catch(error => console.error('Fehler beim Abrufen besetzter Boxen:', error));
     }, []);
 
-    const increaseStock = (id) => {
-        axios.put(`/api/Materialtyp/${id}/increase`)
-            .then(() => {
-                axios.get('/api/Materialtyp')
-                    .then((response) => setMaterialien(response.data))
-                    .catch((error) => console.error('Fehler beim Abrufen der Materialdaten:', error));
-            })
-            .catch((error) => console.error('Fehler beim Erhöhen des Bestands:', error));
-    };
-
-    const decreaseStock = (id) => {
-        axios.put(`/api/Materialtyp/${id}/decrease`)
-            .then(() => {
-                axios.get('/api/Materialtyp')
-                    .then((response) => setMaterialien(response.data))
-                    .catch((error) => console.error('Fehler beim Abrufen der Material-Daten:', error));
-            })
-            .catch((error) => console.error('Fehler beim Verringern des Bestands:', error));
-    };
-
     const deleteMaterial = async (id) => {
-        try {
-            await axios.delete(`/api/Materialtyp/delete/${id}`);
-            // Nach dem Löschen aktualisiere die Materialien
-            const response = await axios.get('/api/Materialtyp');
-            setMaterialien(response.data);
-        } catch (error) {
-            console.error('Fehler beim Löschen des Materials: ', error);
+        await axios.delete(`/api/Materialtyp/delete/${id}`);
+        const response = await axios.get('/api/Materialtyp');
+        setMaterialien(response.data);
+    };
+
+    const updateTargetStock = async (materialId, newTargetStock) => {
+        await axios.put(`/api/Materialtyp/${materialId}/updateTargetStock`, { newTargetStock });
+        const response = await axios.get('/api/Materialtyp');
+        setMaterialien(response.data);
+    };
+
+    const updateBoxStock = async (materialtypId, newStock) => {
+        const response = await axios.put(`/api/Materialtyp/Box/updateStock`, { materialtypId, newStock });
+        if (response.status === 200) {
+            setBestaende(prevBestaende => ({
+                ...prevBestaende,
+                [materialtypId]: parseInt(newStock)
+            }));
         }
     };
 
-    const handleSollBestandChange = (materialId, newValue) => {
-        // Hier kannst du die Logik hinzufügen, um den geänderten Wert zu verarbeiten
-        // z.B., den geänderten Wert im State zu aktualisieren oder an die API zu senden
-        console.log(`Material ID ${materialId} - Neuer Soll-Bestand: ${newValue}`);
+    const updateBoxAssignment = (materialId, newBoxId) => {
+        setBoxAssignments(prev => ({ ...prev, [materialId]: newBoxId }));
+        axios.put('/api/Materialtyp/updateBoxAssignment', { materialtypId: materialId, boxId: newBoxId })
+            .then(response => console.log('Box-Zuweisung erfolgreich aktualisiert'))
+            .catch(error => console.error('Fehler beim Aktualisieren der Box-Zuweisung', error));
     };
 
-    const filteredMaterialien = materialien.filter(
-        (material) =>
-            material.Bezeichnung.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            material.MaterialtypID.toString().includes(searchTerm.toLowerCase())
+    const handleStockChange = (materialId, newValue, updateFunction) => {
+        if (newValue !== "") {
+            updateFunction(materialId, newValue);
+        }
+    };
+
+    const handleKeyDown = (event, materialId, updateFunction) => {
+        if (event.key === 'Enter') {
+            handleStockChange(materialId, event.target.value, updateFunction);
+            event.target.blur();
+        }
+    };
+
+    const filteredMaterialien = materialien.filter(material =>
+        material.Bezeichnung.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        material.MaterialtypID.toString().includes(searchTerm.toLowerCase())
     );
 
     return (
@@ -98,7 +90,7 @@ function Materialverwaltung() {
                 <div className="content">
                     <h1 className="Titel">Materialverwaltung</h1>
                     <div className="specific-content">
-                        <Box sx={{ width: '60%', marginTop: '16px' }}>
+                        <Box sx={{ width: '80%', marginTop: '16px' }}>
                             <TextField
                                 id="outlined-search"
                                 label="Suche nach Name oder ID"
@@ -109,7 +101,7 @@ function Materialverwaltung() {
                                 sx={{ width: '100%' }}
                             />
                         </Box>
-                        <Box sx={{ width: '60%' }}>
+                        <Box sx={{ width: '80%' }}>
                             <Link to="/newmaterial">
                                 <Button sx={{ width: '100%', height: '55px'}} variant="outlined" color="secondary">
                                     Neues Material hinzufügen
@@ -123,49 +115,50 @@ function Materialverwaltung() {
                                         <TableRow>
                                             <TableCell>ID</TableCell>
                                             <TableCell>Name</TableCell>
-                                            <TableCell sx={{textAlign: 'center'}}>Soll-Bestand</TableCell>
-                                            <TableCell sx={{textAlign: 'center'}}>Aktueller Bestand</TableCell> {/* Neue Spalte */}
-                                            <TableCell sx={{textAlign: 'center'}}>Soll-Bestand ändern</TableCell>
-                                            <TableCell sx={{textAlign: 'center'}}>Löschen</TableCell>
+                                            <TableCell sx={{ textAlign: 'center' }}>Soll-Bestand</TableCell>
+                                            <TableCell sx={{ textAlign: 'center' }}>Aktueller Bestand</TableCell>
+                                            <TableCell sx={{ textAlign: 'center' }}>Box</TableCell>
+                                            <TableCell sx={{ textAlign: 'center' }}>Löschen</TableCell>
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
-                                        {filteredMaterialien.map((Materialtyp) => (
-                                            <TableRow key={Materialtyp.MaterialtypID}>
-                                                <TableCell>{Materialtyp.MaterialtypID}</TableCell>
-                                                <TableCell>{Materialtyp.Bezeichnung}</TableCell>
+                                        {filteredMaterialien.map(material => (
+                                            <TableRow key={material.MaterialtypID}>
+                                                <TableCell>{material.MaterialtypID}</TableCell>
+                                                <TableCell>{material.Bezeichnung}</TableCell>
                                                 <TableCell sx={{ textAlign: 'center' }}>
-                                                    {/* Input-Feld für den Soll-Bestand */}
                                                     <Input
                                                         type="number"
-                                                        value={Materialtyp.SollBestand}
-                                                        onChange={(e) => handleSollBestandChange(Materialtyp.MaterialtypID, e.target.value)}
-                                                        sx={{ textAlign: 'center' }}
+                                                        defaultValue={material.SollBestand}
+                                                        onBlur={(e) => handleStockChange(material.MaterialtypID, e.target.value, updateTargetStock)}
+                                                        onKeyDown={(e) => handleKeyDown(e, material.MaterialtypID, updateTargetStock)}
                                                     />
                                                 </TableCell>
                                                 <TableCell sx={{ textAlign: 'center' }}>
-                                                    {bestaende[Materialtyp.MaterialtypID] || 0} {Materialtyp.Zähleinheit}
+                                                    <Input
+                                                        key={material.MaterialtypID + '-' + (bestaende[material.MaterialtypID] || 0)}
+                                                        type="number"
+                                                        defaultValue={bestaende[material.MaterialtypID] || 0}
+                                                        onBlur={(e) => handleStockChange(material.MaterialtypID, e.target.value, updateBoxStock)}
+                                                        onKeyDown={(e) => handleKeyDown(e, material.MaterialtypID, updateBoxStock)}
+                                                    />
                                                 </TableCell>
                                                 <TableCell sx={{ textAlign: 'center' }}>
-                                                    <ButtonGroup>
-                                                        <Button
-                                                            variant="text"
-                                                            color="success"
-                                                            onClick={() => increaseStock(Materialtyp.MaterialtypID)}
-                                                            startIcon={<AddIcon />}
+                                                    <FormControl fullWidth>
+                                                        <Select
+                                                            value={boxAssignments[material.MaterialtypID] || ''}
+                                                            onChange={(e) => updateBoxAssignment(material.MaterialtypID, e.target.value)}
                                                         >
-                                                        </Button>
-                                                        <Button
-                                                            variant="text"
-                                                            color="error"
-                                                            onClick={() => decreaseStock(Materialtyp.MaterialtypID)}
-                                                            endIcon={<RemoveIcon />}
-                                                        >
-                                                        </Button>
-                                                    </ButtonGroup>
+                                                            {Array.from({ length: 64 }, (_, i) => i + 1).map(boxId => (
+                                                                <MenuItem key={boxId} value={boxId} disabled={occupiedBoxes.includes(boxId) && boxAssignments[material.MaterialtypID] !== boxId}>
+                                                                    {`Box ${boxId}`}
+                                                                </MenuItem>
+                                                            ))}
+                                                        </Select>
+                                                    </FormControl>
                                                 </TableCell>
                                                 <TableCell sx={{ textAlign: 'center' }}>
-                                                    <IconButton onClick={() => deleteMaterial(Materialtyp.MaterialtypID)}>
+                                                    <IconButton onClick={() => deleteMaterial(material.MaterialtypID)}>
                                                         <DeleteIcon />
                                                     </IconButton>
                                                 </TableCell>

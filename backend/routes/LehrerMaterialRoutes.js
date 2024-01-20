@@ -13,41 +13,33 @@ module.exports = function(db) {
             }
         });
     });
-
     router.post('/create', (req, res) => {
         const newMaterial = { ...req.body, Kontingent: 0 };
-
         db.query('ALTER TABLE Materialtyp AUTO_INCREMENT = 1');
-        // Einfügen in Materialtyp
-        db.query(
-            'INSERT INTO Materialtyp (Bezeichnung, SollBestand, Kontingent) VALUES (?, ?, ?)',
-            [newMaterial.Bezeichnung, newMaterial.SollBestand, newMaterial.Kontingent],
-            (err, insertResult) => {
+        db.query('INSERT INTO Materialtyp (Bezeichnung, SollBestand, Kontingent) VALUES (?, ?, ?)', [newMaterial.Bezeichnung, newMaterial.SollBestand, newMaterial.Kontingent], (err, insertResult) => {
                 if (err) {
                     console.error('Fehler beim Einfügen in Materialtyp: ', err);
                     return res.status(500).send('Interner Serverfehler');
                 }
-
-                // Abrufen der MaterialtypID
-                db.query(
-                    'SELECT MaterialtypID FROM Materialtyp WHERE Bezeichnung= ?',
-                    [newMaterial.Bezeichnung],
-                    (err, materialResults) => {
+                db.query('SELECT MaterialtypID FROM Materialtyp WHERE Bezeichnung= ?', [newMaterial.Bezeichnung], (err, materialResults) => {
                         if (err) {
                             console.error('Fehler beim Abrufen der MaterialtypID: ', err);
                             return res.status(500).send('Interner Serverfehler');
                         }
-
                         const MaterialtypID = materialResults[0].MaterialtypID;
+                        const { BoxID, Menge } = newMaterial;
+                        if (BoxID !== undefined && Menge !== undefined) {
+                            db.query('INSERT INTO Box (BoxID, Menge, MaterialtypID) VALUES (?, ?, ?)', [BoxID, Menge, MaterialtypID], (err, result) => {
+                                if (err) {
+                                    console.error('Fehler beim Einfügen der Box: ', err);
+                                }
+                            });
+                        }
                         const attributes = ['Durchmesser', 'Kraft', 'Länge', 'Stärke'];
-
                         let completedQueries = 0;
                         attributes.forEach((attribute) => {
                             if (newMaterial[attribute] !== '' && newMaterial[attribute] !== undefined) {
-                                db.query(
-                                    'INSERT INTO Materialtyp_Materialattribute (MaterialtypID, AttributName, Quantitaet) VALUES (?, ?, ?)',
-                                    [MaterialtypID, attribute, newMaterial[attribute]],
-                                    (err, result) => {
+                                db.query('INSERT INTO Materialtyp_Materialattribute (MaterialtypID, AttributName, Quantitaet) VALUES (?, ?, ?)', [MaterialtypID, attribute, newMaterial[attribute]], (err, result) => {
                                         if (err) {
                                             console.error(`Fehler beim Einfügen des Attributs ${attribute}: `, err);
                                             return res.status(500).send('Interner Serverfehler');
@@ -71,14 +63,33 @@ module.exports = function(db) {
         );
     });
 
+    router.get('/occupiedBoxes', (req, res) => {
+        db.query('SELECT BoxID FROM Box WHERE MaterialtypID IS NOT NULL', (err, results) => {
+            if (err) {
+                console.error('Fehler beim Abrufen besetzter Boxen: ', err);
+                res.status(500).send('Interner Serverfehler');
+            } else {
+                res.json(results.map(result => result.BoxID));
+            }
+        });
+    });
 
+    router.put('/:id/updateTargetStock', (req, res) => {
+        const { id } = req.params;
+        const { newTargetStock } = req.body;
+        db.query('UPDATE Materialtyp SET SollBestand = ? WHERE MaterialtypID = ?', [newTargetStock, id], (err, result) => {
+            if (err) {
+                console.error('Fehler beim Aktualisieren des Soll-Bestands: ', err);
+                res.status(500).send('Interner Serverfehler');
+            } else {
+                res.status(200).send('Soll-Bestand erfolgreich aktualisiert');
+            }
+        });
+    });
 
     router.get('/check-duplicate', (req, res) => {
         const { Bezeichnung } = req.query;
-        db.query(
-            'SELECT COUNT(*) AS count FROM Materialtyp WHERE  Bezeichnung = ?',
-            [Bezeichnung],
-            (err, result) => {
+        db.query('SELECT COUNT(*) AS count FROM Materialtyp WHERE  Bezeichnung = ?', [Bezeichnung], (err, result) => {
                 if (err) {
                     console.error('Fehler beim Überprüfen von Duplikaten: ', err);
                     res.status(500).send('Interner Serverfehler');
@@ -90,57 +101,60 @@ module.exports = function(db) {
         );
     });
 
-    router.put('/:id/increase', (req, res) => {
-        const { id } = req.params;
-        db.query('UPDATE Materialtyp SET SollBestand = SollBestand + 1 WHERE MaterialtypID = ?', [id], (err, result) => {
-        if (err) {
-            console.error('Fehler beim Aktualisieren des Bestands: ', err);
-            res.status(500).send('Interner Serverfehler');
-        } else {
-            res.status(200).send('Bestand erfolgreich erhöht');
-        }
-    });
-});
-    router.put('/:id/decrease', (req, res) => {
-        const { id } = req.params;
-        db.query('UPDATE Materialtyp SET SollBestand = SollBestand - 1 WHERE MaterialtypID = ?', [id], (err, result) => {
+    router.get('/Box', (req, res) => {
+        db.query('SELECT BoxID, Menge, MaterialtypID FROM Box', (err, result) => {
             if (err) {
-                console.error('Fehler beim Aktualisieren des Bestands: ', err);
+                console.error('Fehler beim Abrufen der Box-Daten: ', err);
                 res.status(500).send('Interner Serverfehler');
             } else {
-                res.status(200).send('Bestand erfolgreich verringert');
+                res.json(result);
+            }
+        });
+    });
+
+    router.put('/Box/updateStock', (req, res) => {
+        const { materialtypId, newStock } = req.body;
+        db.query('UPDATE Box SET Menge = ? WHERE MaterialtypID = ?', [newStock, materialtypId], (err, result) => {
+            if (err) {
+                console.error('Fehler beim Aktualisieren des Box-Bestands: ', err);
+                res.status(500).send('Interner Serverfehler');
+            } else {
+                res.status(200).send('Box-Bestand erfolgreich aktualisiert');
+            }
+        });
+    });
+    router.put('/updateBoxAssignment', (req, res) => {
+        const { materialtypId, boxId } = req.body;
+        db.query('UPDATE Box SET MaterialtypID = ? WHERE BoxID = ?', [materialtypId, boxId], (err, result) => {
+            if (err) {
+                console.error('Fehler beim Aktualisieren der Box-Zuweisung: ', err);
+                res.status(500).send('Interner Serverfehler');
+            } else {
+                res.status(200).send('Box-Zuweisung erfolgreich aktualisiert');
             }
         });
     });
 
     router.delete('/delete/:id', (req, res) => {
         const { id } = req.params;
-
-        // Zuerst löschen aus MaterialEntnahmeRecht
         db.query('DELETE FROM MaterialEntnahmeRecht WHERE MaterialtypID = ?', [id], (err, result) => {
             if (err) {
                 console.error('Fehler beim Löschen in MaterialEntnahmeRecht: ', err);
                 res.status(500).send('Interner Serverfehler');
                 return;
             }
-
-            // Dann löschen aus Box
             db.query('DELETE FROM Box WHERE MaterialtypID = ?', [id], (err, result) => {
                 if (err) {
                     console.error('Fehler beim Löschen in Box: ', err);
                     res.status(500).send('Interner Serverfehler');
                     return;
                 }
-
-                // Dann löschen aus Materialtyp_Materialattribute
                 db.query('DELETE FROM Materialtyp_Materialattribute WHERE MaterialtypID = ?', [id], (err, result) => {
                     if (err) {
                         console.error('Fehler beim Löschen in Materialtyp_Materialattribute: ', err);
                         res.status(500).send('Interner Serverfehler');
                         return;
                     }
-
-                    // Schließlich löschen aus Materialtyp
                     db.query('DELETE FROM Materialtyp WHERE MaterialtypID = ?', [id], (err, result) => {
                         if (err) {
                             console.error('Fehler beim Löschen des Materials: ', err);
@@ -153,7 +167,6 @@ module.exports = function(db) {
             });
         });
     });
-
 
     return router;
 };
