@@ -1,7 +1,7 @@
 import React from 'react';
 import Sidebar from '../Components/Sidebar';
 import Faq from "react-faq-component";
-import '../CSS/General.css'
+import '../CSS/Help.css'
 
 function Help() {
 
@@ -60,11 +60,11 @@ function Help() {
     };
 
     return (
-        <div style={{ display: 'flex'}}>
+        <div className="container">
             <Sidebar />
             <div className="content">
                     <h1 className="Titel">Help</h1>
-                <div style={{width: '60%'}}>
+                <div className="faq-section">
                     <Faq
                         data={data}
                         styles={styles}
