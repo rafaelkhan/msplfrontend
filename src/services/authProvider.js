@@ -1,4 +1,3 @@
-// authProvider.js
 import axios from 'axios';
 import { PublicClientApplication } from '@azure/msal-browser';
 import { msalConfig } from './authConfig';
@@ -16,31 +15,30 @@ export const signIn = async () => {
         sessionStorage.removeItem("msal.interaction.status")
         localStorage.removeItem('accessToken');
         localStorage.removeItem('VollerName');
-        localStorage.removeItem('firstName')
+        localStorage.removeItem('firstName');
         const response = await msalInstance.loginPopup(loginRequest);
         const user = response.account;
         localStorage.setItem('fullname', user.name);
         localStorage.setItem('email', user.username);
-        try {
-            const email = user.username;
 
+        const email = user.username;
+        try {
             const classResponse = await axios.get('/api/user/class', { params: { email } });
             localStorage.setItem('accessToken', classResponse.data.accessToken);
         } catch (error) {
             console.error('Fehler beim Abrufen der Nutzerklasse', error);
-            // Optional: Handhabung des Fehlers oder Festlegen eines Standardwerts
         }
 
-        window.location.href = '/Dashboard';
+        const preAuthPath = localStorage.getItem('preAuthPath') || '/dashboard';
+        window.location.href = preAuthPath;
+        localStorage.removeItem('preAuthPath');
 
-        // Aufteilen des Namens in Vor- und Nachname
         const fullName = user.name;
         const splitName = fullName.split(' ');
         const firstName = splitName[0];
         const lastName = splitName.length > 1 ? splitName.slice(1).join(' ') : '';
         localStorage.setItem("firstname", firstName);
 
-        // Senden der Daten an das Backend mit Axios
         await axios.post('/api/user/login', {
             email: user.username,
             firstName: firstName,
@@ -57,16 +55,16 @@ export const signIn = async () => {
 export const signOut = async () => {
     try {
         await msalInstance.logout();
-        // Nach dem Abmelden zur Homepage weiterleiten;
         sessionStorage.removeItem("msal.interaction.status")
         sessionStorage.removeItem('user');
-        sessionStorage.removeItem('userClass')
+        sessionStorage.removeItem('userClass');
         window.location.href = '/';
     } catch (error) {
         console.error('An error occurred during sign out:', error);
         throw error;
     }
 };
+
 export const isAuthenticated = () => {
     const accounts = msalInstance.getAllAccounts();
     return accounts && accounts.length > 0;

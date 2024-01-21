@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Homepage from './pages/Homepage';
@@ -9,11 +8,11 @@ import Materialverwaltung from './pages/Materialverwaltung';
 import Benutzerverwaltung from './pages/Benutzerverwaltung';
 import Ueberuns from './pages/Ueberuns';
 import Help from './pages/Help';
+import NotFoundPage from './pages/NotFoundPage';
 import NewMaterial from './pages/NewMaterial';
 import { isAuthenticated } from './services/authProvider';
 import { jwtDecode } from 'jwt-decode';
 import './App.css';
-
 
 function App() {
     let userClass = null;
@@ -23,19 +22,29 @@ function App() {
         userClass = decodedToken.userClass;
     }
 
+    const handlePrivateRoute = (Component) => {
+        if (!isAuthenticated()) {
+            const currentPath = window.location.pathname;
+            localStorage.setItem('preAuthPath', currentPath);
+            return <Navigate replace to="/" />;
+        }
+        return <Component />;
+    };
+
     return (
         <Router>
             <div>
                 <Routes>
-                    <Route path="/" element={<Homepage/>} />
-                    <Route path="/dashboard" element={isAuthenticated() ? <Dashboard /> : <Navigate replace to="/" />} />
-                    <Route path="/materialansicht" element={isAuthenticated() ? <Materialansicht /> : <Navigate replace to="/" />} />
-                    <Route path="/material-detail/:BoxID" element={isAuthenticated() ? <Materialdetails /> : <Navigate replace to="/" />} />
-                    {userClass === 'LEHRER' && <Route path="/materialverwaltung" element={isAuthenticated() ? <Materialverwaltung /> : <Navigate replace to="/" />} />}
-                    {userClass === 'LEHRER' && <Route path="/benutzerverwaltung" element={isAuthenticated() ? <Benutzerverwaltung /> : <Navigate replace to="/" />} />}
+                    <Route path="/" element={<Homepage />} />
+                    <Route path="/dashboard" element={handlePrivateRoute(Dashboard)} />
+                    <Route path="/materialansicht" element={handlePrivateRoute(Materialansicht)} />
+                    <Route path="/material-detail/:BoxID" element={handlePrivateRoute(Materialdetails)} />
+                    {userClass === 'LEHRER' && <Route path="/materialverwaltung" element={handlePrivateRoute(Materialverwaltung)} />}
+                    {userClass === 'LEHRER' && <Route path="/benutzerverwaltung" element={handlePrivateRoute(Benutzerverwaltung)} />}
                     <Route path="/ueberuns" element={<Ueberuns />} />
                     <Route path="/help" element={<Help />} />
-                    <Route path="/newmaterial" element={isAuthenticated() ? <NewMaterial /> : <Navigate replace to="/" />} />
+                    <Route path="/newmaterial" element={handlePrivateRoute(NewMaterial)} />
+                    <Route path="*" element={<NotFoundPage />} />
                 </Routes>
             </div>
         </Router>
