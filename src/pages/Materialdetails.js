@@ -3,7 +3,9 @@ import { useParams } from 'react-router-dom';
 import { Box, Paper, Typography } from '@mui/material';
 import Sidebar from '../Components/Sidebar';
 import axios from 'axios'; // Angenommen, du verwendest axios für API-Aufrufe
-import '../CSS/General.css';
+//import '../CSS/General.css';
+import '../CSS/Materialdetails.css';
+
 
 function Materialdetails() {
     const { BoxID } = useParams();
@@ -21,12 +23,12 @@ function Materialdetails() {
     }, [BoxID]);
 
     return (
-        <div style={{ display: 'flex' }}>
+        <div className="flex-container">
             <Sidebar />
             <div className="content">
                 <h1 className="Titel">Materialdetails für {materialDetails ? materialDetails.Bezeichnung : '...'}</h1>
                 {materialDetails ? (
-                    <Paper>
+                    <Paper className="material-Data">
                         <Typography variant="h6">{materialDetails.Bezeichnung}</Typography>
                         {/* Weitere Details anzeigen */}
                         <Typography variant="body1">Menge: {materialDetails.Menge}</Typography>
