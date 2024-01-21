@@ -89,7 +89,7 @@ function Materialverwaltung() {
 
     return (
         <div className="body">
-            <div style={{ display: 'flex' }}>
+            <div className="flexContainer">
                 <Sidebar />
                 <div className="content">
                     <h1 className="Titel">Materialverwaltung</h1>
@@ -107,7 +107,7 @@ function Materialverwaltung() {
                         </Box>
                         <Box className="button-container">
                             <Link to="/newmaterial">
-                                <Button variant="outlined" color="secondary" sx={{ width: '100%', height: '55px' }}>
+                                <Button variant="outlined" className="customButton">
                                     Neues Material hinzufügen
                                 </Button>
                             </Link>

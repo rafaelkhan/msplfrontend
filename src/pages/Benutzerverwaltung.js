@@ -5,7 +5,9 @@ import {
     TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Paper
 } from '@mui/material';
 import Sidebar from '../Components/Sidebar';
-import '../CSS/General.css';
+//import '../CSS/General.css';
+import '../CSS/Benutzerverwaltung.css';
+
 
 function Benutzerverwaltung() {
     const [benutzer, setBenutzer] = useState([]);
@@ -68,24 +70,24 @@ function Benutzerverwaltung() {
 
     return (
         <div className="body">
-            <div style={{ display: 'flex' }}>
+            <div className="flexContainer">
                 <Sidebar />
                 <div className="content">
                     <h1 className="Titel">Benutzerverwaltung</h1>
                     <div className="specific-content">
-                        <Box sx={{ width: '60%', marginTop: '16px' }}>
-                        <TextField
-                            id="outlined-search"
-                            label={`Suche nach E-Mail, Vor- oder Nachname`}
-                            type="search"
-                            variant="outlined"
-                            value={searchTerm}
-                            onChange={handleSearchChange}
-                            sx={{ width: '100%' }}
-                        />
+                        <Box>
+                            <TextField
+                                id="outlined-search"
+                                label={`Suche nach E-Mail, Vor- oder Nachname`}
+                                type="search"
+                                variant="outlined"
+                                value={searchTerm}
+                                onChange={handleSearchChange}
+                                className="textField"
+                            />
                         </Box>
-                        <Paper sx={{ width: '60%', overflow: 'hidden' }}>
-                            <TableContainer component={Paper}>
+                        <Paper className="paper-container">
+                        <TableContainer component={Paper}  className="table-container">
                                 <Table>
                                     <TableHead>
                                         <TableRow>
