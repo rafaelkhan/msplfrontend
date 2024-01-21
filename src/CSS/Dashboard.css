@@ -1,0 +1,26 @@
+/* styles.css */
+
+.paperContainer {
+    padding: 8px;
+    border-radius: 20px;
+    cursor: pointer;
+    width: fit-content;
+}
+
+.paperContainer:hover {
+    background-color: #f1f1f1;
+}
+
+.flexContainer{
+    display: flex;
+}
+
+@media (max-width: 768px) {
+    .paperContainer {
+        padding: 8px;
+        border-radius: 20px;
+        cursor: pointer;
+        width: fit-content;
+    }
+
+}
