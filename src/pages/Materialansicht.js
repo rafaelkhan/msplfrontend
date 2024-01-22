@@ -10,7 +10,7 @@ function Materialansicht() {
     useEffect(() => {
         axios.get('/api/BoxMaterial/boxes')
             .then((response) => {
-                const fullArray = new Array(64).fill(null).map((item, index) => {
+                const fullArray = new Array(208).fill(null).map((item, index) => {
                     return response.data.find(box => box.BoxID === index + 1) || { BoxID: index + 1, Menge: 0 };
                 });
                 setBoxes(fullArray);

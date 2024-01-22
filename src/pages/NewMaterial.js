@@ -74,7 +74,7 @@ const NewMaterial = () => {
                     <FormControl fullWidth sx={{ width: '80%' }} margin="normal">
                         <InputLabel id="box-select-label" required>Box</InputLabel>
                         <Select labelId="box-select-label" id="box-select" value={selectedBox} label="Box" onChange={(e) => setSelectedBox(e.target.value)}>
-                            {Array.from({ length: 64 }, (_, i) => i + 1).map((boxId) => (
+                            {Array.from({ length: 208 }, (_, i) => i + 1).map((boxId) => (
                                 <MenuItem key={boxId} value={boxId} disabled={occupiedBoxes.includes(boxId)}>
                                     {`Box ${boxId}`}
                                 </MenuItem>

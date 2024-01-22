@@ -153,7 +153,7 @@ function Materialverwaltung() {
                                                             value={boxAssignments[material.MaterialtypID] || ''}
                                                             onChange={(e) => updateBoxAssignment(material.MaterialtypID, e.target.value)}
                                                         >
-                                                            {Array.from({ length: 64 }, (_, i) => i + 1).map(boxId => (
+                                                            {Array.from({ length: 208 }, (_, i) => i + 1).map(boxId => (
                                                                 <MenuItem key={boxId} value={boxId} disabled={occupiedBoxes.includes(boxId) && boxAssignments[material.MaterialtypID] !== boxId}>
                                                                     {`Box ${boxId}`}
                                                                 </MenuItem>
