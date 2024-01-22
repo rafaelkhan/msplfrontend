@@ -116,7 +116,7 @@ function Materialverwaltung() {
                             <TableContainer component={Paper} className="table-container">
                                 <Table>
                                     <TableHead>
-                                        <TableRow>
+                                        <TableRow className="sticky-header">
                                             <TableCell>ID</TableCell>
                                             <TableCell>Name</TableCell>
                                             <TableCell className="table-cell-center">Soll-Bestand</TableCell>

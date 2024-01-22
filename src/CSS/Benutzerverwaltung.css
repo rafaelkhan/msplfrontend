@@ -28,6 +28,12 @@
     overflow: auto;
 }
 
+.sticky-header th{
+    position: sticky;
+    background-color: #fff; /* Hintergrundfarbe anpassen, falls erforderlich */
+    z-index: 10;
+    top: 0;
+}
 
 /* Stile für Bildschirmbreite bis 768 Pixel */
 @media (max-width: 768px) {

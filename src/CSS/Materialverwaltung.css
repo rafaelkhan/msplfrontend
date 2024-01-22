@@ -20,16 +20,19 @@
 .button-container {
     width: 80%;
 }
-
-.paper-container {
+.table-container {
+    max-height: 65vh;
+    overflow: auto;
     width: 80%;
     overflow: hidden;
     margin-top: 16px;
 }
 
-.table-container {
-    max-height: 65vh;
-    overflow: auto;
+.sticky-header th{
+    position: sticky;
+    background-color: #fff; /* Hintergrundfarbe anpassen, falls erforderlich */
+    z-index: 10;
+    top: 0;
 }
 
 .customButton {

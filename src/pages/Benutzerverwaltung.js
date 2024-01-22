@@ -90,7 +90,7 @@ function Benutzerverwaltung() {
                         <TableContainer component={Paper}  className="table-container">
                                 <Table>
                                     <TableHead>
-                                        <TableRow>
+                                        <TableRow className="sticky-header">
                                             <TableCell>E-Mail</TableCell>
                                             <TableCell>Vorname</TableCell>
                                             <TableCell>Nachname</TableCell>
