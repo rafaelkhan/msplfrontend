@@ -2,28 +2,19 @@ import React, { useState, useEffect } from 'react';
 
 const WelcomeMessage = ({ firstname }) => {
     const [displayedText, setDisplayedText] = useState('');
+    const [index, setIndex] = useState(0);
+    const text = `Willkommen ${firstname}.`;
 
     useEffect(() => {
-        let intervalId;
-
-        const displayTextLetterByLetter = () => {
-            const text = `Willkommen ${firstname}.`;
-            let index = 0;
-
-            intervalId = setInterval(() => {
-                setDisplayedText((prevText) => prevText + text[index]);
-                index++;
-
-                if (index === text.length) {
-                    clearInterval(intervalId);
-                }
+        if (index < text.length) {
+            const timeoutId = setTimeout(() => {
+                setDisplayedText(text.substring(0, index + 1));
+                setIndex(index + 1);
             }, 100);
-        };
 
-        displayTextLetterByLetter();
-
-        return () => clearInterval(intervalId);
-    }, [firstname]);
+            return () => clearTimeout(timeoutId);
+        }
+    }, [index, text]);
 
     return <h2 className="name-Willkommen">{displayedText}</h2>;
 };
