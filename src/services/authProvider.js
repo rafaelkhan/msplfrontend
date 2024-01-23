@@ -14,12 +14,11 @@ export const signIn = async () => {
     try {
         sessionStorage.removeItem("msal.interaction.status")
         localStorage.removeItem('accessToken');
-        localStorage.removeItem('VollerName');
         localStorage.removeItem('firstName');
         const response = await msalInstance.loginPopup(loginRequest);
         const user = response.account;
-        localStorage.setItem('fullname', user.name);
         localStorage.setItem('email', user.username);
+        localStorage.setItem("firstname", firstName);
 
         const email = user.username;
         try {
@@ -37,7 +36,6 @@ export const signIn = async () => {
         const splitName = fullName.split(' ');
         const firstName = splitName[0];
         const lastName = splitName.length > 1 ? splitName.slice(1).join(' ') : '';
-        localStorage.setItem("firstname", firstName);
 
         await axios.post('/api/user/login', {
             email: user.username,
