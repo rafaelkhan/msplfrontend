@@ -37,5 +37,21 @@ module.exports = function(db) {
             }
         });
     });
+
+    router.put('/account/:id', (req, res) => {
+        const { id } = req.params;
+        const { zugabe, entnahmeLimit } = req.body;
+
+        db.query('UPDATE Account SET Zugabe = ?, EntnahmeLimit = ? WHERE NutzerID = ?',
+            [zugabe, entnahmeLimit, id], (err, results) => {
+                if (err) {
+                    console.error('Fehler bei der Datenbankaktualisierung: ', err);
+                    res.status(500).send('Interner Serverfehler');
+                } else {
+                    res.status(200).send('Account erfolgreich aktualisiert');
+                }
+            });
+    });
+
     return router;
 };

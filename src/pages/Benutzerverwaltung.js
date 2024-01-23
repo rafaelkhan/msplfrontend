@@ -1,25 +1,34 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import {
-    FormControl,Box , Select, MenuItem, TextField,
+    FormControl, Box, Select, MenuItem, TextField, Checkbox,
     TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Paper
 } from '@mui/material';
 import Sidebar from '../Components/Sidebar';
-//import '../CSS/General.css';
 import '../CSS/Benutzerverwaltung.css';
-
 
 function Benutzerverwaltung() {
     const [benutzer, setBenutzer] = useState([]);
     const [schulklassen, setSchulklassen] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedKlasse, setSelectedKlasse] = useState({});
+    const [zugabeStatus, setZugabeStatus] = useState({});
+    const [entnahmeLimitStatus, setEntnahmeLimitStatus] = useState({});
 
     useEffect(() => {
-        // API-Anfragen, um Benutzer und Schulklasse-Daten abzurufen
         axios.get('/api/benutzer')
             .then((response) => {
                 setBenutzer(response.data);
+
+                const initialZugabeStatus = {};
+                const initialEntnahmeLimitStatus = {};
+                response.data.forEach(user => {
+                    initialZugabeStatus[user.NutzerID] = !!user.Zugabe;
+                    initialEntnahmeLimitStatus[user.NutzerID] = !!user.EntnahmeLimit;
+                });
+
+                setZugabeStatus(initialZugabeStatus);
+                setEntnahmeLimitStatus(initialEntnahmeLimitStatus);
             })
             .catch((error) => {
                 console.error(error);
@@ -36,20 +45,12 @@ function Benutzerverwaltung() {
 
     const handleKlasseChange = (event, userId) => {
         const selectedClass = event.target.value;
-
-        // Aktualisieren Sie den Zustand für die ausgewählte Klasse für diese Zeile
         setSelectedKlasse((prevSelected) => ({
             ...prevSelected,
             [userId]: selectedClass
         }));
 
-        // API-Anfrage, um die ausgewählte Schulklasse für den Benutzer zu aktualisieren
-        axios.put(`/api/benutzer/${userId}`, {
-            schulklasse: selectedClass
-        })
-            .then(() => {
-                // Erfolgreiche Aktualisierung
-            })
+        axios.put(`/api/benutzer/${userId}`, { schulklasse: selectedClass })
             .catch((error) => {
                 console.error(error);
             });
@@ -57,6 +58,34 @@ function Benutzerverwaltung() {
 
     const handleSearchChange = (event) => {
         setSearchTerm(event.target.value);
+    };
+
+    const handleZugabeChange = (event, userId) => {
+        const newStatus = event.target.checked;
+        setZugabeStatus((prevStatus) => ({
+            ...prevStatus,
+            [userId]: newStatus
+        }));
+        updateAccount(userId, newStatus, entnahmeLimitStatus[userId]);
+    };
+
+    const handleEntnahmeLimitChange = (event, userId) => {
+        const newStatus = event.target.checked;
+        setEntnahmeLimitStatus((prevStatus) => ({
+            ...prevStatus,
+            [userId]: newStatus
+        }));
+        updateAccount(userId, zugabeStatus[userId], newStatus);
+    };
+
+    const updateAccount = (userId, zugabe, entnahmeLimit) => {
+        axios.put(`/api/account/${userId}`, {
+            zugabe: zugabe ? 1 : 0,
+            entnahmeLimit: entnahmeLimit ? 1 : 0
+        })
+            .catch((error) => {
+                console.error(error);
+            });
     };
 
     const filteredBenutzer = benutzer.filter((user) => {
@@ -78,7 +107,7 @@ function Benutzerverwaltung() {
                         <Box>
                             <TextField
                                 id="outlined-search"
-                                label={`Suche nach E-Mail, Vor- oder Nachname`}
+                                label="Suche nach E-Mail, Vor- oder Nachname"
                                 type="search"
                                 variant="outlined"
                                 value={searchTerm}
@@ -87,7 +116,7 @@ function Benutzerverwaltung() {
                             />
                         </Box>
                         <Paper className="paper-container">
-                        <TableContainer component={Paper}  className="table-container">
+                            <TableContainer component={Paper} className="table-container">
                                 <Table>
                                     <TableHead>
                                         <TableRow className="sticky-header">
@@ -95,6 +124,8 @@ function Benutzerverwaltung() {
                                             <TableCell>Vorname</TableCell>
                                             <TableCell>Nachname</TableCell>
                                             <TableCell>Schulklasse</TableCell>
+                                            <TableCell>Zugabe</TableCell>
+                                            <TableCell>EntnahmeLimit</TableCell>
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
@@ -116,6 +147,18 @@ function Benutzerverwaltung() {
                                                             ))}
                                                         </Select>
                                                     </FormControl>
+                                                </TableCell>
+                                                <TableCell>
+                                                    <Checkbox
+                                                        checked={zugabeStatus[user.NutzerID] || false}
+                                                        onChange={(e) => handleZugabeChange(e, user.NutzerID)}
+                                                    />
+                                                </TableCell>
+                                                <TableCell>
+                                                    <Checkbox
+                                                        checked={entnahmeLimitStatus[user.NutzerID] || false}
+                                                        onChange={(e) => handleEntnahmeLimitChange(e, user.NutzerID)}
+                                                    />
                                                 </TableCell>
                                             </TableRow>
                                         ))}
