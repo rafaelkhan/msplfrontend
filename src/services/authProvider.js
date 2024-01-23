@@ -18,7 +18,6 @@ export const signIn = async () => {
         const response = await msalInstance.loginPopup(loginRequest);
         const user = response.account;
         localStorage.setItem('email', user.username);
-        localStorage.setItem("firstname", firstName);
 
         const email = user.username;
         try {
@@ -36,6 +35,8 @@ export const signIn = async () => {
         const splitName = fullName.split(' ');
         const firstName = splitName[0];
         const lastName = splitName.length > 1 ? splitName.slice(1).join(' ') : '';
+
+        localStorage.setItem("firstname", firstName);
 
         await axios.post('/api/user/login', {
             email: user.username,

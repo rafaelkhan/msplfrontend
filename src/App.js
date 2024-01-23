@@ -25,7 +25,12 @@ function App() {
     const handlePrivateRoute = (Component) => {
         if (!isAuthenticated()) {
             const currentPath = window.location.pathname;
-            localStorage.setItem('preAuthPath', currentPath);
+            if(currentPath=='/'){
+                localStorage.setItem('preAuthPath', '/dashboard');
+            }
+            else {
+                localStorage.setItem('preAuthPath', currentPath);
+            }
             return <Navigate replace to="/" />;
         }
         return <Component />;

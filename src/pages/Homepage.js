@@ -26,8 +26,6 @@ function Homepage() {
             <button className="bubble-button" onClick={handleSignIn}>
                 <img src={Logo} alt="Logo" className="microsoftlogo" />
             </button>
-            {/* Beispiel: Ein Logout-Button (optional) */}
-            {/* <button onClick={handleSignOut}>Sign Out</button> */}
         </div>
     );
 }
