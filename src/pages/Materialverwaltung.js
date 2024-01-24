@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import {
     Table, TableContainer, TableHead, TableBody, TableRow, TableCell,
-    Paper, TextField, Box, Button, IconButton, Input, Select, MenuItem, FormControl, InputLabel
+    Paper, TextField, Box, Button, IconButton, Input, Select, MenuItem, FormControl, InputLabel, Snackbar
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Sidebar from '../Components/Sidebar';
@@ -15,6 +15,9 @@ function Materialverwaltung() {
     const [bestaende, setBestaende] = useState({});
     const [occupiedBoxes, setOccupiedBoxes] = useState([]);
     const [boxAssignments, setBoxAssignments] = useState({});
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState('');
+
 
     useEffect(() => {
         axios.get('/api/Materialtyp').then(response => {
@@ -38,9 +41,18 @@ function Materialverwaltung() {
     }, []);
 
     const deleteMaterial = async (id) => {
+        const currentStock = bestaende[id];
+        if (currentStock > 0) {
+            setSnackbarMessage('Bitte entfernen Sie das Material aus dem Bestand, bevor Sie es löschen.');
+            setSnackbarOpen(true);
+            return;
+        }
         await axios.delete(`/api/Materialtyp/delete/${id}`);
         const response = await axios.get('/api/Materialtyp');
         setMaterialien(response.data);
+        axios.get('/api/Materialtyp/occupiedBoxes').then(response => {
+            setOccupiedBoxes(response.data);
+        }).catch(error => console.error('Fehler beim Abrufen besetzter Boxen:', error));
     };
 
     const updateTargetStock = async (materialId, newTargetStock) => {
@@ -175,6 +187,13 @@ function Materialverwaltung() {
                     </div>
                 </div>
             </div>
+            <Snackbar
+                open={snackbarOpen}
+                autoHideDuration={6000}
+                onClose={() => setSnackbarOpen(false)}
+                message={snackbarMessage}
+            />
+
         </div>
     );
 }

@@ -11,14 +11,14 @@ function MaterialChart() {
 
     useEffect(() => {
         // Hier API-Aufruf für alle Materialien
-        axios.get('/api/Materialtyp')
+        axios.get('/api/BoxMaterial/boxes')
             .then(response => {
                 // Annahme: Sortiere die Materialien nach SollBestand und wähle die Top 5
-                const sortedMaterialien = response.data.sort((a, b) => b.SollBestand - a.SollBestand);
+                const sortedMaterialien = response.data.sort((a, b) => b.Menge - a.Menge);
                 const top5 = sortedMaterialien.slice(0, 5);
                 setMaterialData(top5.map(material => ({
                     name: material.Bezeichnung,
-                    value: material.SollBestand,
+                    value: material.Menge,
                 })));
             })
             .catch(error => console.error('Fehler beim Abrufen der Materialien:', error));

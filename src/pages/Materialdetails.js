@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Box, Paper, Typography } from '@mui/material';
+import { Box, Paper, Typography, Button } from '@mui/material';
+import { Link } from 'react-router-dom';
 import Sidebar from '../Components/Sidebar';
 import axios from 'axios'; // Angenommen, du verwendest axios für API-Aufrufe
 //import '../CSS/General.css';
@@ -35,7 +36,14 @@ function Materialdetails() {
                         {/* Weitere Informationen hinzufügen, falls nötig */}
                     </Paper>
                 ) : (
-                    <Typography>Lade Materialdetails...</Typography>
+                    <div>
+                    <Typography>Lade Materialdetails... (Bitte überprüfen ob Bestand/Box vorhanden ist)</Typography>
+                        <Link to="/Materialansicht">
+                            <Button variant="outlined">
+                                Zurück zur Ansicht
+                            </Button>
+                        </Link>
+                    </div>
                 )}
             </div>
         </div>
