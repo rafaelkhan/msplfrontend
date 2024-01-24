@@ -54,6 +54,31 @@ function Benutzerverwaltung() {
             .catch((error) => {
                 console.error(error);
             });
+        axios.get('/api/benutzer')
+            .then((response) => {
+                setBenutzer(response.data);
+
+                const initialZugabeStatus = {};
+                const initialEntnahmeLimitStatus = {};
+                response.data.forEach(user => {
+                    initialZugabeStatus[user.NutzerID] = !!user.Zugabe;
+                    initialEntnahmeLimitStatus[user.NutzerID] = !!user.EntnahmeLimit;
+                });
+
+                setZugabeStatus(initialZugabeStatus);
+                setEntnahmeLimitStatus(initialEntnahmeLimitStatus);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+        axios.get('/api/schulklassen')
+            .then((response) => {
+                setSchulklassen(response.data);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+
     };
 
     const handleSearchChange = (event) => {
@@ -93,7 +118,8 @@ function Benutzerverwaltung() {
         return (
             user.Email.toLowerCase().includes(searchText) ||
             user.Vorname.toLowerCase().includes(searchText) ||
-            user.Nachname.toLowerCase().includes(searchText)
+            user.Nachname.toLowerCase().includes(searchText)||
+            user.Schulklasse.toLowerCase().includes(searchText)
         );
     });
 
@@ -107,7 +133,7 @@ function Benutzerverwaltung() {
                         <Box>
                             <TextField
                                 id="outlined-search"
-                                label="Suche nach E-Mail, Vor- oder Nachname"
+                                label="Suche nach E-Mail, Vor- oder Nachname, oder Klasse"
                                 type="search"
                                 variant="outlined"
                                 value={searchTerm}
