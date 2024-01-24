@@ -52,16 +52,22 @@ function Materialdetails() {
     }, [BoxID, email, materialDetails]);
 
     const handleEntnehmen = () => {
-        axios.post(`/api/BoxMaterial/updateMenge`, {
-            BoxID: materialDetails.BoxID,
-            Menge: materialDetails.Menge - 1
-        })
-            .then(response => {
-                setMaterialDetails({...materialDetails, Menge: materialDetails.Menge - 1});
+        if(materialDetails.Menge !=0) {
+            axios.post(`/api/BoxMaterial/updateMenge`, {
+                BoxID: materialDetails.BoxID,
+                Menge: materialDetails.Menge - 1
             })
-            .catch(error => {
-                console.error('Fehler beim Entnehmen des Materials:', error);
-            });
+                .then(response => {
+                    setMaterialDetails({...materialDetails, Menge: materialDetails.Menge - 1});
+                })
+                .catch(error => {
+                    console.error('Fehler beim Entnehmen des Materials:', error);
+                });
+        }
+        else
+        {
+            console.log('Die Box ist schon leer')
+        }
     };
 
     const handleDazugeben = () => {
@@ -95,7 +101,7 @@ function Materialdetails() {
         }
         return attr ?
             <p>{attr.AttributName}: {attr.Quantitaet} {after}</p> :
-            <p>{attrName}: <NotInterestedIcon classname="icon-align"/></p>;
+            <p>{attrName}: <NotInterestedIcon className="icon-align"/></p>;
     };
 
 
@@ -108,7 +114,7 @@ function Materialdetails() {
                     <div>
                         <Typography variant="body1">Vorhandene Menge: {materialDetails.Menge}</Typography>
                         {['Durchmesser', 'Kraft', 'Länge', 'Stärke'].map(attrName => (
-                            <Typography key={attrName}>{displayAttribute(attrName)}</Typography>
+                            <Typography key={attrName} component="div">{displayAttribute(attrName)}</Typography>
                         ))}
                         <Button variant="outlined" onClick={handleEntnehmen} disabled={userClass !== 'LEHRER' && !userRights.EntnahmeLimit}>Entnehmen</Button>
                         <Button variant="outlined" onClick={handleDazugeben} disabled={userClass !== 'LEHRER' && !userRights.Zugabe}>Dazugeben</Button>

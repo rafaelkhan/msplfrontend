@@ -7,6 +7,7 @@ const BoxComponent = ({ box }) => {
     const [hover, setHover] = useState(false);
     const [overlayVisible, setOverlayVisible] = useState(false);
     const isActive = box.Menge > 0;
+    const isEmpty = box.Bezeichnung != null;
 
     const handleMouseMove = (event) => {
         setHover(true);
@@ -28,7 +29,7 @@ const BoxComponent = ({ box }) => {
                     justifyContent: 'center',
                     height: '4vw',
                     alignItems: 'center',
-                    backgroundColor: isActive ? 'lightblue' : 'grey',
+                    backgroundColor: isActive ? '#A7C7E7' : (isEmpty ? '#ff6961' : '#cfcfc4'),
                     position: 'relative',
                     transition: 'box-shadow 0.3s',
                 }}
@@ -36,7 +37,7 @@ const BoxComponent = ({ box }) => {
                 <Typography variant="caption" sx={{ position: 'absolute', top: '5px', right: '5px' }}>
                     Box {box.BoxID}
                 </Typography>
-                {isActive && hover && (
+                {(isActive || isEmpty) && hover && (
                     <Tooltip
                         title={
                             <React.Fragment>
