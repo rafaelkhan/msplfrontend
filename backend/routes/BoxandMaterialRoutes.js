@@ -24,5 +24,27 @@ module.exports = function(db) {
             }
         });
     });
+    router.get('/userRights/:email', (req, res) => {
+        const { email } = req.params;
+        db.query('SELECT Zugabe, EntnahmeLimit FROM Account WHERE Email = ?', [email], (err, results) => {
+            if (err) {
+                res.status(500).send('Interner Serverfehler');
+            } else {
+                res.json(results[0] || {});
+            }
+        });
+    });
+
+    // Neue Route für Materialattribute
+    router.get('/materialAttributes/:MaterialtypID', (req, res) => {
+        const { MaterialtypID } = req.params;
+        db.query('SELECT * FROM Materialtyp_Materialattribute WHERE MaterialtypID = ?', [MaterialtypID], (err, results) => {
+            if (err) {
+                res.status(500).send('Interner Serverfehler');
+            } else {
+                res.json(results);
+            }
+        });
+    });
     return router;
 };
