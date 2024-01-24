@@ -46,5 +46,18 @@ module.exports = function(db) {
             }
         });
     });
+
+    router.post('/updateMenge', (req, res) => {
+        const { BoxID, Menge } = req.body;
+        db.query('UPDATE Box SET Menge = ? WHERE BoxID = ?', [Menge, BoxID], (err, results) => {
+            if (err) {
+                console.error('Fehler beim Aktualisieren der Menge: ', err);
+                res.status(500).send('Interner Serverfehler');
+            } else {
+                res.json({ message: 'Menge erfolgreich aktualisiert' });
+            }
+        });
+    });
+
     return router;
 };

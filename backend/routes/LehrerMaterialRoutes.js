@@ -168,5 +168,40 @@ module.exports = function(db) {
         });
     });
 
+    router.post('/access/:materialId', (req, res) => {
+        const { materialId } = req.params;
+        const { schulklassen } = req.body; // Array von Schulklasse-IDs
+
+        schulklassen.forEach(schulklasse => {
+            db.query('INSERT INTO MaterialEntnahmeRecht (MaterialtypID, Schulklasse) VALUES (?, ?)',
+                [materialId, schulklasse], (err, result) => {
+                    if (err) {
+                        console.error('Fehler beim Hinzufügen der Zugriffsrechte: ', err);
+                        return res.status(500).send('Interner Serverfehler');
+                    }
+                });
+        });
+
+        res.status(201).send('Zugriffsrechte erfolgreich hinzugefügt');
+    });
+
+    // Endpunkt zum Entfernen von Zugriffsrechten
+    router.delete('/access/:materialId', (req, res) => {
+        const { materialId } = req.params;
+        const { schulklassen } = req.body; // Array von Schulklasse-IDs
+
+        schulklassen.forEach(schulklasse => {
+            db.query('DELETE FROM MaterialEntnahmeRecht WHERE MaterialtypID = ? AND Schulklasse = ?',
+                [materialId, schulklasse], (err, result) => {
+                    if (err) {
+                        console.error('Fehler beim Entfernen der Zugriffsrechte: ', err);
+                        return res.status(500).send('Interner Serverfehler');
+                    }
+                });
+        });
+
+        res.status(200).send('Zugriffsrechte erfolgreich entfernt');
+    });
+
     return router;
 };

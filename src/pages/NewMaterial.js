@@ -67,10 +67,10 @@ const NewMaterial = () => {
                 <form onSubmit={handleFormSubmit}>
                     <TextField name="Bezeichnung" label="Bezeichnung" variant="outlined" fullWidth sx={{ width: '80%' }} margin="normal" value={materialData.Bezeichnung} onChange={handleInputChange} required />
                     <TextField name="SollBestand" label="Soll-Bestand" variant="outlined" fullWidth sx={{ width: '80%' }} margin="normal" type="number" value={materialData.SollBestand} onChange={handleInputChange} required />
-                    <TextField name="Durchmesser" label="Durchmesser" variant="outlined" fullWidth sx={{ width: '80%' }} margin="normal" value={materialData.Durchmesser} onChange={handleInputChange} />
-                    <TextField name="Kraft" label="Kraft" variant="outlined" fullWidth sx={{ width: '80%' }} margin="normal" value={materialData.Kraft} onChange={handleInputChange} />
-                    <TextField name="Länge" label="Länge" variant="outlined" fullWidth sx={{ width: '80%' }} margin="normal" value={materialData.Länge} onChange={handleInputChange} />
-                    <TextField name="Stärke" label="Stärke" variant="outlined" fullWidth sx={{ width: '80%' }} margin="normal" value={materialData.Stärke} onChange={handleInputChange} />
+                    <TextField name="Durchmesser" label="Durchmesser in mm" variant="outlined" fullWidth sx={{ width: '80%' }} margin="normal" value={materialData.Durchmesser} onChange={handleInputChange} />
+                    <TextField name="Kraft" label="Kraft in N" variant="outlined" fullWidth sx={{ width: '80%' }} margin="normal" value={materialData.Kraft} onChange={handleInputChange} />
+                    <TextField name="Länge" label="Länge in mm" variant="outlined" fullWidth sx={{ width: '80%' }} margin="normal" value={materialData.Länge} onChange={handleInputChange} />
+                    <TextField name="Stärke" label="Stärke in mm" variant="outlined" fullWidth sx={{ width: '80%' }} margin="normal" value={materialData.Stärke} onChange={handleInputChange} />
                     <FormControl fullWidth sx={{ width: '80%' }} margin="normal">
                         <InputLabel id="box-select-label" required>Box</InputLabel>
                         <Select labelId="box-select-label" id="box-select" value={selectedBox} label="Box" onChange={(e) => setSelectedBox(e.target.value)}>
