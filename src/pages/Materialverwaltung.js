@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import {
     Table, TableContainer, TableHead, TableBody, TableRow, TableCell,
-    Paper, TextField, Box, Button, IconButton, Input, Select, MenuItem, FormControl, InputLabel, Snackbar
+    Paper, TextField, Box, Button, IconButton, Input, Select, MenuItem, FormControl, InputLabel, Snackbar, Checkbox, FormControlLabel, ListItemText
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Sidebar from '../Components/Sidebar';
@@ -15,9 +15,10 @@ function Materialverwaltung() {
     const [bestaende, setBestaende] = useState({});
     const [occupiedBoxes, setOccupiedBoxes] = useState([]);
     const [boxAssignments, setBoxAssignments] = useState({});
+    const [schulKlassen, setSchulKlassen] = useState([]);
+    const [materialAccess, setMaterialAccess] = useState({});
     const [snackbarOpen, setSnackbarOpen] = useState(false);
     const [snackbarMessage, setSnackbarMessage] = useState('');
-
 
     useEffect(() => {
         axios.get('/api/Materialtyp').then(response => {
@@ -35,10 +36,50 @@ function Materialverwaltung() {
             setBoxAssignments(initialBoxAssignments);
         }).catch(error => console.error('Fehler beim Abrufen des aktuellen Bestands:', error));
 
+        axios.get('/api/schulklassen').then(response => {
+            setSchulKlassen(response.data);
+        }).catch(error => console.error('Fehler beim Abrufen der Schulklassen:', error));
+
         axios.get('/api/Materialtyp/occupiedBoxes').then(response => {
             setOccupiedBoxes(response.data);
         }).catch(error => console.error('Fehler beim Abrufen besetzter Boxen:', error));
     }, []);
+
+    useEffect(() => {
+        const fetchAccessRights = async () => {
+            try {
+                const responses = await Promise.all(
+                    materialien.map(material =>
+                        axios.get(`/api/Materialtyp/access/${material.MaterialtypID}`)
+                    )
+                );
+
+                const newMaterialAccess = responses.reduce((acc, response, index) => {
+                    const materialId = materialien[index].MaterialtypID;
+                    acc[materialId] = response.data.map(access => access.Schulklasse);
+                    return acc;
+                }, {});
+
+                setMaterialAccess(newMaterialAccess);
+            } catch (error) {
+                console.error('Fehler beim Abrufen der Zugriffsrechte:', error);
+            }
+        };
+
+        if (materialien.length > 0) {
+            fetchAccessRights();
+        }
+        materialien.forEach(material => {
+            axios.get(`/api/Materialtyp/access/${material.MaterialtypID}`)
+                .then(response => {
+                    setMaterialAccess(prev => ({
+                        ...prev,
+                        [material.MaterialtypID]: response.data.map(access => access.Schulklasse)
+                    }));
+                })
+                .catch(error => console.error('Fehler beim Abrufen der Zugriffsrechte:', error));
+        });
+    }, [materialien]);
 
     const deleteMaterial = async (id) => {
         const currentStock = bestaende[id];
@@ -99,6 +140,60 @@ function Materialverwaltung() {
         material.MaterialtypID.toString().includes(searchTerm.toLowerCase())
     );
 
+    const renderSchulklasseAccess = (materialId) => {
+        const hasAccess = materialAccess[materialId] && materialAccess[materialId].length > 0;
+        return (
+            <FormControl sx={{width:'200px'}}>
+                <Select
+                    multiple
+                    displayEmpty // Damit der Platzhalter immer angezeigt wird
+                    value={hasAccess ? materialAccess[materialId] : []}
+                    onChange={(e) => handleMaterialAccessChange(materialId, e)}
+                    renderValue={(selected) => selected.length > 0 ? selected.join(', ') : 'Noch nicht zugeteilt'}
+                >
+                    {schulKlassen.map((klasse) => (
+                        <MenuItem key={klasse.Schulklasse} value={klasse.Schulklasse}>
+                            <Checkbox checked={hasAccess && materialAccess[materialId].includes(klasse.Schulklasse)} />
+                            <ListItemText primary={klasse.Schulklasse} />
+                        </MenuItem>
+                    ))}
+                </Select>
+            </FormControl>
+        );
+    };
+    const handleMaterialAccessChange = async (materialId, event) => {
+        const updatedAccess = {
+            ...materialAccess,
+            [materialId]: event.target.value
+        };
+        setMaterialAccess(updatedAccess);
+
+        const currentAccess = materialAccess[materialId] || [];
+        const newAccess = event.target.value;
+
+        const accessToAdd = newAccess.filter(x => !currentAccess.includes(x));
+        const accessToRemove = currentAccess.filter(x => !newAccess.includes(x));
+
+        try {
+            // Hinzufügen neuer Rechte
+            if (accessToAdd.length > 0) {
+                await axios.post(`/api/Materialtyp/access/${materialId}`, { schulklassen: accessToAdd });
+            }
+
+            // Entfernen nicht mehr benötigter Rechte
+            if (accessToRemove.length > 0) {
+                await axios.delete(`/api/Materialtyp/access/${materialId}`, { data: { schulklassen: accessToRemove } });
+            }
+
+            setSnackbarMessage('Zugriffsrechte erfolgreich aktualisiert.');
+            setSnackbarOpen(true);
+        } catch (error) {
+            console.error('Fehler beim Aktualisieren der Zugriffsrechte:', error);
+            setSnackbarMessage('Fehler beim Aktualisieren der Zugriffsrechte.');
+            setSnackbarOpen(true);
+        }
+    };
+
     return (
         <div className="body">
             <div className="flexContainer">
@@ -134,6 +229,7 @@ function Materialverwaltung() {
                                             <TableCell className="table-cell-center">Soll-Bestand</TableCell>
                                             <TableCell className="table-cell-center">Aktueller Bestand</TableCell>
                                             <TableCell className="table-cell-center">Box</TableCell>
+                                            <TableCell className="table-cell-center">Zugriffsrechte</TableCell>
                                             <TableCell className="table-cell-center">Löschen</TableCell>
                                         </TableRow>
                                     </TableHead>
@@ -174,6 +270,9 @@ function Materialverwaltung() {
                                                     </FormControl>
                                                 </TableCell>
                                                 <TableCell className="table-cell-center">
+                                                    {renderSchulklasseAccess(material.MaterialtypID)}
+                                                </TableCell>
+                                                <TableCell className="table-cell-center">
                                                     <IconButton onClick={() => deleteMaterial(material.MaterialtypID)}>
                                                         <DeleteIcon />
                                                     </IconButton>
@@ -193,7 +292,6 @@ function Materialverwaltung() {
                 onClose={() => setSnackbarOpen(false)}
                 message={snackbarMessage}
             />
-
         </div>
     );
 }

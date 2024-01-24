@@ -167,22 +167,43 @@ module.exports = function(db) {
             });
         });
     });
+    router.get('/access/:materialId', (req, res) => {
+        const { materialId } = req.params;
+        db.query('SELECT Schulklasse FROM MaterialEntnahmeRecht WHERE MaterialtypID = ?', [materialId], (err, results) => {
+            if (err) {
+                console.error('Fehler beim Abrufen der Zugriffsrechte: ', err);
+                res.status(500).send('Interner Serverfehler');
+            } else {
+                res.json(results);
+            }
+        });
+    });
 
     router.post('/access/:materialId', (req, res) => {
         const { materialId } = req.params;
         const { schulklassen } = req.body; // Array von Schulklasse-IDs
 
         schulklassen.forEach(schulklasse => {
-            db.query('INSERT INTO MaterialEntnahmeRecht (MaterialtypID, Schulklasse) VALUES (?, ?)',
-                [materialId, schulklasse], (err, result) => {
+            db.query('SELECT COUNT(*) AS count FROM MaterialEntnahmeRecht WHERE MaterialtypID = ? AND Schulklasse = ?',
+                [materialId, schulklasse], (err, results) => {
                     if (err) {
-                        console.error('Fehler beim Hinzufügen der Zugriffsrechte: ', err);
+                        console.error('Fehler beim Überprüfen der Zugriffsrechte: ', err);
                         return res.status(500).send('Interner Serverfehler');
+                    } else {
+                        if (results[0].count === 0) {
+                            db.query('INSERT INTO MaterialEntnahmeRecht (MaterialtypID, Schulklasse) VALUES (?, ?)',
+                                [materialId, schulklasse], (err, result) => {
+                                    if (err) {
+                                        console.error('Fehler beim Hinzufügen der Zugriffsrechte: ', err);
+                                        return res.status(500).send('Interner Serverfehler');
+                                    }
+                                });
+                        }
                     }
                 });
         });
 
-        res.status(201).send('Zugriffsrechte erfolgreich hinzugefügt');
+        res.status(201).send('Zugriffsrechte überprüft und aktualisiert');
     });
 
     // Endpunkt zum Entfernen von Zugriffsrechten
