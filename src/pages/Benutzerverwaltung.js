@@ -93,7 +93,8 @@ function Benutzerverwaltung() {
         return (
             user.Email.toLowerCase().includes(searchText) ||
             user.Vorname.toLowerCase().includes(searchText) ||
-            user.Nachname.toLowerCase().includes(searchText)
+            user.Nachname.toLowerCase().includes(searchText)||
+            user.Schulklasse.toLowerCase().includes(searchText)
         );
     });
 
@@ -107,7 +108,7 @@ function Benutzerverwaltung() {
                         <Box>
                             <TextField
                                 id="outlined-search"
-                                label="Suche nach E-Mail, Vor- oder Nachname"
+                                label="Suche nach E-Mail, Vor- oder Nachname, oder Klasse"
                                 type="search"
                                 variant="outlined"
                                 value={searchTerm}
