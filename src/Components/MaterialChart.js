@@ -25,7 +25,7 @@ function MaterialChart() {
     }, []);
 
     return (
-        <Link to="/materialverwaltung">
+        <Link to="/Materialansicht">
             <BarChart
                 width={600} // Beispielbreite, anpassen nach Bedarf
                 height={200

@@ -34,6 +34,17 @@ module.exports = function(db) {
             }
         });
     });
+    router.get('/entnahmeRecht/:MaterialtypID', (req, res) => {
+        const { MaterialtypID } = req.params;
+        db.query('SELECT Schulklasse FROM MaterialEntnahmeRecht WHERE MaterialtypID=?', [MaterialtypID], (err, results) => {
+            if (err) {
+                res.status(500).send('Interner Serverfehler');
+            } else {
+                // Gib das gesamte Ergebnisarray zurück, statt nur das erste Element
+                res.json(results);
+            }
+        });
+    });
 
     // Neue Route für Materialattribute
     router.get('/materialAttributes/:MaterialtypID', (req, res) => {

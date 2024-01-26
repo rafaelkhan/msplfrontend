@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Box, Paper, Typography, Button, Icon} from '@mui/material';
+import { Box, Paper, Typography, Button, Icon } from '@mui/material';
 import { Link } from 'react-router-dom';
 import Sidebar from '../Components/Sidebar';
 import axios from 'axios';
@@ -13,6 +13,7 @@ function Materialdetails() {
     const [materialDetails, setMaterialDetails] = useState(null);
     const [userRights, setUserRights] = useState({});
     const [materialAttributes, setMaterialAttributes] = useState([]);
+    const [isEntnahmeBerechtigt, setIsEntnahmeBerechtigt] = useState(false);
 
     const email = localStorage.getItem('email');
     const token = localStorage.getItem('accessToken');
@@ -48,25 +49,32 @@ function Materialdetails() {
                 .catch(error => {
                     console.error('Fehler beim Abrufen der Materialattribute:', error);
                 });
+
+            axios.get(`/api/BoxMaterial/entnahmeRecht/${materialDetails.MaterialtypID}`)
+                .then(response => {
+                    const berechtigteKlassen = response.data.map(item => item.Schulklasse);
+                    setIsEntnahmeBerechtigt(berechtigteKlassen.includes(userClass));
+                })
+                .catch(error => {
+                    console.error('Fehler beim Abrufen der Entnahmeberechtigungen:', error);
+                });
         }
     }, [BoxID, email, materialDetails]);
 
     const handleEntnehmen = () => {
-        if(materialDetails.Menge !=0) {
+        if (materialDetails.Menge != 0) {
             axios.post(`/api/BoxMaterial/updateMenge`, {
                 BoxID: materialDetails.BoxID,
                 Menge: materialDetails.Menge - 1
             })
                 .then(response => {
-                    setMaterialDetails({...materialDetails, Menge: materialDetails.Menge - 1});
+                    setMaterialDetails({ ...materialDetails, Menge: materialDetails.Menge - 1 });
                 })
                 .catch(error => {
                     console.error('Fehler beim Entnehmen des Materials:', error);
                 });
-        }
-        else
-        {
-            console.log('Die Box ist schon leer')
+        } else {
+            console.log('Die Box ist schon leer');
         }
     };
 
@@ -76,34 +84,34 @@ function Materialdetails() {
             Menge: materialDetails.Menge + 1
         })
             .then(response => {
-                setMaterialDetails({...materialDetails, Menge: materialDetails.Menge + 1});
+                setMaterialDetails({ ...materialDetails, Menge: materialDetails.Menge + 1 });
             })
             .catch(error => {
                 console.error('Fehler beim Dazugeben des Materials:', error);
             });
     };
+
     const displayAttribute = (attrName) => {
         const attr = materialAttributes.find(attr => attr.AttributName === attrName);
-        let after='';
+        let after = '';
         switch (attrName) {
             case 'Durchmesser':
-                after='mm'
+                after = 'mm';
                 break;
             case 'Kraft':
-                after='N'
+                after = 'N';
                 break;
             case 'Länge':
-                after='mm'
+                after = 'mm';
                 break;
             case 'Stärke':
-                after='mm'
+                after = 'mm';
                 break;
         }
         return attr ?
             <p>{attr.AttributName}: {attr.Quantitaet} {after}</p> :
-            <p>{attrName}: <NotInterestedIcon className="icon-align"/></p>;
+            <p>{attrName}: <NotInterestedIcon className="icon-align" /></p>;
     };
-
 
     return (
         <div className="flex-container">
@@ -114,9 +122,9 @@ function Materialdetails() {
                     <div>
                         <Typography variant="body1">Vorhandene Menge: {materialDetails.Menge}</Typography>
                         {['Durchmesser', 'Kraft', 'Länge', 'Stärke'].map(attrName => (
-                            <Typography key={attrName} component="div">{displayAttribute(attrName)}</Typography>
+                            <Typography key={attrName} >{displayAttribute(attrName)}</Typography>
                         ))}
-                        <Button variant="outlined" onClick={handleEntnehmen} disabled={userClass !== 'LEHRER' && !userRights.EntnahmeLimit}>Entnehmen</Button>
+                        <Button variant="outlined" onClick={handleEntnehmen} disabled={!isEntnahmeBerechtigt || (userClass !== 'LEHRER' && !userRights.EntnahmeLimit)}>Entnehmen</Button>
                         <Button variant="outlined" onClick={handleDazugeben} disabled={userClass !== 'LEHRER' && !userRights.Zugabe}>Dazugeben</Button>
                     </div>
                 ) : (
