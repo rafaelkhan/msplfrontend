@@ -5,7 +5,9 @@ import {
     Table, TableContainer, TableHead, TableBody, TableRow, TableCell,
     Paper, TextField, Box, Button, IconButton, Input, Select, MenuItem, FormControl, InputLabel, Snackbar, Checkbox, FormControlLabel, ListItemText
 } from '@mui/material';
+import EditMaterialDialog from './EditMaterialDialog';
 import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 import Sidebar from '../Components/Sidebar';
 import '../CSS/Materialverwaltung.css';
 
@@ -19,6 +21,9 @@ function Materialverwaltung() {
     const [materialAccess, setMaterialAccess] = useState({});
     const [snackbarOpen, setSnackbarOpen] = useState(false);
     const [snackbarMessage, setSnackbarMessage] = useState('');
+    const [editDialogOpen, setEditDialogOpen] = useState(false);
+    const [currentEditMaterial, setCurrentEditMaterial] = useState(null);
+
 
     useEffect(() => {
         axios.get('/api/Materialtyp').then(response => {
@@ -80,6 +85,30 @@ function Materialverwaltung() {
                 .catch(error => console.error('Fehler beim Abrufen der Zugriffsrechte:', error));
         });
     }, [materialien]);
+
+    const handleEdit = (materialId) => {
+        const materialToEdit = materialien.find(material => material.MaterialtypID === materialId);
+        setCurrentEditMaterial(materialToEdit);
+        setEditDialogOpen(true);
+    };
+
+    const updateMaterial = async (materialData) => {
+        try {
+            const response = await axios.put(`/api/Materialtyp/update/${materialData.MaterialtypID}`, materialData);
+            if (response.status === 200) {
+                console.log('Material und seine Attribute erfolgreich aktualisiert');
+                setMaterialien(materialien.map(material => {
+                    if (material.MaterialtypID === materialData.MaterialtypID) {
+                        return { ...material, ...materialData };
+                    }
+                    return material;
+                }));
+                setEditDialogOpen(false);
+            }
+        } catch (error) {
+            console.error('Fehler beim Aktualisieren des Materials', error);
+        }
+    };
 
     const deleteMaterial = async (id) => {
         const currentStock = bestaende[id];
@@ -230,6 +259,7 @@ function Materialverwaltung() {
                                             <TableCell className="table-cell-center">Aktueller Bestand</TableCell>
                                             <TableCell className="table-cell-center">Box</TableCell>
                                             <TableCell className="table-cell-center">Zugriffsrechte</TableCell>
+                                            <TableCell className="table-cell-center">Bearbeiten</TableCell>
                                             <TableCell className="table-cell-center">Löschen</TableCell>
                                         </TableRow>
                                     </TableHead>
@@ -273,6 +303,11 @@ function Materialverwaltung() {
                                                     {renderSchulklasseAccess(material.MaterialtypID)}
                                                 </TableCell>
                                                 <TableCell className="table-cell-center">
+                                                    <IconButton onClick={() => handleEdit(material.MaterialtypID)}>
+                                                        <EditIcon />
+                                                    </IconButton>
+                                                </TableCell>
+                                                <TableCell className="table-cell-center">
                                                     <IconButton onClick={() => deleteMaterial(material.MaterialtypID)}>
                                                         <DeleteIcon />
                                                     </IconButton>
@@ -291,6 +326,12 @@ function Materialverwaltung() {
                 autoHideDuration={6000}
                 onClose={() => setSnackbarOpen(false)}
                 message={snackbarMessage}
+            />
+            <EditMaterialDialog
+                open={editDialogOpen}
+                handleClose={() => setEditDialogOpen(false)}
+                materialData={currentEditMaterial}
+                updateMaterial={updateMaterial}
             />
         </div>
     );

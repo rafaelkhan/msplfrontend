@@ -2,6 +2,69 @@ const express = require('express');
 
 module.exports = function(db) {
     const router = express.Router();
+//--------------------------------------------------------------------------------------------------------------------------------
+    router.put('/update/:id', (req, res) => {
+        const { id } = req.params;
+        const updatedMaterial = req.body; // Enthält die Werte für Durchmesser, Kraft, Länge, Stärke
+
+        const attributes = ['Durchmesser', 'Kraft', 'Länge', 'Stärke'];
+        let completedQueries = 0;
+        let errorsOccurred = false;
+
+        attributes.forEach((attribute) => {
+            if (updatedMaterial[attribute] !== undefined) {
+                // Überprüft ob das Attribut exisiert
+                db.query('SELECT COUNT(*) AS count FROM Materialtyp_Materialattribute WHERE MaterialtypID = ? AND AttributName = ?',
+                    [id, attribute],
+                    (err, result) => {
+                        if (err) {
+                            console.error(`Fehler beim Überprüfen des Attributs ${attribute}: `, err);
+                            errorsOccurred = true;
+                            return;
+                        }
+
+                        if (result[0].count > 0) {
+                            // Attribut existiert, wird nur aktualisiert
+                            db.query('UPDATE Materialtyp_Materialattribute SET Quantitaet = ? WHERE MaterialtypID = ? AND AttributName = ?',
+                                [updatedMaterial[attribute], id, attribute],
+                                (err, updateResult) => {
+                                    handleQueryCompletion(err, attribute);
+                                }
+                            );
+                        } else {
+                            // Attribut existiert nicht, wird hinzugefügt
+                            db.query('INSERT INTO Materialtyp_Materialattribute (MaterialtypID, AttributName, Quantitaet) VALUES (?, ?, ?)',
+                                [id, attribute, updatedMaterial[attribute]],
+                                (err, insertResult) => {
+                                    handleQueryCompletion(err, attribute);
+                                }
+                            );
+                        }
+                    }
+                );
+            } else {
+                completedQueries++;
+                if (completedQueries === attributes.length && !errorsOccurred) {
+                    res.status(200).send('Materialattribute erfolgreich aktualisiert');
+                }
+            }
+        });
+
+        function handleQueryCompletion(err, attribute) {
+            if (err) {
+                console.error(`Fehler beim Verarbeiten des Attributs ${attribute}: `, err);
+                errorsOccurred = true;
+                if (completedQueries === attributes.length - 1) {
+                    res.status(500).send('Fehler beim Aktualisieren der Materialattribute');
+                }
+            }
+            completedQueries++;
+            if (!errorsOccurred && completedQueries === attributes.length) {
+                res.status(200).send('Materialattribute erfolgreich aktualisiert');
+            }
+        }
+    });
+//--------------------------------------------------------------------------------------------------------------------------------
 
     router.get('/', (req, res) => {
         db.query('SELECT MaterialtypID, Bezeichnung, SollBestand FROM Materialtyp', (err, result) => {
