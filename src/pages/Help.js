@@ -2,6 +2,8 @@ import React from 'react';
 import Sidebar from '../Components/Sidebar';
 import Faq from "react-faq-component";
 import '../CSS/Help.css'
+import '../CSS/Sidebar.css';
+
 
 function Help() {
 

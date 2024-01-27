@@ -1,17 +1,20 @@
 .sidebar-header {
+    position: absolute;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    margin-top: 10px;
-    margin-left: 10px;
-    padding: 20px;
-    color: #2C3E50;
+    margin-top: 2%;
+    margin-left: 5%;
+    color: black;
 }
 
 .menu-icon {
-    color: #ECF0F1;
-    margin-top: 20px;
+    position: absolute !important;
+    display: flex !important;
+    color: black !important;
+    margin-left: 1% !important;
+    margin-top: 2% !important;
 }
+
 .logout-button{
     max-width: 50px;
     align-self: center;
@@ -19,8 +22,8 @@
 }
 
 .drawerPaper {
-    background-color: #2C3E50;
-    color: #176B87;
+    background-color: white;
+    color: white;
     height: 100%;
     max-width: min-content;
 }

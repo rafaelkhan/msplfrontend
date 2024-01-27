@@ -7,6 +7,7 @@ import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
 import NotInterestedIcon from '@mui/icons-material/NotInterested';
 import '../CSS/Materialdetails.css';
+import '../CSS/Sidebar.css';
 
 function Materialdetails() {
     const { BoxID } = useParams();

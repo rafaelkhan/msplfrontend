@@ -12,8 +12,7 @@ import { signOut } from '../services/authProvider';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
-
-import './Sidebar.css';
+import '../CSS/Sidebar.css';
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
@@ -47,19 +46,12 @@ function Sidebar() {
 
 
     return (
-        <div
-            style={{ width: isSidebarOpen ? '120px' : '0', transition: 'width 0.3s' }}
-        >
-            <div className="sidebar-header">
-                <IconButton
-                    className="menu-icon"
-                    onClick={handleToggleSidebar}
-                    color="inherit"
-                    aria-label="menu"
-                >
+        <div style={{ width: isSidebarOpen ? '120px' : '0', transition: 'width 0.3s' }} >
+
+                <IconButton className="menu-icon" onClick={handleToggleSidebar} aria-label="menu">
                     <MenuIcon />
                 </IconButton>
-            </div>
+
             <Drawer
                 className="drawer"
                 variant="temporary"

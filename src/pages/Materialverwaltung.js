@@ -1,15 +1,35 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {
-    Table, TableContainer, TableHead, TableBody, TableRow, TableCell,
-    Paper, TextField, Box, Button, IconButton, Input, Select, MenuItem, FormControl, InputLabel, Snackbar, Checkbox, FormControlLabel, ListItemText
+    Table,
+    TableContainer,
+    TableHead,
+    TableBody,
+    TableRow,
+    TableCell,
+    Paper,
+    TextField,
+    Box,
+    Button,
+    IconButton,
+    Input,
+    Select,
+    MenuItem,
+    FormControl,
+    InputLabel,
+    Snackbar,
+    Checkbox,
+    FormControlLabel,
+    ListItemText
 } from '@mui/material';
 import EditMaterialDialog from './EditMaterialDialog';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import Sidebar from '../Components/Sidebar';
 import '../CSS/Materialverwaltung.css';
+import '../CSS/Sidebar.css';
+
 
 function Materialverwaltung() {
     const [materialien, setMaterialien] = useState([]);
@@ -99,7 +119,7 @@ function Materialverwaltung() {
                 console.log('Material und seine Attribute erfolgreich aktualisiert');
                 setMaterialien(materialien.map(material => {
                     if (material.MaterialtypID === materialData.MaterialtypID) {
-                        return { ...material, ...materialData };
+                        return {...material, ...materialData};
                     }
                     return material;
                 }));
@@ -126,13 +146,13 @@ function Materialverwaltung() {
     };
 
     const updateTargetStock = async (materialId, newTargetStock) => {
-        await axios.put(`/api/Materialtyp/${materialId}/updateTargetStock`, { newTargetStock });
+        await axios.put(`/api/Materialtyp/${materialId}/updateTargetStock`, {newTargetStock});
         const response = await axios.get('/api/Materialtyp');
         setMaterialien(response.data);
     };
 
     const updateBoxStock = async (materialtypId, newStock) => {
-        const response = await axios.put(`/api/Materialtyp/Box/updateStock`, { materialtypId, newStock });
+        const response = await axios.put(`/api/Materialtyp/Box/updateStock`, {materialtypId, newStock});
         if (response.status === 200) {
             setBestaende(prevBestaende => ({
                 ...prevBestaende,
@@ -142,8 +162,8 @@ function Materialverwaltung() {
     };
 
     const updateBoxAssignment = (materialId, newBoxId) => {
-        setBoxAssignments(prev => ({ ...prev, [materialId]: newBoxId }));
-        axios.put('/api/Materialtyp/updateBoxAssignment', { materialtypId: materialId, boxId: newBoxId })
+        setBoxAssignments(prev => ({...prev, [materialId]: newBoxId}));
+        axios.put('/api/Materialtyp/updateBoxAssignment', {materialtypId: materialId, boxId: newBoxId})
             .then(response => console.log('Box-Zuweisung erfolgreich aktualisiert'))
             .catch(error => console.error('Fehler beim Aktualisieren der Box-Zuweisung', error));
         axios.get('/api/Materialtyp/occupiedBoxes').then(response => {
@@ -172,7 +192,7 @@ function Materialverwaltung() {
     const renderSchulklasseAccess = (materialId) => {
         const hasAccess = materialAccess[materialId] && materialAccess[materialId].length > 0;
         return (
-            <FormControl sx={{width:'200px'}}>
+            <FormControl sx={{width: '200px'}}>
                 <Select
                     multiple
                     displayEmpty // Damit der Platzhalter immer angezeigt wird
@@ -182,8 +202,8 @@ function Materialverwaltung() {
                 >
                     {schulKlassen.map((klasse) => (
                         <MenuItem key={klasse.Schulklasse} value={klasse.Schulklasse}>
-                            <Checkbox checked={hasAccess && materialAccess[materialId].includes(klasse.Schulklasse)} />
-                            <ListItemText primary={klasse.Schulklasse} />
+                            <Checkbox checked={hasAccess && materialAccess[materialId].includes(klasse.Schulklasse)}/>
+                            <ListItemText primary={klasse.Schulklasse}/>
                         </MenuItem>
                     ))}
                 </Select>
@@ -206,12 +226,12 @@ function Materialverwaltung() {
         try {
             // Hinzufügen neuer Rechte
             if (accessToAdd.length > 0) {
-                await axios.post(`/api/Materialtyp/access/${materialId}`, { schulklassen: accessToAdd });
+                await axios.post(`/api/Materialtyp/access/${materialId}`, {schulklassen: accessToAdd});
             }
 
             // Entfernen nicht mehr benötigter Rechte
             if (accessToRemove.length > 0) {
-                await axios.delete(`/api/Materialtyp/access/${materialId}`, { data: { schulklassen: accessToRemove } });
+                await axios.delete(`/api/Materialtyp/access/${materialId}`, {data: {schulklassen: accessToRemove}});
             }
 
             setSnackbarMessage('Zugriffsrechte erfolgreich aktualisiert.');
@@ -224,103 +244,112 @@ function Materialverwaltung() {
     };
 
     return (
-        <div className="body">
-            <div className="flexContainer">
-                <Sidebar />
-                <div className="content">
-                    <h1 className="Titel">Materialverwaltung</h1>
-                    <div className="specific-content">
-                        <Box className="search-box">
-                            <TextField
-                                id="outlined-search"
-                                label="Suche nach Name oder ID"
-                                type="search"
-                                variant="outlined"
-                                value={searchTerm}
-                                onChange={(e) => setSearchTerm(e.target.value)}
-                                fullWidth
-                            />
-                        </Box>
-                        <Box className="button-container">
-                            <Link to="/newmaterial">
-                                <Button variant="outlined" className="customButton">
-                                    Neues Material hinzufügen
-                                </Button>
-                            </Link>
-                        </Box>
-                        <Paper className="paper-container">
-                            <TableContainer component={Paper} className="table-container">
-                                <Table>
-                                    <TableHead>
-                                        <TableRow className="sticky-header">
-                                            <TableCell>ID</TableCell>
-                                            <TableCell>Name</TableCell>
-                                            <TableCell className="table-cell-center">Soll-Bestand</TableCell>
-                                            <TableCell className="table-cell-center">Aktueller Bestand</TableCell>
-                                            <TableCell className="table-cell-center">Box</TableCell>
-                                            <TableCell className="table-cell-center">Zugriffsrechte</TableCell>
-                                            <TableCell className="table-cell-center">Bearbeiten</TableCell>
-                                            <TableCell className="table-cell-center">Löschen</TableCell>
-                                        </TableRow>
-                                    </TableHead>
-                                    <TableBody>
-                                        {filteredMaterialien.map(material => (
-                                            <TableRow key={material.MaterialtypID}>
-                                                <TableCell>{material.MaterialtypID}</TableCell>
-                                                <TableCell>{material.Bezeichnung}</TableCell>
-                                                <TableCell className="table-cell-center">
-                                                    <Input
-                                                        type="number"
-                                                        defaultValue={material.SollBestand}
-                                                        onBlur={(e) => handleStockChange(material.MaterialtypID, e.target.value, updateTargetStock)}
-                                                        onKeyDown={(e) => handleKeyDown(e, material.MaterialtypID, updateTargetStock)}
-                                                    />
-                                                </TableCell>
-                                                <TableCell className="table-cell-center">
-                                                    <Input
-                                                        key={material.MaterialtypID + '-' + (bestaende[material.MaterialtypID] || 0)}
-                                                        type="number"
-                                                        defaultValue={bestaende[material.MaterialtypID] || 0}
-                                                        onBlur={(e) => handleStockChange(material.MaterialtypID, e.target.value, updateBoxStock)}
-                                                        onKeyDown={(e) => handleKeyDown(e, material.MaterialtypID, updateBoxStock)}
-                                                    />
-                                                </TableCell>
-                                                <TableCell className="table-cell-center">
-                                                    <FormControl fullWidth className="select-container">
-                                                        <Select
-                                                            value={boxAssignments[material.MaterialtypID] || ''}
-                                                            onChange={(e) => updateBoxAssignment(material.MaterialtypID, e.target.value)}
-                                                        >
-                                                            {Array.from({ length: 208 }, (_, i) => i + 1).map(boxId => (
-                                                                <MenuItem key={boxId} value={boxId} disabled={occupiedBoxes.includes(boxId) && boxAssignments[material.MaterialtypID] !== boxId}>
-                                                                    {`Box ${boxId}`}
-                                                                </MenuItem>
-                                                            ))}
-                                                        </Select>
-                                                    </FormControl>
-                                                </TableCell>
-                                                <TableCell className="table-cell-center">
-                                                    {renderSchulklasseAccess(material.MaterialtypID)}
-                                                </TableCell>
-                                                <TableCell className="table-cell-center">
-                                                    <IconButton onClick={() => handleEdit(material.MaterialtypID)}>
-                                                        <EditIcon />
-                                                    </IconButton>
-                                                </TableCell>
-                                                <TableCell className="table-cell-center">
-                                                    <IconButton onClick={() => deleteMaterial(material.MaterialtypID)}>
-                                                        <DeleteIcon />
-                                                    </IconButton>
-                                                </TableCell>
-                                            </TableRow>
-                                        ))}
-                                    </TableBody>
-                                </Table>
-                            </TableContainer>
-                        </Paper>
-                    </div>
-                </div>
+
+        <div className="flexContainer">
+
+            <Sidebar/>
+
+            <h1 className="sidebar-header">Materialverwaltung</h1>
+
+
+            <div className="search-box-div">
+                <Box className="search-box-box">
+                    <TextField
+                        id="outlined-search"
+                        label="Suche nach Name oder ID"
+                        type="search"
+                        variant="outlined"
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        fullWidth
+                    />
+                </Box>
             </div>
+
+            <div>
+                <Box className="newMaterial-box">
+                    <Link to="/newmaterial">
+                        <Button fullWidth variant="outlined">
+                            Neues Material hinzufügen
+                        </Button>
+                    </Link>
+                </Box>
+            </div>
+
+            <div className="paper-div">
+                <Paper className="paper-container">
+                    <TableContainer component={Paper} className="table-container">
+                        <Table>
+                            <TableHead>
+                                <TableRow className="sticky-header">
+                                    <TableCell>ID</TableCell>
+                                    <TableCell>Name</TableCell>
+                                    <TableCell className="table-cell-center">Soll-Bestand</TableCell>
+                                    <TableCell className="table-cell-center">Aktueller Bestand</TableCell>
+                                    <TableCell className="table-cell-center">Box</TableCell>
+                                    <TableCell className="table-cell-center">Zugriffsrechte</TableCell>
+                                    <TableCell className="table-cell-center">Bearbeiten</TableCell>
+                                    <TableCell className="table-cell-center">Löschen</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {filteredMaterialien.map(material => (
+                                    <TableRow key={material.MaterialtypID}>
+                                        <TableCell>{material.MaterialtypID}</TableCell>
+                                        <TableCell>{material.Bezeichnung}</TableCell>
+                                        <TableCell className="table-cell-center">
+                                            <Input
+                                                type="number"
+                                                defaultValue={material.SollBestand}
+                                                onBlur={(e) => handleStockChange(material.MaterialtypID, e.target.value, updateTargetStock)}
+                                                onKeyDown={(e) => handleKeyDown(e, material.MaterialtypID, updateTargetStock)}
+                                            />
+                                        </TableCell>
+                                        <TableCell className="table-cell-center">
+                                            <Input
+                                                key={material.MaterialtypID + '-' + (bestaende[material.MaterialtypID] || 0)}
+                                                type="number"
+                                                defaultValue={bestaende[material.MaterialtypID] || 0}
+                                                onBlur={(e) => handleStockChange(material.MaterialtypID, e.target.value, updateBoxStock)}
+                                                onKeyDown={(e) => handleKeyDown(e, material.MaterialtypID, updateBoxStock)}
+                                            />
+                                        </TableCell>
+                                        <TableCell className="table-cell-center">
+                                            <FormControl fullWidth className="select-container">
+                                                <Select
+                                                    value={boxAssignments[material.MaterialtypID] || ''}
+                                                    onChange={(e) => updateBoxAssignment(material.MaterialtypID, e.target.value)}
+                                                >
+                                                    {Array.from({length: 208}, (_, i) => i + 1).map(boxId => (
+                                                        <MenuItem key={boxId} value={boxId}
+                                                                  disabled={occupiedBoxes.includes(boxId) && boxAssignments[material.MaterialtypID] !== boxId}>
+                                                            {`Box ${boxId}`}
+                                                        </MenuItem>
+                                                    ))}
+                                                </Select>
+                                            </FormControl>
+                                        </TableCell>
+                                        <TableCell className="table-cell-center">
+                                            {renderSchulklasseAccess(material.MaterialtypID)}
+                                        </TableCell>
+                                        <TableCell className="table-cell-center">
+                                            <IconButton onClick={() => handleEdit(material.MaterialtypID)}>
+                                                <EditIcon/>
+                                            </IconButton>
+                                        </TableCell>
+                                        <TableCell className="table-cell-center">
+                                            <IconButton onClick={() => deleteMaterial(material.MaterialtypID)}>
+                                                <DeleteIcon/>
+                                            </IconButton>
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                </Paper>
+            </div>
+
             <Snackbar
                 open={snackbarOpen}
                 autoHideDuration={6000}
@@ -333,6 +362,7 @@ function Materialverwaltung() {
                 materialData={currentEditMaterial}
                 updateMaterial={updateMaterial}
             />
+
         </div>
     );
 }

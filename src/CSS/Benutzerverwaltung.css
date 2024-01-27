@@ -70,4 +70,38 @@
     }
 }
 
+@media (max-width: 428px) {
+    .Titel {
+        color: black; /* Beispiel: Änderung der Textfarbe für kleinere Bildschirme */
+    }
+
+    .specific-content {
+        margin-top: 16px; /* Beispiel: Änderung des oberen Randes für kleinere Bildschirme */
+    }
+
+    .textField {
+        width: 98%; /* Beispiel: Vollständige Breite für Suchfeld auf kleineren Bildschirmen */
+        margin-bottom: 16px;
+    }
+
+    .button-container {
+        width: 98%; /* Beispiel: Vollständige Breite für Button-Container auf kleineren Bildschirmen */
+    }
+
+    .paper-container {
+        width: 98%; /* Beispiel: Vollständige Breite für Papier-Container auf kleineren Bildschirmen */
+        overflow: hidden;
+        margin-top: 16px;
+    }
+
+    .table-container {
+        max-height: 768px; /* Beispiel: Reduziere die maximale Höhe für Tabellencontainer auf kleineren Bildschirmen */
+        overflow: auto;
+    }
+
+    .table-cell-center {
+        text-align: center;
+    }
+}
+
 /* Weitere benutzerdefinierte Stile können hier hinzugefügt werden */

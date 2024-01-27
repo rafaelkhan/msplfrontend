@@ -3,6 +3,8 @@ import { Button, TextField, FormControl, InputLabel, Select, MenuItem, Snackbar 
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Sidebar from '../Components/Sidebar';
+import '../CSS/Sidebar.css';
+
 
 const NewMaterial = () => {
     const [materialData, setMaterialData] = useState({ Bezeichnung: '', SollBestand: 0, Durchmesser: '', Kraft: '', Länge: '', Stärke: '' });

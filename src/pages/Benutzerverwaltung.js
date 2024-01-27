@@ -6,6 +6,8 @@ import {
 } from '@mui/material';
 import Sidebar from '../Components/Sidebar';
 import '../CSS/Benutzerverwaltung.css';
+import '../CSS/Sidebar.css';
+
 
 function Benutzerverwaltung() {
     const [benutzer, setBenutzer] = useState([]);
