@@ -97,6 +97,12 @@ function Sidebar() {
                     <ListItem button className="sidebar-link" onClick={() => handleNavigateTo('/Help')}>
                         <ListItemText primary="Help" className="Text-Bar"/>
                     </ListItem>
+                    {userClass === 'LEHRER' && (
+                        <ListItem button className="sidebar-link" onClick={() => handleNavigateTo('/Accessed')}>
+                            <ListItemText primary="Accessed" className="Text-Bar"/>
+                        </ListItem>
+                    )
+                    }
                 </List>
                 <Button variant="outlined" color="error" className="logout-button" onClick={handleLogout}>
                     Logout

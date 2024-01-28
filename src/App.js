@@ -8,6 +8,7 @@ import Materialverwaltung from './pages/Materialverwaltung';
 import Benutzerverwaltung from './pages/Benutzerverwaltung';
 import Ueberuns from './pages/Ueberuns';
 import Help from './pages/Help';
+import Accessed from './pages/Accessed';
 import NotFoundPage from './pages/NotFoundPage';
 import NewMaterial from './pages/NewMaterial';
 import { isAuthenticated } from './services/authProvider';
@@ -46,6 +47,7 @@ function App() {
                     <Route path="/material-detail/:BoxID" element={handlePrivateRoute(Materialdetails)} />
                     {userClass === 'LEHRER' && <Route path="/materialverwaltung" element={handlePrivateRoute(Materialverwaltung)} />}
                     {userClass === 'LEHRER' && <Route path="/benutzerverwaltung" element={handlePrivateRoute(Benutzerverwaltung)} />}
+                    {userClass === 'LEHRER' && <Route path="/accessed" element={handlePrivateRoute(Accessed)} />}
                     <Route path="/ueberuns" element={<Ueberuns />} />
                     <Route path="/help" element={<Help />} />
                     <Route path="/newmaterial" element={handlePrivateRoute(NewMaterial)} />
