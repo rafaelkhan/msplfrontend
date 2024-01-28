@@ -3,7 +3,6 @@ import axios from 'axios';
 import Sidebar from '../Components/Sidebar';
 import BoxGrid from '../Components/BoxGrid';
 import '../CSS/General.css';
-import '../CSS/Sidebar.css';
 
 function Materialansicht() {
     const [boxes, setBoxes] = useState([]);

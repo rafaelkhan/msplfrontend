@@ -1,67 +1,82 @@
-.search-box-div {
-    position: absolute;
-    top: 10%;
-    left: 5%;
-    width: 90%;
-    height: 5%;
+/* styles.css */
+.Titel {
+    color: black;
 }
 
-.newMaterial-box{
-    position: absolute;
-    top: 18%;
-    left: 5%;
-    width: 90%;
+.specific-content {
+    margin-top: 20px;
 }
 
-.table-container{
-    position: absolute;
+.flexContainer {
+    display: flex;
+}
+
+.search-box {
+    width: 80%;
+    height: 55px;
+    margin-bottom: 16px;
+}
+
+.button-container {
+    width: 80%;
+}
+.table-container {
+    max-height: 65vh;
     overflow: auto;
-    top: 24%;
-    left: 5%;
-    width: 90% !important;
-    height: 75% !important;
+    width: 80%;
+    overflow: hidden;
+    margin-top: 16px;
 }
 
-.sticky-header {
+.sticky-header th{
     position: sticky;
+    background-color: #fff; /* Hintergrundfarbe anpassen, falls erforderlich */
+    z-index: 10;
     top: 0;
-    background-color: black;
-    z-index: 1;
 }
 
-/* ---------------Tablet-----------------*/
-
-@media {max-width: 768px} {
-
-.search-box-div {
-    position: absolute;
-    top: 10%;
-    left: 1%;
-    width: 98%;
-    height: 5%;
-}
-
-.newMaterial-box {
-    position: absolute;
-    top: 18%;
-    left: 1%;
-    width: 98%;
+.customButton {
+    width: 100%;
+    height: 55px;
+    color: black;
 }
 
 
-.table-container{
-    position: absolute;
-    overflow: auto;
-    top: 24%;
-    left: 1%;
-    width: 98% !important;
+
+/* Stile für Bildschirmbreite bis 768 Pixel */
+@media (max-width: 768px) {
+    .Titel {
+        color: black; /* Beispiel: Änderung der Textfarbe für kleinere Bildschirme */
+    }
+
+    .specific-content{
+        margin-top: 16px; /* Beispiel: Änderung des oberen Randes für kleinere Bildschirme */
+    }
+
+    .search-box {
+        width: 98%; /* Beispiel: Vollständige Breite für Suchfeld auf kleineren Bildschirmen */
+        margin-bottom: 16px;
+    }
+
+    .button-container {
+        width: 98%; /* Beispiel: Vollständige Breite für Button-Container auf kleineren Bildschirmen */
+    }
+
+    .paper-container {
+        width: 98%; /* Beispiel: Vollständige Breite für Papier-Container auf kleineren Bildschirmen */
+        overflow: hidden;
+        margin-top: 16px;
+    }
+
+    .table-container {
+        max-height: 768px; /* Beispiel: Reduziere die maximale Höhe für Tabellencontainer auf kleineren Bildschirmen */
+        overflow: auto;
+    }
+
+    .table-cell-center {
+        text-align: center;
+    }
 }
 
-.sticky-header {
-    position: sticky;
-    top: 0;
-    background-color: black;
-    z-index: 1;
-}
 
-}
+/* Weitere benutzerdefinierte Stile können hier hinzugefügt werden */

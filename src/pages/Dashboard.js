@@ -5,7 +5,6 @@ import Sidebar from '../Components/Sidebar';
 import MaterialChart from '../Components/MaterialChart';
 import WelcomeMessage from '../Components/WelcomeMessage';
 import '../CSS/Dashboard.css';
-import '../CSS/Sidebar.css';
 
 function Dashboard() {
     const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);

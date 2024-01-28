@@ -6,8 +6,6 @@ import Button from '@mui/material/Button'
 import axios from 'axios';
 import Logo from '../Assets/pngimg.com - microsoft_PNG13.png';
 import { signIn } from '../services/authProvider'; // Importiere MSAL-Funktionen
-import '../CSS/Sidebar.css';
-
 
 function Homepage() {
     const navigate = useNavigate();

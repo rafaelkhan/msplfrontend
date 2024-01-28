@@ -3,8 +3,6 @@ import Sidebar from '../Components/Sidebar';
 import '../CSS/General.css';
 import Materiallager from "./img/Materiallager.jpg";
 import Person from "./img/Person.jpg";
-import '../CSS/Sidebar.css';
-
 
 
 function Ueberuns() {
