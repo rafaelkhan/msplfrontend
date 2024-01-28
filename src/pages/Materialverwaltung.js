@@ -5,7 +5,7 @@ import {
     Table, TableContainer, TableHead, TableBody, TableRow, TableCell,
     Paper, TextField, Box, Button, IconButton, Input, Select, MenuItem, FormControl, InputLabel, Snackbar, Checkbox, FormControlLabel, ListItemText
 } from '@mui/material';
-import EditMaterialDialog from './EditMaterialDialog';
+import EditMaterialDialog from '../Components/EditMaterialDialog';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import Sidebar from '../Components/Sidebar';
