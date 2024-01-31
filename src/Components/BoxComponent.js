@@ -17,25 +17,26 @@ const BoxComponent = ({ box }) => {
     const isActive = box.Menge > 0;
     const isEmpty = box.Bezeichnung != null;
 
+    const getBoxContainerClass = () => {
+        if (isHovered) {
+            return 'boxContainer';
+        } else if (isActive) {
+            return 'boxContainer active';
+        } else if (isEmpty) {
+            return 'boxContainer default';
+        } else {
+            return 'boxContainer empty';
+        }
+    };
+
     return (
         <Card
-            className="boxContainer"
-            raised
+            className={getBoxContainerClass()}
+                raised
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
-            sx={{
-                display: 'flex',
-                justifyContent: 'center',
-                height: '4vw',
-                alignItems: 'center',
-                backgroundColor: isHovered ? '#A9A9A9n' : (isActive ? '#A7C7E7' : (isEmpty ? '#ff6961' : '#cfcfc4')),
-                position: 'relative',
-                transition: 'background-color 0.3s',
-            }}
         >
-            <Typography variant="caption" sx={{ position: 'absolute', top: '5px', right: '5px' }}>
-                Box {box.BoxID}
-            </Typography>
+            <Typography variant="caption" className="captionTypography"> Box {box.BoxID} </Typography>
 
             {(isActive || isEmpty) && (
                 <Tooltip
@@ -48,7 +49,7 @@ const BoxComponent = ({ box }) => {
                     open={isHovered}
                     placement="top"
                 >
-                    <Link to={`/material-detail/${box.BoxID}`} style={{ textDecoration: 'none', position: 'absolute', top: 0, left: 0, height: '100%', width: '100%', zIndex: 1000 }} />
+                    <Link to={`/material-detail/${box.BoxID}`} className="fullscreenLink"></Link>
                 </Tooltip>
             )}
         </Card>

@@ -3,6 +3,7 @@ import axios from 'axios';
 import Sidebar from '../Components/Sidebar';
 import BoxGrid from '../Components/BoxGrid';
 import '../CSS/General.css';
+import '../CSS/BoxComponent.css';
 
 function Materialansicht() {
     const [boxes, setBoxes] = useState([]);
@@ -19,13 +20,16 @@ function Materialansicht() {
     }, []);
 
     return (
-        <div style={{ display: 'flex' }}>
+        <div className="pageContainer">
             <Sidebar />
             <div className="content">
                 <h1 className="Titel">Materialansicht</h1>
-                <BoxGrid boxes={boxes} />
+                <div className="boxContainerAnsicht">
+                    <BoxGrid boxes={boxes} />
+                </div>
             </div>
         </div>
+
     );
 }
 
