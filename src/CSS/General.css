@@ -29,11 +29,7 @@ p {
     line-height: 1.5;
     margin-bottom: 15px;
 }
-.content {
-    margin-left: 90px;
-    margin-top: 10px;
-    flex-grow: 1;
-}
+
 
 @media (max-width: 768px) {
     body {

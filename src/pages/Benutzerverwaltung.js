@@ -138,7 +138,7 @@ function Benutzerverwaltung() {
                                 variant="outlined"
                                 value={searchTerm}
                                 onChange={handleSearchChange}
-                                className="textField"
+                                className="text-field"
                             />
                         </Box>
                         <Paper className="paper-container">

@@ -224,7 +224,6 @@ function Materialverwaltung() {
     };
 
     return (
-        <div className="body">
             <div className="flexContainer">
                 <Sidebar />
                 <div className="content">
@@ -320,20 +319,19 @@ function Materialverwaltung() {
                         </Paper>
                     </div>
                 </div>
+                <Snackbar
+                    open={snackbarOpen}
+                    autoHideDuration={6000}
+                    onClose={() => setSnackbarOpen(false)}
+                    message={snackbarMessage}
+                />
+                <EditMaterialDialog
+                    open={editDialogOpen}
+                    handleClose={() => setEditDialogOpen(false)}
+                    materialData={currentEditMaterial}
+                    updateMaterial={updateMaterial}
+                />
             </div>
-            <Snackbar
-                open={snackbarOpen}
-                autoHideDuration={6000}
-                onClose={() => setSnackbarOpen(false)}
-                message={snackbarMessage}
-            />
-            <EditMaterialDialog
-                open={editDialogOpen}
-                handleClose={() => setEditDialogOpen(false)}
-                materialData={currentEditMaterial}
-                updateMaterial={updateMaterial}
-            />
-        </div>
     );
 }
 

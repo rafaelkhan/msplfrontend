@@ -30,7 +30,7 @@ function Materialansicht() {
             </div>
         </div>
 
-    );
+    ); 
 }
 
 export default Materialansicht;

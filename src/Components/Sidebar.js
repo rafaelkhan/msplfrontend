@@ -12,10 +12,8 @@ import { signOut } from '../services/authProvider';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
-
 import './Sidebar.css';
 
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function Sidebar() {
     const navigate = useNavigate();
@@ -91,18 +89,19 @@ function Sidebar() {
                     </ListItem>
                     )
                     }
-                    <ListItem button className="sidebar-link" onClick={() => handleNavigateTo('/Ueberuns')}>
-                        <ListItemText primary="Über uns" className="Text-Bar"/>
-                    </ListItem>
-                    <ListItem button className="sidebar-link" onClick={() => handleNavigateTo('/Help')}>
-                        <ListItemText primary="Help" className="Text-Bar"/>
-                    </ListItem>
                     {userClass === 'LEHRER' && (
                         <ListItem button className="sidebar-link" onClick={() => handleNavigateTo('/Accessed')}>
                             <ListItemText primary="Accessed" className="Text-Bar"/>
                         </ListItem>
                     )
                     }
+                    <ListItem button className="sidebar-link" onClick={() => handleNavigateTo('/Ueberuns')}>
+                        <ListItemText primary="Über uns" className="Text-Bar"/>
+                    </ListItem>
+                    <ListItem button className="sidebar-link" onClick={() => handleNavigateTo('/Help')}>
+                        <ListItemText primary="Help" className="Text-Bar"/>
+                    </ListItem>
+
                 </List>
                 <Button variant="outlined" color="error" className="logout-button" onClick={handleLogout}>
                     Logout

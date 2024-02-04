@@ -57,6 +57,36 @@ module.exports = function(db) {
         });
     });
 
+    router.post('/saveAccessedChange', (req, res) => {
+        const { email, boxID, change } = req.body;
+        const zeitpunkt = new Date();
+
+        const query = 'INSERT INTO Accessed (Zeitpunkt, Aenderung, Email, BoxID) VALUES (?, ?, ?, ?)';
+
+        db.query(query, [zeitpunkt, change, email, boxID], (error, results) => {
+            if (error) {
+                console.error('Fehler beim Einfügen in Accessed:', error);
+                return res.status(500).send('Interner Serverfehler');
+            }
+            res.send('Änderung erfolgreich gespeichert');
+        });
+    });
+
+
+    // Route zum Abrufen der Änderungsprotokolle
+    router.get('/getChanges', (req, res) => {
+        const query = 'SELECT * FROM Accessed ORDER BY Zeitpunkt DESC';
+        db.query(query, (err, results) => {
+            if (err) {
+                console.error('Fehler beim Abrufen der Änderungsprotokolle: ', err);
+                res.status(500).send('Interner Serverfehler');
+                return;
+            }
+            res.json(results);
+        });
+    });
+
+
     router.get('/')
 
     return router;

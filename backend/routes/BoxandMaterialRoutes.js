@@ -58,15 +58,18 @@ module.exports = function(db) {
         });
     });
 
-    router.post('/updateMenge', (req, res) => {
-        const { BoxID, Menge } = req.body;
-        db.query('UPDATE Box SET Menge = ? WHERE BoxID = ?', [Menge, BoxID], (err, results) => {
+    router.post('/submitChanges', (req, res) => {
+        const { BoxID, change } = req.body; // Annahme: `change` enthält die Gesamtänderung
+
+        // SQL-Query zum Aktualisieren der Menge basierend auf BoxID und change
+        const updateQuery = 'UPDATE Box SET Menge = Menge + ? WHERE BoxID = ?';
+
+        db.query(updateQuery, [change, BoxID], (err, result) => {
             if (err) {
-                console.error('Fehler beim Aktualisieren der Menge: ', err);
-                res.status(500).send('Interner Serverfehler');
-            } else {
-                res.json({ message: 'Menge erfolgreich aktualisiert' });
+                console.error('Fehler beim Aktualisieren der Materialmenge:', err);
+                return res.status(500).send('Interner Serverfehler');
             }
+            res.send('Änderungen erfolgreich gespeichert');
         });
     });
 

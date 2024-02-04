@@ -7,7 +7,7 @@
     margin-top: 20px;
 }
 
-.flexContainer {
+.flex-container {
     display: flex;
 }
 
@@ -24,8 +24,6 @@
     max-height: 65vh;
     overflow: auto;
     width: 80%;
-    overflow: hidden;
-    margin-top: 16px;
 }
 
 .sticky-header th{

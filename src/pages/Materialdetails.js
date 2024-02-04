@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Box, Paper, Typography, Button, Icon } from '@mui/material';
+import { Box, Paper, Typography, Button, Icon, Snackbar } from '@mui/material';
 import { Link } from 'react-router-dom';
 import Sidebar from '../Components/Sidebar';
 import axios from 'axios';
@@ -12,8 +12,11 @@ function Materialdetails() {
     const { BoxID } = useParams();
     const [materialDetails, setMaterialDetails] = useState(null);
     const [userRights, setUserRights] = useState({});
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState('');
     const [materialAttributes, setMaterialAttributes] = useState([]);
     const [isEntnahmeBerechtigt, setIsEntnahmeBerechtigt] = useState(false);
+    const [currentChange, setCurrentChange] = useState(0);
 
     const email = localStorage.getItem('email');
     const token = localStorage.getItem('accessToken');
@@ -62,33 +65,41 @@ function Materialdetails() {
     }, [BoxID, email, materialDetails]);
 
     const handleEntnehmen = () => {
-        if (materialDetails.Menge != 0) {
-            axios.post(`/api/BoxMaterial/updateMenge`, {
-                BoxID: materialDetails.BoxID,
-                Menge: materialDetails.Menge - 1
-            })
-                .then(response => {
-                    setMaterialDetails({ ...materialDetails, Menge: materialDetails.Menge - 1 });
-                })
-                .catch(error => {
-                    console.error('Fehler beim Entnehmen des Materials:', error);
-                });
-        } else {
-            console.log('Die Box ist schon leer');
-        }
+        setCurrentChange(currentChange - 1);
     };
 
     const handleDazugeben = () => {
-        axios.post(`/api/BoxMaterial/updateMenge`, {
-            BoxID: materialDetails.BoxID,
-            Menge: materialDetails.Menge + 1
-        })
-            .then(response => {
-                setMaterialDetails({ ...materialDetails, Menge: materialDetails.Menge + 1 });
-            })
-            .catch(error => {
-                console.error('Fehler beim Dazugeben des Materials:', error);
+        setCurrentChange(currentChange + 1);
+    };
+
+    const handleSubmitChanges = async () => {
+        try {
+            const saveChangesResponse = await axios.post(`/api/BoxMaterial/submitChanges`, {
+                BoxID,
+                change: currentChange
             });
+
+            if (saveChangesResponse.status === 200) {
+                await axios.post('/api/user/saveAccessedChange', {
+                    email,
+                    boxID: BoxID,
+                    change: currentChange
+                });
+
+                setMaterialDetails(prevDetails => ({
+                    ...prevDetails,
+                    Menge: prevDetails.Menge
+                }));
+                setSnackbarMessage(`Erfolgreich ${Math.abs(currentChange)} ${currentChange > 0 ? 'dazugegeben' : 'entnommen'}`);
+                setSnackbarOpen(true);
+                setCurrentChange(0);
+            }
+        } catch (error) {
+            console.error('Fehler beim Speichern der Änderungen:', error);
+            // Update snackbar message to show error
+            setSnackbarMessage('Fehler beim Speichern der Änderungen');
+            setSnackbarOpen(true);
+        }
     };
 
     const displayAttribute = (attrName) => {
@@ -120,12 +131,14 @@ function Materialdetails() {
                 <h1 className="Titel">Materialdetails für {materialDetails ? materialDetails.Bezeichnung : '...'}</h1>
                 {materialDetails ? (
                     <div>
-                        <Typography variant="body1">Vorhandene Menge: {materialDetails.Menge}</Typography>
+                        <Typography variant="body1">Vorhandene Menge: {materialDetails ? materialDetails.Menge : 'Lädt...'}</Typography>
+                        <Typography variant="body2">Ihre aktuelle Änderung: {currentChange > 0 ? `+${currentChange}` : currentChange}</Typography>
                         {['Durchmesser', 'Kraft', 'Länge', 'Stärke'].map(attrName => (
                             <Typography key={attrName} >{displayAttribute(attrName)}</Typography>
                         ))}
                         <Button variant="outlined" onClick={handleEntnehmen} disabled={!isEntnahmeBerechtigt || (userClass !== 'LEHRER' && !userRights.EntnahmeLimit)}>Entnehmen</Button>
                         <Button variant="outlined" onClick={handleDazugeben} disabled={userClass !== 'LEHRER' && !userRights.Zugabe}>Dazugeben</Button>
+                        <Button variant="contained" onClick={handleSubmitChanges} color="primary" disabled={(!isEntnahmeBerechtigt || (userClass !== 'LEHRER' && !userRights.EntnahmeLimit)) && (userClass !== 'LEHRER' && !userRights.Zugabe)}>Änderungen speichern</Button>
                     </div>
                 ) : (
                     <div>
@@ -138,6 +151,12 @@ function Materialdetails() {
                     </div>
                 )}
             </div>
+            <Snackbar
+                open={snackbarOpen}
+                autoHideDuration={3000}
+                onClose={() => setSnackbarOpen(false)}
+                message={snackbarMessage}
+            />
         </div>
     );
 }

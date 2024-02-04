@@ -1,0 +1,35 @@
+.titel{
+    color: black;
+}
+
+.specificContent{
+    margin-top: 20px;
+}
+
+.flexContainer {
+    display: flex;
+}
+
+.textField {
+    width: 740px;
+    margin-top: 16px;
+    height: 55px;
+}
+
+.paper_container {
+    width: 1500px;
+    overflow: hidden;
+    margin-top: 16px;
+}
+
+.tableContainer{
+    max-height: 65vh;
+    overflow: auto;
+}
+
+.stickyHeader th{
+    position: sticky;
+    background-color: #fff; /* Hintergrundfarbe anpassen, falls erforderlich */
+    z-index: 10;
+    top: 0;
+}
