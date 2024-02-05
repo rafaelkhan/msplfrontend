@@ -40,41 +40,37 @@
 }
 
 
+@media (max-width: 600px) {
 
-/* Stile für Bildschirmbreite bis 768 Pixel */
-@media (max-width: 768px) {
-    .Titel {
-        color: black; /* Beispiel: Änderung der Textfarbe für kleinere Bildschirme */
+    .search-box-div {
+        position: relative;
+        top: 10%;
+        left: -20px;
+        width: 200px;
+        height: 5%;
     }
 
-    .specific-content{
-        margin-top: 16px; /* Beispiel: Änderung des oberen Randes für kleinere Bildschirme */
+    .newMaterial-box {
+        position: absolute;
+        top: 18%;
+        left: 1%;
+        width: 98%;
     }
 
-    .search-box {
-        width: 98%; /* Beispiel: Vollständige Breite für Suchfeld auf kleineren Bildschirmen */
-        margin-bottom: 16px;
-    }
-
-    .button-container {
-        width: 98%; /* Beispiel: Vollständige Breite für Button-Container auf kleineren Bildschirmen */
-    }
-
-    .paper-container {
-        width: 98%; /* Beispiel: Vollständige Breite für Papier-Container auf kleineren Bildschirmen */
-        overflow: hidden;
-        margin-top: 16px;
-    }
 
     .table-container {
-        max-height: 768px; /* Beispiel: Reduziere die maximale Höhe für Tabellencontainer auf kleineren Bildschirmen */
+        position: absolute;
         overflow: auto;
+        top: 24%;
+        left: 2%;
+        width: 80% !important;
     }
 
-    .table-cell-center {
-        text-align: center;
+    .sticky-header {
+        position: sticky;
+        top: 0;
+        background-color: black;
+        z-index: 1;
     }
 }
-
-
 /* Weitere benutzerdefinierte Stile können hier hinzugefügt werden */
