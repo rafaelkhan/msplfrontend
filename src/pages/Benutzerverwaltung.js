@@ -124,24 +124,22 @@ function Benutzerverwaltung() {
     });
 
     return (
-        <div className="body">
             <div className="flexContainer">
                 <Sidebar />
                 <div className="content">
                     <h1 className="Titel">Benutzerverwaltung</h1>
-                    <div className="specific-content">
                         <Box>
                             <TextField
+                                className="benutzer-search-box"
                                 id="outlined-search"
                                 label="Suche nach E-Mail, Vor- oder Nachname, oder Klasse"
                                 type="search"
                                 variant="outlined"
                                 value={searchTerm}
                                 onChange={handleSearchChange}
-                                className="text-field"
                             />
                         </Box>
-                        <Paper className="paper-container">
+                        <Paper className="benutzer-paper-container">
                             <TableContainer component={Paper} className="table-container">
                                 <Table>
                                     <TableHead>
@@ -192,10 +190,8 @@ function Benutzerverwaltung() {
                                 </Table>
                             </TableContainer>
                         </Paper>
-                    </div>
                 </div>
             </div>
-        </div>
     );
 }
 

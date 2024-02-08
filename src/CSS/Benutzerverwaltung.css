@@ -1,68 +1,362 @@
-.Titel{
-    color: black;
-}
+@media (min-width: 1101px) and (max-width: 3000px) {
 
-.specific-content{
-    margin-top: 20px;
-}
-
-.flex-container {
-    display: flex;
-}
-
-.text-field {
-    width: 80%;
-    margin-top: 16px;
-    height: 55px;
-}
-
-.paper-container {
-    width: 80%;
-    overflow: hidden;
-    margin-top: 16px;
-}
-
-
-.sticky-header th{
-    position: sticky;
-    background-color: #fff; /* Hintergrundfarbe anpassen, falls erforderlich */
-    z-index: 10;
-    top: 0;
-}
-
-/* Stile für Bildschirmbreite bis 768 Pixel */
-@media (max-width: 768px) {
     .Titel {
-        color: black; /* Beispiel: Änderung der Textfarbe für kleinere Bildschirme */
+        color: black;
     }
 
-    .specific-content {
-        margin-top: 16px; /* Beispiel: Änderung des oberen Randes für kleinere Bildschirme */
+    .flex-container {
+        display: flex;
     }
 
-    .textField {
-        width: 98%; /* Beispiel: Vollständige Breite für Suchfeld auf kleineren Bildschirmen */
-        margin-bottom: 16px;
+    .benutzer-search-box {
+        position: relative;
+        width: 80%;
+        height: 45px;
+        margin-bottom: 25px !important;
     }
 
-    .button-container {
-        width: 98%; /* Beispiel: Vollständige Breite für Button-Container auf kleineren Bildschirmen */
-    }
-
-    .paper-container {
-        width: 98%; /* Beispiel: Vollständige Breite für Papier-Container auf kleineren Bildschirmen */
-        overflow: hidden;
-        margin-top: 16px;
-    }
-
-    .table-container {
-        max-height: 768px; /* Beispiel: Reduziere die maximale Höhe für Tabellencontainer auf kleineren Bildschirmen */
+    .benutzer-paper-container {
+        position: relative;
+        max-height: 70vh !important;
         overflow: auto;
+        width: 80% !important;
     }
 
-    .table-cell-center {
-        text-align: center;
+    .sticky-header th {
+        position: sticky;
     }
 }
 
-/* Weitere benutzerdefinierte Stile können hier hinzugefügt werden */
+
+/*----------------------------------------------------------------------------------------------------------------------*/
+
+
+@media (min-width: 1001px) and (max-width: 1100px) {
+
+    .Titel {
+        color: black;
+    }
+
+    .flex-container {
+        display: flex;
+    }
+
+    .benutzer-search-box {
+        position: relative;
+        width: 900px;
+        height: 45px;
+        margin-bottom: 25px !important;
+    }
+
+
+    .benutzer-paper-container {
+        position: relative;
+        max-height: 800px !important;
+        overflow: auto;
+        width: 900px !important;
+    }
+
+
+    .sticky-header th {
+        position: sticky;
+    }
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------*/
+
+
+@media (min-width: 901px) and (max-width: 1000px) {
+
+    .Titel {
+        color: black;
+    }
+
+    .flex-container {
+        display: flex;
+    }
+
+    .benutzer-search-box {
+        position: relative;
+        width: 750px;
+        height: 45px;
+        margin-bottom: 25px !important;
+    }
+
+
+    .benutzer-paper-container {
+        position: relative;
+        max-height: 1000px;
+        overflow: auto;
+        width: 750px !important;
+    }
+
+
+    .sticky-header th {
+        position: sticky;
+    }
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------*/
+
+
+@media (min-width: 801px) and (max-width: 900px) {
+
+    .Titel {
+        color: black;
+    }
+
+    .flex-container {
+        display: flex;
+    }
+
+    .benutzer-search-box {
+        position: relative;
+        width: 600px;
+        height: 45px;
+        margin-bottom: 25px !important;
+    }
+
+
+    .benutzer-paper-container {
+        position: relative;
+        max-height: 900px !important;
+        overflow: auto;
+        width: 600px !important;
+    }
+
+
+    .sticky-header th {
+        position: sticky;
+    }
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------*/
+
+
+@media (min-width: 701px) and (max-width: 800px) {
+
+    .Titel {
+        color: black;
+    }
+
+    .flex-container {
+        display: flex;
+    }
+
+    .benutzer-search-box {
+        position: relative;
+        width: 550px;
+        height: 45px;
+        margin-bottom: 25px !important;
+    }
+
+
+    .benutzer-paper-container {
+        position: relative;
+        max-height: 900px;
+        overflow: auto;
+        width: 550px !important;
+    }
+
+
+    .sticky-header th {
+        position: sticky;
+    }
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------*/
+
+
+@media (min-width: 601px) and (max-width: 700px) {
+
+    .Titel {
+        color: black;
+    }
+
+    .flex-container {
+        display: flex;
+    }
+
+    .benutzer-search-box {
+        position: relative;
+        width: 75vw;
+        height: 45px;
+        margin-bottom: 25px !important;
+    }
+
+
+    .benutzer-paper-container {
+        position: relative;
+        max-height: 50vh;
+        overflow: auto;
+        max-width: 75vw;
+    }
+
+
+    .sticky-header th {
+        position: sticky;
+    }
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------*/
+
+
+@media (min-width: 451px) and (max-width: 600px) {
+    .Titel {
+        color: black;
+        font-size: 30px;
+        left: -20px;
+        top: 1px;
+    }
+
+    .flex-container {
+        display: flex;
+    }
+
+    .benutzer-search-box {
+        position: relative;
+        width: 400px;
+        left: -50px;
+        height: 40px;
+        margin-bottom: 25px !important;
+
+    }
+
+    .benutzer-paper-container {
+        position: relative;
+        max-height: 400px;
+        overflow: auto;
+        left: -50px !important;
+        width: 400px !important;
+    }
+
+
+    .sticky-header th {
+        position: sticky;
+    }
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------*/
+
+
+@media (min-width: 401px) and (max-width: 450px) {
+
+    .Titel {
+        color: black;
+        position: relative;
+        left: -20px;
+        font-size: 25px;
+    }
+
+    .flex-container {
+        display: flex;
+    }
+
+    .benutzer-search-box {
+        position: relative;
+        width: 320px;
+        left: -50px;
+        height: 40px;
+        margin-bottom: 25px !important;
+    }
+
+
+    .benutzer-paper-container {
+        position: relative;
+        max-height: 60vh;
+        overflow: auto;
+        left: -50px !important;
+        width: 320px !important;
+    }
+
+
+    .sticky-header th {
+        position: sticky;
+    }
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------*/
+
+
+@media (min-width: 301px) and (max-width: 400px) {
+
+    .Titel {
+        color: black;
+        position: relative;
+        left: -20px;
+        font-size: 25px;
+        top: 7px;
+    }
+
+
+    .flex-container {
+        display: flex;
+    }
+
+    .benutzer-search-box {
+        position: relative;
+        width: 310px;
+        left: -50px;
+        height: 45px;
+        margin-bottom: 25px !important;
+    }
+
+    .benutzer-paper-container {
+        position: relative;
+        max-height: 400px;
+        overflow: auto;
+        left: -50px !important;
+        max-width: 310px;
+    }
+
+
+    .sticky-header th {
+        position: sticky;
+    }
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------*/
+
+
+@media (min-width: 0px) and (max-width: 300px) {
+    .Titel {
+        color: black;
+        position: relative;
+        left: -20px;
+        font-size: 25px;
+        top: 7px;
+    }
+
+    .flex-container {
+        display: flex;
+    }
+
+    .benutzer-search-box {
+        position: relative;
+        width: 270px;
+        left: -50px;
+        height: 45px;
+        margin-bottom: 25px !important;
+    }
+
+    .benutzer-paper-container {
+        position: relative;
+        max-height: 90vh;
+        overflow: auto;
+        width: 270px !important;
+        left: -50px !important;
+    }
+
+
+    .sticky-header th {
+        position: sticky;
+    }
+}
