@@ -9,3 +9,20 @@
 .icon-align {
     margin-top: 20px;
 }
+.container {
+    display: flex;
+}
+
+.content {
+    width: 80%;
+}
+
+.inputField {
+    width: 100%;
+}
+
+.buttonGroup {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}

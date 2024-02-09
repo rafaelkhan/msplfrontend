@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Card, Typography, Tooltip } from '@mui/material';
 import { Link } from 'react-router-dom';
-import '../CSS/BoxComponent.css';
 
 const BoxComponent = ({ box }) => {
     const [isHovered, setIsHovered] = useState(false);
