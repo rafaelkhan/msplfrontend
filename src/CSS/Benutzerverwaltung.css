@@ -15,7 +15,9 @@
     margin-top: 16px;
     height: 55px;
 }
-
+.formControl{
+    width: 243px;
+}
 .paper-container {
     width: 80%;
     overflow: hidden;

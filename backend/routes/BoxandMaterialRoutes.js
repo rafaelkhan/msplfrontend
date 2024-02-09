@@ -59,9 +59,8 @@ module.exports = function(db) {
     });
 
     router.post('/submitChanges', (req, res) => {
-        const { BoxID, change } = req.body; // Annahme: `change` enthält die Gesamtänderung
+        const { BoxID, change } = req.body;
 
-        // SQL-Query zum Aktualisieren der Menge basierend auf BoxID und change
         const updateQuery = 'UPDATE Box SET Menge = Menge + ? WHERE BoxID = ?';
 
         db.query(updateQuery, [change, BoxID], (err, result) => {

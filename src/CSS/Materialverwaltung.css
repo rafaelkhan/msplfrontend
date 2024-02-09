@@ -21,9 +21,8 @@
     width: 80%;
 }
 .table-container {
-    max-height: 65vh;
+    max-height: 61vh;
     overflow: auto;
-    width: 80%;
 }
 
 .sticky-header th{

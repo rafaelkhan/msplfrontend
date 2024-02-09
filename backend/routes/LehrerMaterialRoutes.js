@@ -188,24 +188,18 @@ module.exports = function(db) {
     });
     router.put('/updateBoxAssignment', async (req, res) => {
         const { materialtypId, boxId } = req.body;
-        const connection = db; // Angenommen, db ist Ihre Datenbankverbindung
 
         try {
-            // Beginnen Sie eine Transaktion
-            await connection.beginTransaction();
+            await db.beginTransaction();
 
-            // Löschen Sie zuerst die zugehörigen Accessed-Einträge
-            await connection.query('DELETE FROM Accessed WHERE BoxID IN (SELECT BoxID FROM Box WHERE MaterialtypID = ?)', [materialtypId]);
+            await db.query('DELETE FROM Accessed WHERE BoxID IN (SELECT BoxID FROM Box WHERE MaterialtypID = ?)', [materialtypId]);
 
-            // Aktualisieren Sie nun die BoxID in der Box-Tabelle
-            await connection.query('UPDATE Box SET BoxID = ? WHERE MaterialtypID = ?', [boxId, materialtypId]);
+            await db.query('UPDATE Box SET BoxID = ? WHERE MaterialtypID = ?', [boxId, materialtypId]);
 
-            // Commit der Transaktion
-            await connection.commit();
+            await db.commit();
             res.status(200).send('Box-Zuweisung und zugehörige Accessed-Einträge erfolgreich aktualisiert');
         } catch (error) {
-            // Rollback im Fehlerfall
-            await connection.rollback();
+            await db.rollback();
             console.error('Fehler beim Aktualisieren der Box-Zuweisung: ', error);
             res.status(500).send('Interner Serverfehler');
         }
@@ -243,6 +237,7 @@ module.exports = function(db) {
             });
         });
     });
+
     router.get('/access/:materialId', (req, res) => {
         const { materialId } = req.params;
         db.query('SELECT Schulklasse FROM MaterialEntnahmeRecht WHERE MaterialtypID = ?', [materialId], (err, results) => {
