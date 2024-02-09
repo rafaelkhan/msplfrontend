@@ -264,7 +264,10 @@ function Materialverwaltung() {
                                     </TableHead>
                                     <TableBody>
                                         {filteredMaterialien.map(material => (
-                                            <TableRow key={material.MaterialtypID}>
+                                            <TableRow
+                                                key={material.MaterialtypID}
+                                                className={(bestaende[material.MaterialtypID] || 0) < material.SollBestand ? 'row-below-target' : ''}
+                                            >
                                                 <TableCell>{material.MaterialtypID}</TableCell>
                                                 <TableCell>{material.Bezeichnung}</TableCell>
                                                 <TableCell className="table-cell-center">
