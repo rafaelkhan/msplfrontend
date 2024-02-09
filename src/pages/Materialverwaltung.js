@@ -104,8 +104,12 @@ function Materialverwaltung() {
                     return material;
                 }));
                 setEditDialogOpen(false);
+                setSnackbarMessage('Materialattribute erfolgreich geändert.');
+                setSnackbarOpen(true);
             }
         } catch (error) {
+            setSnackbarMessage('Fehler beim Ändern der Materialattribute');
+            setSnackbarOpen(true);
             console.error('Fehler beim Aktualisieren des Materials', error);
         }
     };
