@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
+    import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Box, Paper, Typography, Button, Icon, Snackbar } from '@mui/material';
 import { Link } from 'react-router-dom';
 import Sidebar from '../Components/Sidebar';
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
-import NotInterestedIcon from '@mui/icons-material/NotInterested';
 import '../CSS/Materialdetails.css';
 
 function Materialdetails() {
@@ -129,7 +128,7 @@ function Materialdetails() {
         }
         return attr ?
             <p>{attr.AttributName}: {attr.Quantitaet} {after}</p> :
-            <p>{attrName}: <NotInterestedIcon className="icon-align" /></p>;
+            <p>{attrName}: /</p>;
     };
 
     return (

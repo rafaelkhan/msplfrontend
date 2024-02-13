@@ -175,6 +175,7 @@ function Benutzerverwaltung() {
                                 value={searchTerm}
                                 onChange={handleSearchChange}
                                 className="text-field"
+                                fullwidth
                             />
                         </Box>
                         <Paper className="paper-container">

@@ -72,5 +72,23 @@ module.exports = function(db) {
         });
     });
 
+    router.get('/search/:bezeichnung', (req, res) => {
+        const { bezeichnung } = req.params;
+        const query = `
+        SELECT Box.BoxID, Materialtyp.Bezeichnung 
+        FROM Box 
+        JOIN Materialtyp ON Box.MaterialtypID = Materialtyp.MaterialtypID 
+        WHERE Materialtyp.Bezeichnung LIKE ?
+    `;
+        db.query(query, [`%${bezeichnung}%`], (err, results) => {
+            if (err) {
+                console.error('Fehler bei der Suche nach Materialbezeichnung:', err);
+                res.status(500).send('Interner Serverfehler');
+            } else {
+                res.json(results);
+            }
+        });
+    });
+
     return router;
 };
