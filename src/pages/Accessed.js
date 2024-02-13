@@ -60,6 +60,7 @@ function Accessed() {
                                         <TableCell>Änderung</TableCell>
                                         <TableCell>Email</TableCell>
                                         <TableCell>BoxID</TableCell>
+                                        <TableCell>Materialtyp</TableCell> {/* Neue Spalte hinzugefügt */}
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -69,6 +70,7 @@ function Accessed() {
                                             <TableCell>{change.Aenderung}</TableCell>
                                             <TableCell>{change.Email}</TableCell>
                                             <TableCell>{change.BoxID}</TableCell>
+                                            <TableCell>{change.Bezeichnung}</TableCell> {/* Daten anzeigen */}
                                         </TableRow>
                                     ))}
                                 </TableBody>

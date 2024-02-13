@@ -75,7 +75,13 @@ module.exports = function(db) {
 
     // Route zum Abrufen der Änderungsprotokolle
     router.get('/getChanges', (req, res) => {
-        const query = 'SELECT * FROM Accessed ORDER BY Zeitpunkt DESC';
+        const query = `
+    SELECT Accessed.*, Box.BoxID, Materialtyp.Bezeichnung
+    FROM Accessed
+    JOIN Box ON Accessed.BoxID = Box.BoxID
+    JOIN Materialtyp ON Box.MaterialtypID = Materialtyp.MaterialtypID
+    ORDER BY Accessed.Zeitpunkt DESC`;
+
         db.query(query, (err, results) => {
             if (err) {
                 console.error('Fehler beim Abrufen der Änderungsprotokolle: ', err);
