@@ -73,6 +73,14 @@ function Materialdetails() {
     };
 
     const handleSubmitChanges = async () => {
+
+        if (currentChange === 0) {
+            console.log('Keine Änderung vorgenommen, daher wird nicht gespeichert.');
+            setSnackbarMessage('Keine Änderung vorgenommen');
+            setSnackbarOpen(true);
+            return;
+        }
+
         try {
             const saveChangesResponse = await axios.post(`/api/BoxMaterial/submitChanges`, {
                 BoxID,
@@ -96,11 +104,11 @@ function Materialdetails() {
             }
         } catch (error) {
             console.error('Fehler beim Speichern der Änderungen:', error);
-            // Update snackbar message to show error
             setSnackbarMessage('Fehler beim Speichern der Änderungen');
             setSnackbarOpen(true);
         }
     };
+
 
     const displayAttribute = (attrName) => {
         const attr = materialAttributes.find(attr => attr.AttributName === attrName);
