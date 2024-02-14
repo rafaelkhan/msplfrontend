@@ -73,7 +73,7 @@ module.exports = function(db) {
     });
 
 
-    // Route zum Abrufen der Änderungsprotokolle
+    // API für Accessed
     router.get('/getChanges', (req, res) => {
         const query = `
     SELECT Accessed.*, Box.BoxID, Materialtyp.Bezeichnung

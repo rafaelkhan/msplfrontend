@@ -186,6 +186,7 @@ module.exports = function(db) {
             }
         });
     });
+
     router.put('/updateBoxAssignment', async (req, res) => {
         const { materialtypId, boxId } = req.body;
 
