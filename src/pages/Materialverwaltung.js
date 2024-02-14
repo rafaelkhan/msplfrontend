@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import {
@@ -23,7 +23,7 @@ function Materialverwaltung() {
     const [snackbarMessage, setSnackbarMessage] = useState('');
     const [editDialogOpen, setEditDialogOpen] = useState(false);
     const [currentEditMaterial, setCurrentEditMaterial] = useState(null);
-
+    const updateTriggeredByEnter = useRef(false);
 
     useEffect(() => {
         axios.get('/api/Materialtyp').then(response => {
@@ -136,14 +136,42 @@ function Materialverwaltung() {
     };
 
     const updateBoxStock = async (materialtypId, newStock) => {
-        const response = await axios.put(`/api/Materialtyp/Box/updateStock`, { materialtypId, newStock });
-        if (response.status === 200) {
-            setBestaende(prevBestaende => ({
-                ...prevBestaende,
-                [materialtypId]: parseInt(newStock)
-            }));
+
+        newStock = parseInt(newStock);
+
+        try {
+            const currentStock = bestaende[materialtypId] || 0;
+
+            const stockDifference = newStock - currentStock;
+
+            if (stockDifference === 0) {
+                console.log('Keine Änderung im Bestand.');
+                return;
+            }
+
+            const response = await axios.put(`/api/Materialtyp/Box/updateStock`, { materialtypId, newStock });
+            if (response.status === 200) {
+                setBestaende(prevBestaende => ({
+                    ...prevBestaende,
+                    [materialtypId]: newStock
+                }));
+                setSnackbarMessage(`Erfolgreich ${Math.abs(stockDifference)} ${stockDifference > 0 ? 'dazugegeben' : 'entnommen'}`);
+                setSnackbarOpen(true);
+
+                const userEmail = localStorage.getItem('email');
+
+                await axios.post('/api/user/saveAccessedChange', {
+                    email: userEmail,
+                    boxID: boxAssignments[materialtypId],
+                    change: stockDifference
+                });
+                console.log('Änderung')
+            }
+        } catch (error) {
+            console.error('Fehler beim Aktualisieren des Bestands oder beim Protokollieren der Änderung', error);
         }
     };
+
 
     const updateBoxAssignment = (materialId, newBoxId) => {
         setBoxAssignments(prev => ({ ...prev, [materialId]: newBoxId }));
@@ -163,9 +191,17 @@ function Materialverwaltung() {
 
     const handleKeyDown = (event, materialId, updateFunction) => {
         if (event.key === 'Enter') {
+            updateTriggeredByEnter.current = true;
             handleStockChange(materialId, event.target.value, updateFunction);
-            event.target.blur();
+            event.target.blur(); // Fokus verlieren, was onBlur auslösen wird
         }
+    };
+
+    const onBlurHandler = (materialId, value, updateFunction) => {
+        if (!updateTriggeredByEnter.current) {
+            handleStockChange(materialId, value, updateFunction);
+        }
+        updateTriggeredByEnter.current = false;
     };
 
     const filteredMaterialien = materialien.filter(material =>
@@ -287,7 +323,7 @@ function Materialverwaltung() {
                                                         key={material.MaterialtypID + '-' + (bestaende[material.MaterialtypID] || 0)}
                                                         type="number"
                                                         defaultValue={bestaende[material.MaterialtypID] || 0}
-                                                        onBlur={(e) => handleStockChange(material.MaterialtypID, e.target.value, updateBoxStock)}
+                                                        onBlur={(e) => onBlurHandler(material.MaterialtypID, e.target.value, updateBoxStock)}
                                                         onKeyDown={(e) => handleKeyDown(e, material.MaterialtypID, updateBoxStock)}
                                                     />
                                                 </TableCell>
