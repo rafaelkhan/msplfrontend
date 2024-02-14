@@ -15,7 +15,11 @@ module.exports = function(db) {
     });
     router.get('/materialdaten/:BoxID', (req, res) => {
         const { BoxID } = req.params;
-        db.query('SELECT Box.BoxID, Box.Menge, Materialtyp.Bezeichnung, Materialtyp.MaterialtypID FROM Box INNER JOIN Materialtyp ON Box.MaterialtypID = Materialtyp.MaterialtypID WHERE Box.BoxID= ?', [BoxID] , (err, results) => {
+        db.query(`
+        SELECT Box.BoxID, Box.Menge, Materialtyp.Bezeichnung, Materialtyp.MaterialtypID, Materialtyp.Kontingent
+        FROM Box
+        INNER JOIN Materialtyp ON Box.MaterialtypID = Materialtyp.MaterialtypID
+        WHERE Box.BoxID= ?`, [BoxID], (err, results) => {
             if (err) {
                 console.error('Fehler beim Abrufen der Box-Daten: ', err);
                 res.status(500).send('Interner Serverfehler');
@@ -24,6 +28,7 @@ module.exports = function(db) {
             }
         });
     });
+
     router.get('/userRights/:email', (req, res) => {
         const { email } = req.params;
         db.query('SELECT Zugabe, EntnahmeLimit FROM Account WHERE Email = ?', [email], (err, results) => {
@@ -45,7 +50,20 @@ module.exports = function(db) {
             }
         });
     });
-
+    router.get('/entnommeneMenge/:BoxID/:email', (req, res) => {
+        const { BoxID, email } = req.params;
+        db.query(`
+        SELECT COALESCE(SUM(Aenderung), 0) AS entnommeneMenge
+        FROM Accessed
+        WHERE BoxID = ? AND Email = ? AND Aenderung < 0`, [BoxID, email], (err, results) => {
+            if (err) {
+                console.error('Fehler beim Abrufen der entnommenen Menge:', err);
+                res.status(500).send('Interner Serverfehler');
+            } else {
+                res.json(results[0]);
+            }
+        });
+    });
     // Neue Route für Materialattribute
     router.get('/materialAttributes/:MaterialtypID', (req, res) => {
         const { MaterialtypID } = req.params;
