@@ -144,7 +144,7 @@ function Materialdetails() {
                             <Typography key={attrName} >{displayAttribute(attrName)}</Typography>
                         ))}
                         <Button variant="outlined" onClick={handleEntnehmen} disabled={!isEntnahmeBerechtigt || (userClass !== 'LEHRER' && !userRights.EntnahmeLimit)}>Entnehmen</Button>
-                        <Button variant="outlined" onClick={handleDazugeben} disabled={userClass !== 'LEHRER' && !userRights.Zugabe}>Dazugeben</Button>
+                        <Button variant="outlined" onClick={handleDazugeben} disabled={!isEntnahmeBerechtigt || (userClass !== 'LEHRER' && !userRights.Zugabe)}>Dazugeben</Button>
                         <Button variant="contained" onClick={handleSubmitChanges} color="primary" disabled={(!isEntnahmeBerechtigt || (userClass !== 'LEHRER' && !userRights.EntnahmeLimit)) && (userClass !== 'LEHRER' && !userRights.Zugabe)}>Änderungen speichern</Button>
                     </div>
                 ) : (
