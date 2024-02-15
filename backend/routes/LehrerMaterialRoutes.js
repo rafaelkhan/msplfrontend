@@ -67,7 +67,7 @@ module.exports = function(db) {
 //--------------------------------------------------------------------------------------------------------------------------------
 
     router.get('/', (req, res) => {
-        db.query('SELECT MaterialtypID, Bezeichnung, SollBestand FROM Materialtyp', (err, result) => {
+        db.query('SELECT MaterialtypID, Bezeichnung, SollBestand, Kontingent FROM Materialtyp', (err, result) => {
             if (err) {
                 console.error('Fehler beim Abrufen von Daten aus der Tabelle: ', err);
                 res.status(500).send('Interner Serverfehler');
@@ -276,6 +276,20 @@ module.exports = function(db) {
         });
 
         res.status(201).send('Zugriffsrechte überprüft und aktualisiert');
+    });
+
+    router.put('/:id/updateKontingent', (req, res) => {
+        const { id } = req.params;
+        const { newKontingent } = req.body; // Der neue Kontingent-Wert aus dem Request
+
+        db.query('UPDATE Materialtyp SET Kontingent = ? WHERE MaterialtypID = ?', [newKontingent, id], (err, result) => {
+            if (err) {
+                console.error('Fehler beim Aktualisieren des Kontingents: ', err);
+                res.status(500).send('Interner Serverfehler');
+            } else {
+                res.status(200).send('Kontingent erfolgreich aktualisiert');
+            }
+        });
     });
 
     // Endpunkt zum Entfernen von Zugriffsrechten

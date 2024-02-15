@@ -12,6 +12,7 @@ import Sidebar from '../Components/Sidebar';
 import '../CSS/Materialverwaltung.css';
 
 function Materialverwaltung() {
+    const [isEditingUnlimited, setIsEditingUnlimited] = useState(null);
     const [materialien, setMaterialien] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [bestaende, setBestaende] = useState({});
@@ -263,6 +264,31 @@ function Materialverwaltung() {
         }
     };
 
+    const handleKontingentChange = async (materialId, newKontingent) => {
+        let kontingentValue = parseInt(newKontingent);
+        if (isNaN(kontingentValue)) {
+            kontingentValue = 0; // Setze auf 0, wenn "Unbegrenzt" oder eine nicht-numerische Eingabe erfolgt
+        }
+
+        try {
+            await axios.put(`/api/Materialtyp/${materialId}/updateKontingent`, { newKontingent: kontingentValue });
+            setSnackbarMessage(`Kontingent erfolgreich aktualisiert.`);
+            setSnackbarOpen(true);
+
+            setMaterialien(materialien.map(material => {
+                if (material.MaterialtypID === materialId) {
+                    return { ...material, Kontingent: kontingentValue };
+                }
+                return material;
+            }));
+        } catch (error) {
+            console.error('Fehler beim Aktualisieren des Kontingents', error);
+            setSnackbarMessage('Fehler beim Aktualisieren des Kontingents');
+            setSnackbarOpen(true);
+        }
+    };
+
+
     return (
             <div className="flexContainer">
                 <Sidebar />
@@ -295,6 +321,7 @@ function Materialverwaltung() {
                                             <TableCell>ID</TableCell>
                                             <TableCell>Name</TableCell>
                                             <TableCell className="table-cell-center">Soll-Bestand</TableCell>
+                                            <TableCell className="table-cell-center">Kontingent</TableCell>
                                             <TableCell className="table-cell-center">Aktueller Bestand</TableCell>
                                             <TableCell className="table-cell-center">Box</TableCell>
                                             <TableCell className="table-cell-center">Zugriffsrechte</TableCell>
@@ -318,6 +345,35 @@ function Materialverwaltung() {
                                                         onKeyDown={(e) => handleKeyDown(e, material.MaterialtypID, updateTargetStock)}
                                                     />
                                                 </TableCell>
+                                                {material.Kontingent === 0 ? (
+                                                    <TableCell className="table-cell-center">
+                                                            <IconButton onClick={() => setIsEditingUnlimited(material.MaterialtypID)}>
+                                                                <p>Unbegrenzt</p><EditIcon />
+                                                            </IconButton>
+                                                            {isEditingUnlimited === material.MaterialtypID && (
+                                                                <Input
+                                                                    autoFocus
+                                                                    type="number"
+                                                                    onBlur={() => setIsEditingUnlimited(null)}
+                                                                    onKeyDown={(e) => {
+                                                                        if (e.key === 'Enter') {
+                                                                            handleKontingentChange(material.MaterialtypID, e.target.value);
+                                                                            setIsEditingUnlimited(null);
+                                                                        }
+                                                                    }}
+                                                                />
+                                                            )}
+                                                    </TableCell>
+                                                ) : (
+                                                    <TableCell className="table-cell-center">
+                                                        <Input
+                                                            type="number"
+                                                            defaultValue={material.Kontingent}
+                                                            onBlur={(e) => handleKontingentChange(material.MaterialtypID, e.target.value)}
+                                                            onKeyDown={(e) => handleKeyDown(e, material.MaterialtypID, handleKontingentChange)}
+                                                        />
+                                                    </TableCell>
+                                                )}
                                                 <TableCell className="table-cell-center">
                                                     <Input
                                                         key={material.MaterialtypID + '-' + (bestaende[material.MaterialtypID] || 0)}
