@@ -178,7 +178,7 @@ function Benutzerverwaltung() {
                                 fullwidth
                             />
                         </Box>
-                        <Paper className="paper-container">
+                        <Paper className="paper-container-benutzer">
                             <TableContainer component={Paper} className="table-container">
                                 <Table>
                                     <TableHead>
@@ -230,8 +230,9 @@ function Benutzerverwaltung() {
                             </TableContainer>
                         </Paper>
                     </div>
+                    <div className="container-klassenverwaltung">
                     <h1 className="Titel">Klassenverwaltung</h1>
-                    <Button variant="outlined" startIcon={<EditIcon />} onClick={handleClickOpen}>
+                    <Button className="button-hinzufügen" variant="outlined" startIcon={<EditIcon />} onClick={handleClickOpen}>
                         Neue Klasse hinzufügen
                     </Button>
                     <Dialog open={openDialog} onClose={handleClose}>
@@ -254,7 +255,7 @@ function Benutzerverwaltung() {
                             <Button onClick={handleNeueKlasseHinzufuegen}>Hinzufügen</Button>
                         </DialogActions>
                     </Dialog>
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, marginTop: 2 }}>
+                    <Box>
                         <FormControl className="formControl">
                             <Select
                                 value={selectedVerwaltungsKlasse}
@@ -272,6 +273,7 @@ function Benutzerverwaltung() {
                             </Select>
                         </FormControl>
                         <Button
+                            className="button-loeschen"
                             variant="outlined"
                             color="error"
                             startIcon={<DeleteIcon />}
@@ -281,6 +283,7 @@ function Benutzerverwaltung() {
                             Löschen
                         </Button>
                     </Box>
+                </div>
                 </div>
             </div>
         </div>
