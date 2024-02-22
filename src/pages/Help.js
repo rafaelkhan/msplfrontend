@@ -63,7 +63,7 @@ function Help() {
         <div className="container">
             <Sidebar />
             <div className="content">
-                    <h1 className="Titel">Help</h1>
+                    <h1 className="Titel">FAQ</h1>
                 <div className="faq-section">
                     <Faq
                         data={data}

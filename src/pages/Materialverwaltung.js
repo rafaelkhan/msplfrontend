@@ -10,6 +10,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import Sidebar from '../Components/Sidebar';
 import '../CSS/Materialverwaltung.css';
+import '../CSS/Materialverwaltung_Accessed.css';
+import '../CSS/General.css';
 
 function Materialverwaltung() {
     const [isEditingUnlimited, setIsEditingUnlimited] = useState(null);
@@ -293,9 +295,9 @@ function Materialverwaltung() {
             <div className="flexContainer">
                 <Sidebar />
                 <div className="content">
-                    <h1 className="Titel">Materialverwaltung</h1>
+                    <h1 className="titel">Material</h1>
                     <div className="specific-content">
-                        <Box className="search-box">
+                        <Box className="text-field-button">
                             <TextField
                                 id="outlined-search"
                                 label="Suche nach Name oder ID"
@@ -306,9 +308,9 @@ function Materialverwaltung() {
                                 fullWidth
                             />
                         </Box>
-                        <Box className="button-container">
+                        <Box>
                             <Link to="/newmaterial">
-                                <Button variant="outlined" className="customButton">
+                                <Button variant="outlined" className="text-field-button">
                                     Neues Material hinzufügen
                                 </Button>
                             </Link>
@@ -317,7 +319,7 @@ function Materialverwaltung() {
                             <TableContainer component={Paper} className="table-container">
                                 <Table>
                                     <TableHead>
-                                        <TableRow className="sticky-header">
+                                        <TableRow className="stickyHeader">
                                             <TableCell>ID</TableCell>
                                             <TableCell>Name</TableCell>
                                             <TableCell className="table-cell-center">Soll-Bestand</TableCell>

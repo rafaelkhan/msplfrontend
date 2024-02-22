@@ -38,24 +38,21 @@ function Materialansicht() {
         <div className="pageContainer">
             <Sidebar />
             <div className="content">
-                <h1 className="Titel">Materialansicht</h1>
+                <h1 className="Titel">Lager</h1>
                 <Autocomplete
-                    freeSolo
-                    options={searchResults.map((option) => option.Bezeichnung)}
-                    onInputChange={(event, newInputValue) => {
-                        handleSearch(newInputValue);
-                    }}
-                    onChange={(event, newValue) => {
-                        const selectedBox = searchResults.find(result => result.Bezeichnung === newValue);
-                        if (selectedBox) navigate(`/material-detail/${selectedBox.BoxID}`);
-                    }}
-                    renderInput={(params) => (
-                        <TextField {...params} label="Material suchen..." variant="outlined"
-
-                                   style={{ width: '96%' }} // Alternativ können Sie eine spezifische Breite angeben, falls benötigt
-                        />
-                    )}
-                />
+                        freeSolo
+                        options={searchResults.map((option) => option.Bezeichnung)}
+                        onInputChange={(event, newInputValue) => {
+                            handleSearch(newInputValue);
+                        }}
+                        onChange={(event, newValue) => {
+                            const selectedBox = searchResults.find(result => result.Bezeichnung === newValue);
+                            if (selectedBox) navigate(`/material-detail/${selectedBox.BoxID}`);
+                        }}
+                        renderInput={(params) => (
+                            <TextField {...params} label="Material suchen..." variant="outlined" className="textFieldMaterialansicht" />
+                        )}
+                    />
                 <div className="boxContainerAnsicht">
                     <p></p>
                     <BoxGrid boxes={boxes} />

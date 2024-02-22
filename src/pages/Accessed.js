@@ -29,9 +29,9 @@ function Accessed() {
         <div className="flexContainer">
             <Sidebar />
             <div className="content">
-                <h1 className="titel">Accessed</h1>
-                <div className="specificContent">
-                    <div style={{ display: 'flex', gap: '20px' }}>
+                <h1 className="titel">Zugriff</h1>
+                <div>
+
                         <TextField
                             id="email-search"
                             label="Suche nach Email"
@@ -39,7 +39,7 @@ function Accessed() {
                             variant="outlined"
                             value={emailSearchTerm}
                             onChange={e => setEmailSearchTerm(e.target.value)}
-                            className="textField"
+                            className="text-field-button-accessed"
                         />
                         <TextField
                             id="date-search"
@@ -48,14 +48,14 @@ function Accessed() {
                             variant="outlined"
                             value={dateSearchTerm}
                             onChange={e => setDateSearchTerm(e.target.value)}
-                            className="textField"
+                            className="text-field-button-accessed"
                         />
-                    </div>
-                    <Paper className="paper_container">
-                        <TableContainer component={Paper} className="tableContainer">
+
+                    <Paper className="paper-container-accessed">
+                        <TableContainer component={Paper} className="table-container-accessed">
                             <Table>
                                 <TableHead>
-                                    <TableRow className="stickyHeader">
+                                    <TableRow className="stickyHeader-accessed">
                                         <TableCell>Zeitpunkt</TableCell>
                                         <TableCell>Änderung</TableCell>
                                         <TableCell>Email</TableCell>

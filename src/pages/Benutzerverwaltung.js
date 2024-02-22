@@ -164,7 +164,7 @@ function Benutzerverwaltung() {
             <div className="flexContainer">
                 <Sidebar />
                 <div className="content">
-                    <h1 className="Titel">Benutzerverwaltung</h1>
+                    <h1 className="titel">Benutzer</h1>
                     <div className="specific-content">
                         <Box>
                             <TextField
@@ -174,15 +174,15 @@ function Benutzerverwaltung() {
                                 variant="outlined"
                                 value={searchTerm}
                                 onChange={handleSearchChange}
-                                className="text-field"
+                                className="text-field-benutzerverwaltung"
                                 fullwidth
                             />
                         </Box>
-                        <Paper className="paper-container-benutzer">
-                            <TableContainer component={Paper} className="table-container">
+                        <Paper className="paper-container-benutzerverwaltung">
+                            <TableContainer component={Paper} className="table-container-benutzerverwaltung">
                                 <Table>
                                     <TableHead>
-                                        <TableRow className="sticky-header">
+                                        <TableRow className="stickyHeader">
                                             <TableCell>E-Mail</TableCell>
                                             <TableCell>Vorname</TableCell>
                                             <TableCell>Nachname</TableCell>
@@ -231,7 +231,7 @@ function Benutzerverwaltung() {
                         </Paper>
                     </div>
                     <div className="container-klassenverwaltung">
-                    <h1 className="Titel">Klassenverwaltung</h1>
+                    <h1 className="titel-klassenverwaltung">Klassen</h1>
                     <Button className="button-hinzufügen" variant="outlined" startIcon={<EditIcon />} onClick={handleClickOpen}>
                         Neue Klasse hinzufügen
                     </Button>

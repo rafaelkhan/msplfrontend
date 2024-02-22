@@ -1,34 +1,25 @@
 @media (min-width: 1801px) {
-    .titel{
-        color: black;
+
+    .text-field-button-accessed {
+        position: relative;
+        width: 80%;
+        height: 50px;
+        margin-bottom: 18px !important;
     }
 
-    .specificContent{
-        margin-top: 20px;
+    .paper-container-accessed {
+        position: relative;
+        max-height: 65vh !important;
+        width: 80% !important;
+        overflow: auto;
     }
 
-    .flexContainer {
-        display: flex;
-    }
-
-    .textField {
-        width: 600px;
-        margin-top: 16px;
-        height: 55px;
-    }
-
-    .paper_container {
-        width: 1200px;
-        overflow: hidden;
-        margin-top: 16px;
-    }
-
-    .tableContainer{
+    .table-container-accessed{
         max-height: 65vh;
         overflow: auto;
     }
 
-    .stickyHeader th{
+    .stickyHeader-accessed th{
         position: sticky;
         background-color: #fff;
         z-index: 10;
@@ -43,36 +34,26 @@
 
     @media (min-width: 1301px) and (max-width: 1800px) {
 
-        .titel{
-            color: black;
+        .text-field-button-accessed {
+            position: relative;
+            width: 80%;
+            height: 50px;
+            margin-bottom: 18px !important;
         }
 
-        .specificContent{
-            margin-top: 20px;
+        .paper-container-accessed {
+            position: relative;
+            max-height: 65vh !important;
+            width: 80% !important;
+            overflow: auto;
         }
 
-        .flexContainer {
-            display: flex;
-        }
-
-        .textField {
-            width: 550px;
-            margin-top: 16px;
-            height: 55px;
-        }
-
-        .paper_container {
-            width: 1120px;
-            overflow: hidden;
-            margin-top: 16px;
-        }
-
-        .tableContainer{
+        .table-container-accessed{
             max-height: 65vh;
             overflow: auto;
         }
 
-        .stickyHeader th{
+        .stickyHeader-accessed th{
             position: sticky;
             background-color: #fff;
             z-index: 10;
@@ -87,43 +68,34 @@
 
     @media (min-width: 1101px) and (max-width: 1300px) {
 
-    .titel{
-        color: black;
-    }
+        .text-field-button-accessed {
+            position: relative;
+            width: 90%;
+            height: 50px;
+            margin-bottom: 18px !important;
+        }
 
-    .specificContent{
-        margin-top: 20px;
-    }
+        .paper-container-accessed {
+            position: relative;
+            max-height: 65vh !important;
+            width: 90% !important;
+            overflow: auto;
+        }
 
-    .flexContainer {
-        display: flex;
-    }
+        .table-container-accessed{
+            max-height: 65vh;
+            overflow: auto;
+        }
 
-    .textField {
-        width: 480px;
-        margin-top: 16px;
-        height: 55px;
-    }
+        .stickyHeader-accessed th{
+            position: sticky;
+            background-color: #fff;
+            z-index: 10;
+            top: 0;
+        }
 
-    .paper_container {
-        width: 980px;
-        overflow: hidden;
-        margin-top: 16px;
-    }
 
-    .tableContainer{
-        max-height: 65vh;
-        overflow: auto;
     }
-
-    .stickyHeader th{
-        position: sticky;
-        background-color: #fff;
-        z-index: 10;
-        top: 0;
-    }
-
-}
 
 
 /*-------------------------------------------------------------------------------------------------------------*/
@@ -131,34 +103,28 @@
 
 @media (min-width: 1001px) and (max-width: 1100px) {
 
-    .titel{
-        color: black;
+    .text-field-button-accessed {
+        position: relative;
+        width: 80%;
+        height: 50px;
+        margin-bottom: 18px !important;
     }
 
-    .specificContent{
-        margin-top: 20px;
+    .paper-container-accessed {
+        position: relative;
+        max-height: 65vh !important;
+        width: 80% !important;
+        overflow: auto;
     }
 
-    .flexContainer {
-        display: flex;
+    .table-container-accessed{
+        max-height: 65vh;
+        overflow: auto;
     }
 
-    .textField {
-        width: 400px;
-        margin-top: 16px;
-        height: 55px;
-    }
-
-    .paper_container {
-        width: 820px;
-        overflow: hidden;
-        margin-top: 16px;
-        max-height: 500px;
-    }
-
-    .stickyHeader th{
+    .stickyHeader-accessed th{
         position: sticky;
-        background-color: #fff; /* Hintergrundfarbe anpassen, falls erforderlich */
+        background-color: #fff;
         z-index: 10;
         top: 0;
     }
@@ -170,359 +136,283 @@
 
 
 @media (min-width: 901px) and (max-width: 1000px) {
-    .titel{
-        color: black;
-    }
-
-    .specificContent{
-        margin-top: 20px;
-    }
-
-    .flexContainer {
-        display: flex;
-    }
-
-    .textField {
-        width: 350px;
-        margin-top: 16px;
-        height: 55px;
-    }
-
-    .paper_container {
-        width: 720px;
-        overflow: hidden;
-        margin-top: 16px;
-        max-height: 500px;
-    }
-
-    .stickyHeader th{
-        position: sticky;
-        background-color: #fff; /* Hintergrundfarbe anpassen, falls erforderlich */
-        z-index: 10;
-        top: 0;
-    }
-}
-
-/*-------------------------------------------------------------------------------------------------------------*/
-
-
-@media (min-width: 801px) and (max-width: 900px) {
-    .titel{
-        color: black;
-    }
-
-    .specificContent{
-        margin-top: 20px;
-    }
-
-    .flexContainer {
-        display: flex;
-    }
-
-    .textField {
-        width: 300px;
-        margin-top: 16px;
-        height: 55px;
-    }
-
-    .paper_container {
-        width: 620px;
-        overflow: hidden;
-        margin-top: 16px;
-        max-height: 300px;
-    }
-
-    .stickyHeader th{
-        position: sticky;
-        background-color: #fff; /* Hintergrundfarbe anpassen, falls erforderlich */
-        z-index: 10;
-        top: 0;
-    }
-}
-
-
-/*-------------------------------------------------------------------------------------------------------------*/
-
-
-@media (min-width: 701px) and (max-width: 800px) {
-    .titel{
-        color: black;
-    }
-
-    .specificContent{
-        margin-top: 20px;
-    }
-
-    .flexContainer {
-        display: flex;
-    }
-
-    .textField {
-        width: 250px;
-        margin-top: 16px;
-        height: 55px;
-    }
-
-    .paper_container {
-        width: 520px;
-        overflow: hidden;
-        margin-top: 16px;
-        max-height: 300px;
-    }
-
-    .stickyHeader th{
-        position: sticky;
-        background-color: #fff; /* Hintergrundfarbe anpassen, falls erforderlich */
-        z-index: 10;
-        top: 0;
-    }
-}
-
-
-/*-------------------------------------------------------------------------------------------------------------*/
-
-
-
-@media (min-width: 601px) and (max-width: 700px) {
-    .titel{
-        color: black;
-    }
-
-    .specificContent{
-        margin-top: 20px;
-    }
-
-    .flexContainer {
-        display: flex;
-    }
-
-    .textField {
-        width: 230px;
-        margin-top: 16px;
-        height: 55px;
+    .text-field-button-accessed {
         position: relative;
-        left: -50px;
+        width: 80%;
+        height: 50px;
+        margin-bottom: 18px !important;
     }
 
-    .paper_container {
-        width: 480px;
-        overflow: hidden;
-        margin-top: 16px;
-        max-height: 300px;
+    .paper-container-accessed {
         position: relative;
-        left: -50px;
+        max-height: 65vh !important;
+        width: 80% !important;
+        overflow: auto;
     }
 
-    .stickyHeader th{
-        position: sticky;
-        background-color: #fff; /* Hintergrundfarbe anpassen, falls erforderlich */
-        z-index: 10;
-        top: 0;
-    }
-}
-
-
-/*-------------------------------------------------------------------------------------------------------------*/
-
-
-@media (min-width: 501px) and (max-width: 600px) {
-    .titel{
-        color: black;
+    .table-container-accessed{
+        max-height: 65vh;
+        overflow: auto;
     }
 
-    .specificContent{
-        margin-top: 20px;
-    }
-
-    .flexContainer {
-        display: flex;
-    }
-
-    .textField {
-        width: 190px;
-        margin-top: 16px;
-        height: 55px;
-    }
-
-    .paper_container {
-        width: 400px;
-        overflow: hidden;
-        margin-top: 16px;
-        max-height: 300px;
-    }
-
-    .stickyHeader th{
+    .stickyHeader-accessed th{
         position: sticky;
         background-color: #fff;
         z-index: 10;
         top: 0;
     }
+
 }
 
+    /*-------------------------------------------------------------------------------------------------------------*/
+    @media (min-width: 801px) and (max-width: 900px) {
+        .text-field-button-accessed {
+            position: relative;
+            width: 80%;
+            height: 50px;
+            margin-bottom: 18px !important;
+        }
 
-/*-------------------------------------------------------------------------------------------------------------*/
+        .paper-container-accessed {
+            position: relative;
+            max-height: 65vh !important;
+            width: 80% !important;
+            overflow: auto;
+        }
 
+        .table-container-accessed{
+            max-height: 65vh;
+            overflow: auto;
+        }
 
-@media (min-width: 451px) and (max-width: 500px) {
-    .titel{
-        color: black;
+        .stickyHeader-accessed th{
+            position: sticky;
+            background-color: #fff;
+            z-index: 10;
+            top: 0;
+        }
+
     }
 
-    .specificContent{
-        margin-top: 20px;
+
+    /*-------------------------------------------------------------------------------------------------------------*/
+    @media (min-width: 701px) and (max-width: 800px) {
+        .text-field-button-accessed {
+            position: relative;
+            width: 80%;
+            height: 50px;
+            margin-bottom: 18px !important;
+        }
+
+        .paper-container-accessed {
+            position: relative;
+            max-height: 65vh !important;
+            width: 80% !important;
+            overflow: auto;
+        }
+
+        .table-container-accessed{
+            max-height: 65vh;
+            overflow: auto;
+        }
+
+        .stickyHeader-accessed th{
+            position: sticky;
+            background-color: #fff;
+            z-index: 10;
+            top: 0;
+        }
+
     }
 
-    .flexContainer {
-        display: flex;
+
+    /*-------------------------------------------------------------------------------------------------------------*/
+    @media (min-width: 601px) and (max-width: 700px) {
+        .text-field-button-accessed {
+            position: relative;
+            width: 80%;
+            height: 50px;
+            margin-bottom: 18px !important;
+        }
+
+        .paper-container-accessed {
+            position: relative;
+            max-height: 65vh !important;
+            width: 80% !important;
+            overflow: auto;
+        }
+
+        .table-container-accessed{
+            max-height: 65vh;
+            overflow: auto;
+        }
+
+        .stickyHeader-accessed th{
+            position: sticky;
+            background-color: #fff;
+            z-index: 10;
+            top: 0;
+        }
+
     }
 
-    .textField {
-        width: 150px;
-        margin-top: 16px;
-        height: 55px;
-        position: relative;
-        left: -50px;
+
+    /*-------------------------------------------------------------------------------------------------------------*/
+    @media (min-width: 501px) and (max-width: 600px) {
+        .text-field-button-accessed {
+            position: relative;
+            width: 80%;
+            height: 50px;
+            margin-bottom: 18px !important;
+        }
+
+        .paper-container-accessed {
+            position: relative;
+            max-height: 65vh !important;
+            width: 80% !important;
+            overflow: auto;
+        }
+
+        .table-container-accessed{
+            max-height: 65vh;
+            overflow: auto;
+        }
+
+        .stickyHeader-accessed th{
+            position: sticky;
+            background-color: #fff;
+            z-index: 10;
+            top: 0;
+        }
+
     }
 
-    .paper_container {
-        width: 320px;
-        overflow: hidden;
-        margin-top: 16px;
-        max-height: 300px;
-        position: relative;
-        left: -50px;
+
+    /*-------------------------------------------------------------------------------------------------------------*/
+    @media (min-width: 451px) and (max-width: 500px) {
+        .text-field-button-accessed {
+            position: relative;
+            width: 80%;
+            height: 50px;
+            margin-bottom: 18px !important;
+        }
+
+        .paper-container-accessed {
+            position: relative;
+            max-height: 65vh !important;
+            width: 80% !important;
+            overflow: auto;
+        }
+
+        .table-container-accessed{
+            max-height: 65vh;
+            overflow: auto;
+        }
+
+        .stickyHeader-accessed th{
+            position: sticky;
+            background-color: #fff;
+            z-index: 10;
+            top: 0;
+        }
+
     }
 
-    .stickyHeader th{
-        position: sticky;
-        background-color: #fff; /* Hintergrundfarbe anpassen, falls erforderlich */
-        z-index: 10;
-        top: 0;
-    }
-}
 
+    /*-------------------------------------------------------------------------------------------------------------*/
+    @media (min-width: 401px) and (max-width: 450px) {
+        .text-field-button-accessed {
+            position: relative;
+            left: -15%;
+            width: 100%;
+            height: 50px;
+            margin-bottom: 18px !important;
+        }
 
-/*-------------------------------------------------------------------------------------------------------------*/
+        .paper-container-accessed {
+            position: relative;
+            max-height: 65vh !important;
+            left: -15%;
+            width: 100%;
+            overflow: auto;
+        }
 
+        .table-container-accessed{
+            max-height: 65vh;
+            overflow: auto;
+        }
 
-@media (min-width: 401px) and (max-width: 450px) {
-    .titel{
-        color: black;
-    }
+        .stickyHeader-accessed th{
+            position: sticky;
+            background-color: #fff;
+            z-index: 10;
+            top: 0;
+        }
 
-    .specificContent{
-        margin-top: 20px;
-    }
-
-    .flexContainer {
-        display: flex;
-    }
-
-    .textField {
-        width: 130px;
-        margin-top: 16px;
-        height: 55px;
-        position: relative;
-        left: -50px;
-    }
-
-    .paper_container {
-        width: 280px;
-        overflow: hidden;
-        margin-top: 16px;
-        max-height: 300px;
-        position: relative;
-        left: -50px;
     }
 
-    .stickyHeader th{
-        position: sticky;
-        background-color: #fff; /* Hintergrundfarbe anpassen, falls erforderlich */
-        z-index: 10;
-        top: 0;
-    }
-}
 
+    /*-------------------------------------------------------------------------------------------------------------*/
+    @media (min-width: 301px) and (max-width: 400px) {
+        .text-field-button-accessed {
+            position: relative;
+            left: -15%;
+            width: 100%;
+            height: 50px;
+            margin-bottom: 18px !important;
+        }
 
-/*-------------------------------------------------------------------------------------------------------------*/
+        .paper-container-accessed {
+            position: relative;
+            max-height: 50vh !important;
+            left: -15%;
+            width: 100%;
+            overflow: auto;
+        }
 
+        .table-container-accessed{
+            max-height: 50vh;
+            overflow: auto;
+        }
 
-@media (min-width: 301px) and (max-width: 400px) {
-    .titel{
-        color: black;
-    }
+        .stickyHeader-accessed th{
+            position: sticky;
+            background-color: #fff;
+            z-index: 10;
+            top: 0;
+        }
 
-    .specificContent{
-        margin-top: 20px;
-    }
-
-    .flexContainer {
-        display: flex;
-    }
-
-    .textField {
-        width: 120px;
-        margin-top: 16px;
-        height: 55px;
-        position: relative;
-        left: -50px;
-    }
-
-    .paper_container {
-        width: 260px;
-        overflow: hidden;
-        margin-top: 16px;
-        max-height: 300px;
-        position: relative;
-        left: -50px;
     }
 
-    .stickyHeader th{
-        position: sticky;
-        background-color: #fff; /* Hintergrundfarbe anpassen, falls erforderlich */
-        z-index: 10;
-        top: 0;
+
+    /*-------------------------------------------------------------------------------------------------------------*/
+    @media (min-width: 0px) and (max-width: 300px) {
+        .text-field-button-accessed {
+            position: relative;
+            left: -23%;
+            width: 100%;
+            height: 50px;
+            margin-bottom: 18px !important;
+        }
+
+        .paper-container-accessed {
+            position: relative;
+            max-height: 50vh !important;
+            left: -23%;
+            width: 100%;
+            overflow: auto;
+        }
+
+        .table-container-accessed{
+            max-height: 50vh;
+            overflow: auto;
+        }
+
+        .stickyHeader-accessed th{
+            position: sticky;
+            background-color: #fff;
+            z-index: 10;
+            top: 0;
+        }
+
     }
-}
-
-
-/*-------------------------------------------------------------------------------------------------------------*/
-
-
-@media (min-width: 0px) and (max-width: 300px) {
-    .titel{
-        color: black;
-    }
-
-    .specificContent{
-        margin-top: 20px;
-    }
-
-    .flexContainer {
-        display: flex;
-    }
-
-    .textField {
-        width: 100px;
-        margin-top: 16px;
-        height: 55px;
-        position: relative;
-        left: -50px;
-    }
-
-    .paper_container {
-        width: 220px;
-        overflow: hidden;
-        margin-top: 16px;
-        max-height: 300px;
-        position: relative;
-        left: -50px;
-    }
-
-    .stickyHeader th{
-        position: sticky;
-        background-color: #fff; /* Hintergrundfarbe anpassen, falls erforderlich */
-        z-index: 10;
-        top: 0;
-    }
-}
