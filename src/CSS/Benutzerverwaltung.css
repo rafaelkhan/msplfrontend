@@ -3,14 +3,14 @@
         display: flex;
     }
 
-    .text-field-benutzerverwaltung{
+    .text-field-benutzerverwaltung {
         position: relative;
         width: 90%;
         height: 50px;
         margin-bottom: 18px !important;
     }
 
-    .table-container-benutzerverwaltung{
+    .table-container-benutzerverwaltung {
         max-height: 70vh;
         width: 100%;
         overflow: auto;
@@ -23,7 +23,7 @@
         overflow: auto;
     }
 
-    .stickyHeader th{
+    .stickyHeader th {
         position: sticky;
         background-color: #fff;
         z-index: 10;
@@ -55,8 +55,6 @@
         height: 50px;
     }
 */
-
-
     .container-klassenverwaltung {
         width: 30%;
         padding: 10px;
@@ -68,16 +66,16 @@
         width: 100%;
     }
 
-    .formControl{
+    .formControl {
         margin-bottom: 18px !important;
         height: 50px;
         width: 100%;
     }
 
-    .button-loeschen{
+    .button-loeschen {
         width: 100%;
         height: 50px;
-        margin-bottom: 5%;
+        margin-bottom: 10% !important;
     }
 
 }
@@ -91,7 +89,7 @@
         display: flex;
     }
 
-    .text-field-benutzerverwaltung{
+    .text-field-benutzerverwaltung {
         position: relative;
         width: 90%;
         height: 50px;
@@ -105,12 +103,12 @@
         overflow: auto;
     }
 
-    .table-container-benutzerverwaltung{
+    .table-container-benutzerverwaltung {
         max-height: 60vh;
         overflow: auto;
     }
 
-    .stickyHeader th{
+    .stickyHeader th {
         position: sticky;
         background-color: #fff;
         z-index: 10;
@@ -128,15 +126,16 @@
         width: 100%;
     }
 
-    .formControl{
+    .formControl {
         margin-bottom: 18px !important;
         height: 50px;
         width: 100%;
     }
 
-    .button-loeschen{
+    .button-loeschen {
         width: 100%;
         height: 50px;
+        margin-bottom: 10% !important;
     }
 
 }
@@ -150,7 +149,7 @@
         display: flex;
     }
 
-    .text-field-benutzerverwaltung{
+    .text-field-benutzerverwaltung {
         position: relative;
         width: 90%;
         height: 50px;
@@ -164,12 +163,12 @@
         overflow: auto;
     }
 
-    .table-container-benutzerverwaltung{
+    .table-container-benutzerverwaltung {
         max-height: 60vh;
         overflow: auto;
     }
 
-    .stickyHeader th{
+    .stickyHeader th {
         position: sticky;
         background-color: #fff;
         z-index: 10;
@@ -188,15 +187,16 @@
         width: 100%;
     }
 
-    .formControl{
+    .formControl {
         margin-bottom: 18px !important;
         height: 50px;
         width: 100%;
     }
 
-    .button-loeschen{
+    .button-loeschen {
         width: 100%;
         height: 50px;
+        margin-bottom: 10% !important;
     }
 
 }
@@ -209,7 +209,7 @@
         display: flex;
     }
 
-    .text-field-benutzerverwaltung{
+    .text-field-benutzerverwaltung {
         position: relative;
         width: 90%;
         height: 50px;
@@ -223,12 +223,12 @@
         overflow: auto;
     }
 
-    .table-container-benutzerverwaltung{
+    .table-container-benutzerverwaltung {
         max-height: 60vh;
         overflow: auto;
     }
 
-    .stickyHeader th{
+    .stickyHeader th {
         position: sticky;
         background-color: #fff;
         z-index: 10;
@@ -246,15 +246,16 @@
         width: 100%;
     }
 
-    .formControl{
+    .formControl {
         margin-bottom: 18px !important;
         height: 50px;
         width: 100%;
     }
 
-    .button-loeschen{
+    .button-loeschen {
         width: 100%;
         height: 50px;
+        margin-bottom: 10% !important;
     }
 
 }
@@ -264,11 +265,11 @@
 
 
 @media (min-width: 701px) and (max-width: 800px) {
- .flex-container {
+    .flex-container {
         display: flex;
     }
 
-    .text-field-benutzerverwaltung{
+    .text-field-benutzerverwaltung {
         position: relative;
         width: 90%;
         height: 50px;
@@ -282,12 +283,12 @@
         overflow: auto;
     }
 
-    .table-container-benutzerverwaltung{
+    .table-container-benutzerverwaltung {
         max-height: 60vh;
         overflow: auto;
     }
 
-    .stickyHeader th{
+    .stickyHeader th {
         position: sticky;
         background-color: #fff;
         z-index: 10;
@@ -305,15 +306,16 @@
         width: 100%;
     }
 
-    .formControl{
+    .formControl {
         margin-bottom: 18px !important;
         height: 50px;
         width: 100%;
     }
 
-    .button-loeschen{
+    .button-loeschen {
         width: 100%;
         height: 50px;
+        margin-bottom: 10% !important;
     }
 
 }
@@ -327,7 +329,7 @@
         display: flex;
     }
 
-    .text-field-benutzerverwaltung{
+    .text-field-benutzerverwaltung {
         position: relative;
         width: 90%;
         height: 50px;
@@ -341,17 +343,18 @@
         overflow: auto;
     }
 
-    .table-container-benutzerverwaltung{
+    .table-container-benutzerverwaltung {
         max-height: 60vh;
         overflow: auto;
     }
 
-    .stickyHeader th{
+    .stickyHeader th {
         position: sticky;
         background-color: #fff;
         z-index: 10;
         top: 0;
     }
+
     .container-klassenverwaltung {
         width: 50%;
         padding: 10px;
@@ -363,15 +366,16 @@
         width: 100%;
     }
 
-    .formControl{
+    .formControl {
         margin-bottom: 18px !important;
         height: 50px;
         width: 100%;
     }
 
-    .button-loeschen{
+    .button-loeschen {
         width: 100%;
         height: 50px;
+        margin-bottom: 10% !important;
     }
 
 }
@@ -385,7 +389,7 @@
         display: flex;
     }
 
-    .text-field-benutzerverwaltung{
+    .text-field-benutzerverwaltung {
         position: relative;
         width: 90%;
         height: 50px;
@@ -399,12 +403,12 @@
         overflow: auto;
     }
 
-    .table-container-benutzerverwaltung{
+    .table-container-benutzerverwaltung {
         max-height: 60vh;
         overflow: auto;
     }
 
-    .stickyHeader th{
+    .stickyHeader th {
         position: sticky;
         background-color: #fff;
         z-index: 10;
@@ -422,15 +426,16 @@
         width: 100%;
     }
 
-    .formControl{
+    .formControl {
         margin-bottom: 18px !important;
         height: 50px;
         width: 100%;
     }
 
-    .button-loeschen{
+    .button-loeschen {
         width: 100%;
         height: 50px;
+        margin-bottom: 10% !important;
     }
 }
 
@@ -445,13 +450,13 @@
         display: flex;
     }
 
-    .table-container-benutzerverwaltung{
+    .table-container-benutzerverwaltung {
         left: -20%;
         max-height: 60vh;
         overflow: auto;
     }
 
-    .text-field-benutzerverwaltung{
+    .text-field-benutzerverwaltung {
         left: -20%;
         position: relative;
         width: 110%;
@@ -467,7 +472,7 @@
         overflow: auto;
     }
 
-    .stickyHeader th{
+    .stickyHeader th {
         position: sticky;
         background-color: #fff;
         z-index: 10;
@@ -487,17 +492,18 @@
         width: 110%;
     }
 
-    .formControl{
+    .formControl {
         left: -25%;
         margin-bottom: 18px !important;
         height: 50px;
         width: 110%;
     }
 
-    .button-loeschen{
+    .button-loeschen {
         left: -25%;
         width: 110%;
         height: 50px;
+        margin-bottom: 5% !important;
     }
 }
 
@@ -510,13 +516,13 @@
         display: flex;
     }
 
-    .table-container-benutzerverwaltung{
+    .table-container-benutzerverwaltung {
         left: -20%;
         max-height: 60vh;
         overflow: auto;
     }
 
-    .text-field-benutzerverwaltung{
+    .text-field-benutzerverwaltung {
         left: -20%;
         position: relative;
         width: 110%;
@@ -532,7 +538,7 @@
         overflow: auto;
     }
 
-    .stickyHeader th{
+    .stickyHeader th {
         position: sticky;
         background-color: #fff;
         z-index: 10;
@@ -552,17 +558,18 @@
         width: 110%;
     }
 
-    .formControl{
+    .formControl {
         left: -25%;
         margin-bottom: 18px !important;
         height: 50px;
         width: 110%;
     }
 
-    .button-loeschen{
+    .button-loeschen {
         left: -25%;
         width: 110%;
         height: 50px;
+        margin-bottom: 5% !important;
     }
 }
 
@@ -575,13 +582,13 @@
         display: flex;
     }
 
-    .table-container-benutzerverwaltung{
+    .table-container-benutzerverwaltung {
         left: -20%;
         max-height: 60vh;
         overflow: auto;
     }
 
-    .text-field-benutzerverwaltung{
+    .text-field-benutzerverwaltung {
         left: -20%;
         position: relative;
         width: 110%;
@@ -597,12 +604,13 @@
         overflow: auto;
     }
 
-    .stickyHeader th{
+    .stickyHeader th {
         position: sticky;
         background-color: #fff;
         z-index: 10;
         top: 0;
     }
+
     .container-klassenverwaltung {
         left: -25%;
         width: 100%;
@@ -616,16 +624,17 @@
         width: 100%;
     }
 
-    .formControl{
+    .formControl {
         left: -25%;
         margin-bottom: 18px !important;
         height: 50px;
         width: 100%;
     }
 
-    .button-loeschen{
+    .button-loeschen {
         left: -25%;
         width: 100%;
         height: 50px;
+        margin-bottom: 5% !important;
     }
 }

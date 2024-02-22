@@ -133,7 +133,7 @@ return (
         <div className="content">
             <h1 className="Titel">Materialdetails für {materialDetails ? materialDetails.Bezeichnung : '...'}</h1>
             {materialDetails && (
-                <div>
+                <div className="buttonContainer">
                     <Typography variant="body1">Vorhandene Menge: {materialDetails.Menge}</Typography>
                     {userClass !== 'LEHRER' && kontingent > 0 && (
                         <Typography variant="body2">Maximal entnehmbar: {kontingent}</Typography>
@@ -142,17 +142,18 @@ return (
                     {['Durchmesser', 'Kraft', 'Länge', 'Stärke'].map(attrName => (
                         <Typography key={attrName} >{displayAttribute(attrName)}</Typography>
                     ))}
-                    <Button variant="outlined" onClick={handleEntnehmen} disabled={isEntnahmeDisabled()}>Entnehmen</Button>
-                    <Button variant="outlined" onClick={handleDazugeben} disabled={!isEntnahmeBerechtigt || (userClass !== 'LEHRER' && !userRights.Zugabe)}>Dazugeben</Button>
-                    <Button variant="contained" onClick={handleSubmitChanges} color="primary">Änderungen speichern</Button>
+                    <Button variant="outlined" onClick={handleEntnehmen} disabled={isEntnahmeDisabled()} className="button" >Entnehmen</Button>
+                    <Button variant="outlined" onClick={handleDazugeben} disabled={!isEntnahmeBerechtigt || (userClass !== 'LEHRER' && !userRights.Zugabe)} className="button">Dazugeben</Button>
+                    <Button variant="contained" onClick={handleSubmitChanges} color="primary" className="button">Änderungen speichern</Button>
+                    <Link to="/Materialansicht">
+                        <Button variant="outlined" className="button">Zurück zur Ansicht</Button>
+                    </Link>
                 </div>
             )}
             {!materialDetails && (
                 <Typography>Lade Materialdetails...</Typography>
             )}
-            <Link to="/Materialansicht">
-                <Button variant="outlined">Zurück zur Ansicht</Button>
-            </Link>
+
         </div>
         <Snackbar
             open={snackbarOpen}

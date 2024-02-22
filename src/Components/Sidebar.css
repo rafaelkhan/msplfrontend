@@ -11,6 +11,7 @@
 .menu-icon {
     color: #ECF0F1;
     margin-top: 20px;
+    overflow: visible;
 }
 .logout-button{
     max-width: 50px;
