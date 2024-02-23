@@ -36,7 +36,7 @@
 
     .text-field-button{
         position: relative;
-        width: 80%;
+        width: 90%;
         height: 50px;
         margin-bottom: 18px !important;
     }
@@ -44,7 +44,7 @@
     .paper-container {
         position: relative;
         max-height: 65vh !important;
-        width: 80% !important;
+        width: 90% !important;
         overflow: auto;
     }
 
@@ -134,7 +134,7 @@
 @media (min-width: 901px) and (max-width: 1000px) {
     .text-field-button{
         position: relative;
-        width: 80%;
+        width: 70%;
         height: 50px;
         margin-bottom: 18px !important;
     }
@@ -142,7 +142,7 @@
     .paper-container {
         position: relative;
         max-height: 65vh !important;
-        width: 80% !important;
+        width: 70% !important;
         overflow: auto;
     }
 
@@ -163,7 +163,7 @@
 @media (min-width: 801px) and (max-width: 900px) {
     .text-field-button{
         position: relative;
-        width: 80%;
+        width: 60%;
         height: 50px;
         margin-bottom: 18px !important;
     }
@@ -171,7 +171,7 @@
     .paper-container {
         position: relative;
         max-height: 65vh !important;
-        width: 80% !important;
+        width: 60% !important;
         overflow: auto;
     }
 
@@ -193,7 +193,7 @@
 @media (min-width: 701px) and (max-width: 800px) {
     .text-field-button{
         position: relative;
-        width: 80%;
+        width: 55%;
         height: 50px;
         margin-bottom: 18px !important;
     }
@@ -201,7 +201,7 @@
     .paper-container {
         position: relative;
         max-height: 65vh !important;
-        width: 80% !important;
+        width: 55% !important;
         overflow: auto;
     }
 
@@ -223,20 +223,20 @@
 @media (min-width: 601px) and (max-width: 700px) {
     .text-field-button{
         position: relative;
-        width: 80%;
+        width: 40%;
         height: 50px;
         margin-bottom: 18px !important;
     }
 
     .paper-container {
         position: relative;
-        max-height: 65vh !important;
-        width: 80% !important;
+        max-height: 50vh !important;
+        width: 40%;
         overflow: auto;
     }
 
     .table-container{
-        max-height: 65vh;
+        max-height: 50vh;
         overflow: auto;
     }
 
@@ -253,20 +253,20 @@
 @media (min-width: 501px) and (max-width: 600px) {
     .text-field-button{
         position: relative;
-        width: 80%;
+        width: 40%;
         height: 50px;
         margin-bottom: 18px !important;
     }
 
     .paper-container {
         position: relative;
-        max-height: 65vh !important;
-        width: 80% !important;
+        max-height: 50vh !important;
+        width: 40%;
         overflow: auto;
     }
 
     .table-container{
-        max-height: 65vh;
+        max-height: 50vh;
         overflow: auto;
     }
 
@@ -283,22 +283,25 @@
 @media (min-width: 451px) and (max-width: 500px) {
     .text-field-button{
         position: relative;
-        width: 80%;
+        left: -5%;
+        width: 30%;
         height: 50px;
         margin-bottom: 18px !important;
     }
 
     .paper-container {
         position: relative;
-        max-height: 65vh !important;
-        width: 80% !important;
+        max-height: 50vh !important;
+        left: -5%;
+        width: 30%;
         overflow: auto;
     }
 
     .table-container{
-        max-height: 65vh;
+        max-height: 50vh;
         overflow: auto;
     }
+
 
     .stickyHeader th{
         position: sticky;
@@ -314,22 +317,22 @@
 @media (min-width: 401px) and (max-width: 450px) {
     .text-field-button{
         position: relative;
-        left: -15%;
-        width: 100%;
+        left: -5%;
+        width: 30%;
         height: 50px;
         margin-bottom: 18px !important;
     }
 
     .paper-container {
         position: relative;
-        max-height: 65vh !important;
-        left: -15%;
-        width: 100%;
+        max-height: 50vh !important;
+        left: -5%;
+        width: 30%;
         overflow: auto;
     }
 
     .table-container{
-        max-height: 65vh;
+        max-height: 50vh;
         overflow: auto;
     }
 
@@ -346,8 +349,8 @@
 @media (min-width: 301px) and (max-width: 400px) {
     .text-field-button{
         position: relative;
-        left: -15%;
-        width: 100%;
+        left: -5%;
+        width: 30%;
         height: 50px;
         margin-bottom: 18px !important;
     }
@@ -355,8 +358,8 @@
     .paper-container {
         position: relative;
         max-height: 50vh !important;
-        left: -15%;
-        width: 100%;
+        left: -5%;
+        width: 30%;
         overflow: auto;
     }
 
@@ -379,8 +382,8 @@
 @media (min-width: 0px) and (max-width: 300px) {
     .text-field-button{
         position: relative;
-        left: -23%;
-        width: 100%;
+        left: -5%;
+        width: 25%;
         height: 50px;
         margin-bottom: 18px !important;
     }
@@ -388,8 +391,8 @@
     .paper-container {
         position: relative;
         max-height: 50vh !important;
-        left: -23%;
-        width: 100%;
+        left: -5%;
+        width: 25%;
         overflow: auto;
     }
 

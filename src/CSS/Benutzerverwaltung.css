@@ -151,7 +151,7 @@
 
     .text-field-benutzerverwaltung {
         position: relative;
-        width: 90%;
+        width: 70%;
         height: 50px;
         margin-bottom: 18px !important;
     }
@@ -159,7 +159,7 @@
     .paper-container-benutzerverwaltung {
         position: relative;
         max-height: 65vh !important;
-        width: 90% !important;
+        width: 70% !important;
         overflow: auto;
     }
 
@@ -211,7 +211,7 @@
 
     .text-field-benutzerverwaltung {
         position: relative;
-        width: 90%;
+        width: 80%;
         height: 50px;
         margin-bottom: 18px !important;
     }
@@ -219,7 +219,7 @@
     .paper-container-benutzerverwaltung {
         position: relative;
         max-height: 65vh !important;
-        width: 90% !important;
+        width: 80% !important;
         overflow: auto;
     }
 
@@ -271,7 +271,7 @@
 
     .text-field-benutzerverwaltung {
         position: relative;
-        width: 90%;
+        width: 70%;
         height: 50px;
         margin-bottom: 18px !important;
     }
@@ -279,67 +279,7 @@
     .paper-container-benutzerverwaltung {
         position: relative;
         max-height: 65vh !important;
-        width: 90% !important;
-        overflow: auto;
-    }
-
-    .table-container-benutzerverwaltung {
-        max-height: 60vh;
-        overflow: auto;
-    }
-
-    .stickyHeader th {
-        position: sticky;
-        background-color: #fff;
-        z-index: 10;
-        top: 0;
-    }
-
-    .container-klassenverwaltung {
-        width: 40%;
-        padding: 10px;
-    }
-
-    .button-hinzufügen {
-        margin-bottom: 18px !important;
-        height: 50px;
-        width: 100%;
-    }
-
-    .formControl {
-        margin-bottom: 18px !important;
-        height: 50px;
-        width: 100%;
-    }
-
-    .button-loeschen {
-        width: 100%;
-        height: 50px;
-        margin-bottom: 10% !important;
-    }
-
-}
-
-
-/*----------------------------------------------------------------------------------------------------------------------*/
-
-
-@media (min-width: 601px) and (max-width: 700px) {
-    .flex-container {
-        display: flex;
-    }
-
-    .text-field-benutzerverwaltung {
-        position: relative;
-        width: 90%;
-        height: 50px;
-        margin-bottom: 18px !important;
-    }
-
-    .paper-container-benutzerverwaltung {
-        position: relative;
-        max-height: 65vh !important;
-        width: 90% !important;
+        width: 70% !important;
         overflow: auto;
     }
 
@@ -384,14 +324,19 @@
 /*----------------------------------------------------------------------------------------------------------------------*/
 
 
-@media (min-width: 451px) and (max-width: 600px) {
+@media (min-width: 601px) and (max-width: 700px) {
     .flex-container {
         display: flex;
     }
 
+    .table-container-benutzerverwaltung {
+        max-height: 65vh;
+        overflow: auto;
+    }
+
     .text-field-benutzerverwaltung {
         position: relative;
-        width: 90%;
+        width: 50%;
         height: 50px;
         margin-bottom: 18px !important;
     }
@@ -399,14 +344,10 @@
     .paper-container-benutzerverwaltung {
         position: relative;
         max-height: 65vh !important;
-        width: 90% !important;
+        width: 50% !important;
         overflow: auto;
     }
 
-    .table-container-benutzerverwaltung {
-        max-height: 60vh;
-        overflow: auto;
-    }
 
     .stickyHeader th {
         position: sticky;
@@ -416,7 +357,7 @@
     }
 
     .container-klassenverwaltung {
-        width: 60%;
+        width: 50%;
         padding: 10px;
     }
 
@@ -437,38 +378,34 @@
         height: 50px;
         margin-bottom: 10% !important;
     }
+
 }
 
 
 /*----------------------------------------------------------------------------------------------------------------------*/
 
 
-@media (min-width: 401px) and (max-width: 450px) {
-
-
+@media (min-width: 451px) and (max-width: 600px) {
     .flex-container {
         display: flex;
     }
 
     .table-container-benutzerverwaltung {
-        left: -20%;
         max-height: 60vh;
         overflow: auto;
     }
 
     .text-field-benutzerverwaltung {
-        left: -20%;
         position: relative;
-        width: 110%;
+        width: 50%;
         height: 50px;
         margin-bottom: 18px !important;
     }
 
     .paper-container-benutzerverwaltung {
-        left: -20%;
         position: relative;
         max-height: 65vh !important;
-        width: 110% !important;
+        width: 50% !important;
         overflow: auto;
     }
 
@@ -480,29 +417,92 @@
     }
 
     .container-klassenverwaltung {
-        left: -25%;
         width: 100%;
         padding: 10px;
     }
 
     .button-hinzufügen {
-        left: -25%;
         margin-bottom: 18px !important;
         height: 50px;
-        width: 110%;
+        width: 50%;
     }
 
     .formControl {
-        left: -25%;
         margin-bottom: 18px !important;
         height: 50px;
-        width: 110%;
+        width: 24%;
+        margin-right: 2% !important;
     }
 
     .button-loeschen {
-        left: -25%;
-        width: 110%;
+        width: 24%;
+        height: 55px;
+        margin-bottom: 5% !important;
+    }
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------*/
+
+
+@media (min-width: 401px) and (max-width: 450px) {
+    .flex-container {
+        display: flex;
+    }
+
+    .table-container-benutzerverwaltung {
+        max-height: 60vh;
+        overflow: auto;
+    }
+
+    .text-field-benutzerverwaltung {
+        left: -6%;
+        position: relative;
+        width: 40%;
         height: 50px;
+        margin-bottom: 18px !important;
+    }
+
+    .paper-container-benutzerverwaltung {
+        left: -6%;
+        position: relative;
+        max-height: 65vh !important;
+        width: 40% !important;
+        overflow: auto;
+    }
+
+    .stickyHeader th {
+        position: sticky;
+        background-color: #fff;
+        z-index: 10;
+        top: 0;
+    }
+
+    .container-klassenverwaltung {
+        left: -6%;
+        width: 100%;
+        padding: 10px;
+    }
+
+    .button-hinzufügen {
+        left: -6%;
+        margin-bottom: 18px !important;
+        height: 50px;
+        width: 40%;
+    }
+
+    .formControl {
+        left: -6%;
+        margin-bottom: 18px !important;
+        height: 50px;
+        width: 19%;
+        margin-right: 2% !important;
+    }
+
+    .button-loeschen {
+        left: -6%;
+        width: 19%;
+        height: 55px;
         margin-bottom: 5% !important;
     }
 }
@@ -517,24 +517,23 @@
     }
 
     .table-container-benutzerverwaltung {
-        left: -20%;
         max-height: 60vh;
         overflow: auto;
     }
 
     .text-field-benutzerverwaltung {
-        left: -20%;
+        left: -6%;
         position: relative;
-        width: 110%;
+        width: 40%;
         height: 50px;
         margin-bottom: 18px !important;
     }
 
     .paper-container-benutzerverwaltung {
-        left: -20%;
+        left: -6%;
         position: relative;
         max-height: 65vh !important;
-        width: 110% !important;
+        width: 40% !important;
         overflow: auto;
     }
 
@@ -546,29 +545,30 @@
     }
 
     .container-klassenverwaltung {
-        left: -25%;
+        left: -6%;
         width: 100%;
         padding: 10px;
     }
 
     .button-hinzufügen {
-        left: -25%;
+        left: -6%;
         margin-bottom: 18px !important;
         height: 50px;
-        width: 110%;
+        width: 40%;
     }
 
     .formControl {
-        left: -25%;
+        left: -6%;
         margin-bottom: 18px !important;
         height: 50px;
-        width: 110%;
+        width: 19%;
+        margin-right: 2% !important;
     }
 
     .button-loeschen {
-        left: -25%;
-        width: 110%;
-        height: 50px;
+        left: -6%;
+        width: 19%;
+        height: 55px;
         margin-bottom: 5% !important;
     }
 }
@@ -583,24 +583,23 @@
     }
 
     .table-container-benutzerverwaltung {
-        left: -20%;
         max-height: 60vh;
         overflow: auto;
     }
 
     .text-field-benutzerverwaltung {
-        left: -20%;
         position: relative;
-        width: 110%;
+        left: -5%;
+        width: 25%;
         height: 50px;
         margin-bottom: 18px !important;
     }
 
     .paper-container-benutzerverwaltung {
-        left: -20%;
         position: relative;
-        max-height: 65vh !important;
-        width: 110% !important;
+        max-height: 50vh !important;
+        left: -5%;
+        width: 25%;
         overflow: auto;
     }
 
@@ -618,23 +617,24 @@
     }
 
     .button-hinzufügen {
-        left: -25%;
+        left: -6%;
         margin-bottom: 18px !important;
         height: 50px;
-        width: 100%;
+        width: 40%;
     }
 
     .formControl {
-        left: -25%;
+        left: -6%;
         margin-bottom: 18px !important;
         height: 50px;
-        width: 100%;
+        width: 19%;
+        margin-right: 2% !important;
     }
 
     .button-loeschen {
-        left: -25%;
-        width: 100%;
-        height: 50px;
+        left: -6%;
+        width: 19%;
+        height: 55px;
         margin-bottom: 5% !important;
     }
 }

@@ -292,15 +292,17 @@
     @media (min-width: 451px) and (max-width: 500px) {
         .text-field-button-accessed {
             position: relative;
-            width: 80%;
+            left: -8%;
+            width: 60%;
             height: 50px;
             margin-bottom: 18px !important;
         }
 
         .paper-container-accessed {
             position: relative;
-            max-height: 65vh !important;
-            width: 80% !important;
+            max-height: 50vh !important;
+            left: -8%;
+            width: 60%;
             overflow: auto;
         }
 
@@ -321,19 +323,20 @@
 
     /*-------------------------------------------------------------------------------------------------------------*/
     @media (min-width: 401px) and (max-width: 450px) {
+
         .text-field-button-accessed {
             position: relative;
-            left: -15%;
-            width: 100%;
+            left: -8%;
+            width: 55%;
             height: 50px;
             margin-bottom: 18px !important;
         }
 
         .paper-container-accessed {
             position: relative;
-            max-height: 65vh !important;
-            left: -15%;
-            width: 100%;
+            max-height: 50vh !important;
+            left: -8%;
+            width: 55%;
             overflow: auto;
         }
 
@@ -356,8 +359,8 @@
     @media (min-width: 301px) and (max-width: 400px) {
         .text-field-button-accessed {
             position: relative;
-            left: -15%;
-            width: 100%;
+            left: -8%;
+            width: 52%;
             height: 50px;
             margin-bottom: 18px !important;
         }
@@ -365,8 +368,8 @@
         .paper-container-accessed {
             position: relative;
             max-height: 50vh !important;
-            left: -15%;
-            width: 100%;
+            left: -8%;
+            width: 52%;
             overflow: auto;
         }
 
@@ -389,8 +392,8 @@
     @media (min-width: 0px) and (max-width: 300px) {
         .text-field-button-accessed {
             position: relative;
-            left: -23%;
-            width: 100%;
+            left: -8%;
+            width: 52%;
             height: 50px;
             margin-bottom: 18px !important;
         }
@@ -398,8 +401,8 @@
         .paper-container-accessed {
             position: relative;
             max-height: 50vh !important;
-            left: -23%;
-            width: 100%;
+            left: -8%;
+            width: 52%;
             overflow: auto;
         }
 
