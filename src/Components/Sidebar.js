@@ -72,26 +72,26 @@ function Sidebar() {
                 <List>
                     {/* Deine Sidebar-ListItems hier */}
                     <ListItem button className="sidebar-link" onClick={() => handleNavigateTo('/Dashboard')}>
-                        <ListItemText primary="Dashboard" className="Text-Bar"/>
+                        <ListItemText primary="MSPL" className="Text-Bar"/>
                     </ListItem>
                     <ListItem button className="sidebar-link" onClick={() => handleNavigateTo('/Materialansicht')}>
-                        <ListItemText primary="Materialansicht" className="Text-Bar"/>
+                        <ListItemText primary="Lager" className="Text-Bar"/>
                     </ListItem>
                     {userClass === 'LEHRER' && (
                     <ListItem button className="sidebar-link" onClick={() => handleNavigateTo('/Materialverwaltung')}>
-                        <ListItemText primary="Materialverwaltung" className="Text-Bar"/>
+                        <ListItemText primary="Material" className="Text-Bar"/>
                     </ListItem>
                     )
                     }
                     {userClass === 'LEHRER' && (
                     <ListItem button className="sidebar-link" onClick={() => handleNavigateTo('/Benutzerverwaltung')}>
-                        <ListItemText primary="Benutzerverwaltung" className="Text-Bar"/>
+                        <ListItemText primary="Benutzer/Klassen" className="Text-Bar"/>
                     </ListItem>
                     )
                     }
                     {userClass === 'LEHRER' && (
                         <ListItem button className="sidebar-link" onClick={() => handleNavigateTo('/Accessed')}>
-                            <ListItemText primary="Accessed" className="Text-Bar"/>
+                            <ListItemText primary="Zugriff" className="Text-Bar"/>
                         </ListItem>
                     )
                     }
@@ -99,7 +99,7 @@ function Sidebar() {
                         <ListItemText primary="Über uns" className="Text-Bar"/>
                     </ListItem>
                     <ListItem button className="sidebar-link" onClick={() => handleNavigateTo('/Help')}>
-                        <ListItemText primary="Help" className="Text-Bar"/>
+                        <ListItemText primary="FAQ" className="Text-Bar"/>
                     </ListItem>
 
                 </List>
