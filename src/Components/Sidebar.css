@@ -13,6 +13,7 @@
     margin-top: 20px;
     overflow: visible;
 }
+
 .logout-button{
     max-width: 50px;
     align-self: center;
@@ -40,6 +41,7 @@
     align-self: center;
     text-align: left
 }
+
 .sidebar-link:hover {
     background-color: #34495E;
 }

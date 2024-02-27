@@ -16,6 +16,7 @@
         background-color: #f0ffff; /* Hintergrundfarbe */
         border: 1px solid #ccc; /* Rahmen */
         margin-bottom: 50px;
+        border-radius: 5px;
     }
 
     .person {

@@ -1,20 +1,43 @@
-.flex-container{
-    display: flex;
+@media (min-width: 901px) {
+    .flex-container{
+        display: flex;
+    }
+
+    .container {
+        display: flex;
+    }
+
+    .buttonContainer{
+        width: 40%;
+        text-align: left;
+    }
+
+    .button{
+        width: 100% !important;
+        margin-bottom: 5% !important;
+        display: block;
+    }
 }
 
-.container {
-    display: flex;
-}
+@media (max-width: 900px) {
+    .flex-container{
+        display: flex;
+    }
 
-.buttonContainer{
-    width: 30%;
-    text-align: left;
-}
+    .container {
+        display: flex;
+    }
 
-.button{
-    width: 100%;
-    margin-bottom: 5% !important;
-    display: block;
-}
+    .buttonContainer{
+        width: 80%;
+        text-align: left;
+    }
 
+    .button{
+        width: 100% !important;
+        margin-bottom: 5% !important;
+        display: block;
+    }
+
+}
 

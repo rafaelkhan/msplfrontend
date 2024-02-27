@@ -10,7 +10,6 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import Sidebar from '../Components/Sidebar';
 import '../CSS/Materialverwaltung.css';
-import '../CSS/Materialverwaltung_Accessed.css';
 import '../CSS/General.css';
 
 function Materialverwaltung() {

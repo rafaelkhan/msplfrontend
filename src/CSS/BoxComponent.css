@@ -38,7 +38,7 @@
     }
 
     .boxContainer:hover {
-        background-color: #6a5d4d;
+        background-color: #a9a9a9;
         transform: rotateY(30deg) scale(1.1);
     }
 
@@ -53,6 +53,7 @@
     .boxContainer.default {
         background-color: #dfaa55;
     }
+
     .boxItem {
         flex-basis: 6%;
     }
