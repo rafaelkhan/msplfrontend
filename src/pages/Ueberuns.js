@@ -2,7 +2,12 @@ import React from 'react';
 import Sidebar from '../Components/Sidebar';
 import '../CSS/General.css';
 import Materiallager from "./img/Materiallager.jpg";
-import Person from "./img/Person.jpg";
+import Felix from "../Assets/Felix.heic";
+import Sebastian from "../Assets/Sebastian.heic";
+import Rafael from "../Assets/Rafael.heic";
+import Mathias from "../Assets/Mathias.jpeg";
+import Sameer from "../Assets/Sameer.HEIC";
+
 import '../CSS/UeberUns.css';
 
 
@@ -35,23 +40,23 @@ function Ueberuns() {
                     </div>
                     <div className="person-pictures">
                         <div class="image-wrapper">
-                            <img src={Person} alt="Person-img" class="person"/>
+                            <img src={Rafael} alt="Person-img" class="person"/>
                             <div class="description">Rafael Khan</div>
                         </div>
                         <div class="image-wrapper">
-                            <img src={Person} alt="Person-img" class="person"/>
+                            <img src={Sameer} alt="Person-img" class="person"/>
                             <div class="description">Sameer Sufi</div>
                         </div>
                         <div className="image-wrapper">
-                            <img src={Person} alt="Person-img" className="person"/>
+                            <img src={Felix} alt="Person-img" className="person"/>
                             <div className="description">Felix Hofer</div>
                         </div>
                         <div className="image-wrapper">
-                            <img src={Person} alt="Person-img" className="person"/>
+                            <img src={Sebastian} alt="Person-img" className="person"/>
                             <div class="description">Sebastian Damm</div>
                         </div>
                         <div className="image-wrapper">
-                            <img src={Person} alt="Person-img" className="person"/>
+                            <img src={Mathias} alt="Person-img" className="person"/>
                             <div className="description">Mathias Muth</div>
                         </div>
                     </div>
