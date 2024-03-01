@@ -2,9 +2,10 @@
 
 .paperContainer {
     padding: 8px;
+    margin-top: 20px;
     border-radius: 20px;
     cursor: pointer;
-    width: fit-content;
+    width: 50%;
 }
 
 .paperContainer:hover {
@@ -17,10 +18,12 @@
 
 @media (max-width: 768px) {
     .paperContainer {
-        padding: 8px;
+        position: relative;
         border-radius: 20px;
+        margin-top: 10px;
+        padding: 8px;
         cursor: pointer;
-        width: fit-content;
+        width: 80%;
     }
 
 }

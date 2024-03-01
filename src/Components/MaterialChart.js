@@ -26,10 +26,8 @@ function MaterialChart() {
 
     return (
         <Link to="/Materialansicht">
+            <ResponsiveContainer width="100%" height={300}>
             <BarChart
-                width={600} // Beispielbreite, anpassen nach Bedarf
-                height={200
-                }
                 data={materialData}
                 margin={{ top: 5, right: 20, left: 10, bottom: 5 }}
             >
@@ -38,6 +36,7 @@ function MaterialChart() {
                 <Tooltip formatter={(value, name, props) => ['sind noch Verfügbar', value]} />
                 <Bar dataKey="value" fill="#5DADE2" radius={[5,5,0,0]}/>
             </BarChart>
+            </ResponsiveContainer>
         </Link>
     );
 }
