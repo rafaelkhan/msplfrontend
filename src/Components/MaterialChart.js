@@ -26,7 +26,7 @@ function MaterialChart() {
 
     return (
         <Link to="/Materialansicht">
-            <ResponsiveContainer width="100%" height={300}>
+            <ResponsiveContainer width="100%" height="90%">
             <BarChart
                 data={materialData}
                 margin={{ top: 5, right: 20, left: 10, bottom: 5 }}

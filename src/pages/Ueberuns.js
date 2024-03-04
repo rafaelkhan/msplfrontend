@@ -1,7 +1,7 @@
 import React from 'react';
 import Sidebar from '../Components/Sidebar';
 import '../CSS/General.css';
-import Materiallager from "./img/Materiallager.jpg";
+import Materiallager from "../Assets/Materiallager.jpg";
 import Felix from "../Assets/Felix.heic";
 import Sebastian from "../Assets/Sebastian.heic";
 import Rafael from "../Assets/Rafael.heic";
