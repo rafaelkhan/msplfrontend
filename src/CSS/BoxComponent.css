@@ -66,9 +66,23 @@
 
 
 @media (min-width: 601px) and (max-width: 1150px) {
+    .titleAndSearchContainer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px; /* Abstand zwischen dem Titel/Suchleiste und dem nächsten Element */
+    }
 
+    .Titel {
+        flex-grow: 1; /* Erlaubt dem Titel, den verfügbaren Platz zu nutzen */
+    }
+
+    .Flex {
+        flex-grow: 2; /* Erlaubt der Suchleiste, den verfügbaren Platz zu nutzen und sich entsprechend anzupassen */
+    }
     .textFieldMaterialansicht {
         width: 80% !important;
+        margin-left: 0;
     }
 
     .pageContainer {
@@ -123,9 +137,23 @@
 
 
 @media (max-width: 600px) {
+    .titleAndSearchContainer {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .Titel {
+        flex-grow: 1; /* Erlaubt dem Titel, den verfügbaren Platz zu nutzen */
+    }
+
+    .Flex {
+        margin-right: 100px;
+        margin-top: 10px;
+        flex-grow: 2; /* Erlaubt der Suchleiste, den verfügbaren Platz zu nutzen und sich entsprechend anzupassen */
+    }
 
     .textFieldMaterialansicht {
-        width: 90% !important;
+        width: 170% !important;
     }
 
     .pageContainer {
