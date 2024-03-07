@@ -29,7 +29,7 @@
     }
 
     .boxContainer {
-        height: 2.8vw;
+        height: 2.5vw;
         position: relative;
         transition: background-color 0.8s;
         border: 2px solid #576f87;

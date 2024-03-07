@@ -1,74 +1,105 @@
-@media (min-width: 901px) {
-    .specific-content{
-        width: 100%;
-        justify-content: center; /* Horizontal zentrieren */
-        align-items: center; /* Vertikal zentrieren */
-    }
-
-    .paperContainerViewport {
-        padding: 8px;
-        border-radius: 20px;
-        cursor: pointer;
-        width: 90%;
-        height: 35vh;
-        margin-bottom: 2vh;
-    }
-
-    .paperContainerLager {
-        padding: 8px;
-        border-radius: 20px;
-        cursor: pointer;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        width: 90%;
-        height: 35vh;
-        margin-bottom: 2vh;
-    }
-
-    .paperContainerUeberUns {
-        padding: 8px;
-        border-radius: 20px;
-        cursor: pointer;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        width: 90%;
-        height: 35vh;
-        margin-bottom: 2vh;
-    }
-
-    .paperContainerHelp {
-        padding: 8px;
-        border-radius: 20px;
-        cursor: pointer;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        width: 90%;
-        height: 35vh;
-        margin-bottom: 2vh;
-    }
-
-    .paperContainer:hover {
-        background-color: #f1f1f1;
-    }
-
-    .img {
-        font-size: 20vh!important;
-    }
-
+@media (min-width: 701px) {
     .flexContainer {
         display: flex;
     }
 
+    .container-wrapper {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .container-group {
+        display: flex;
+        justify-content: center;
+    }
+
+    .paperContainerViewport  {
+        padding: 8px;
+        border-radius: 20px;
+        cursor: pointer;
+        width: 45%;
+        height: 35vh;
+        margin-bottom: 2vh;
+        margin-left: -5vh;
+        background-color: #f1f1f1;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .paperContainerLager{
+        padding: 8px;
+        border-radius: 20px !important;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 45%;
+        height: 35vh;
+        margin-bottom: 2vh;
+        margin-left: 2vw;
+        background-color: #f1f1f1;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .paperContainerUeberUns{
+        padding: 8px;
+        border-radius: 20px !important;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 45%;
+        height: 35vh;
+        margin-bottom: 2vh;
+        margin-left: -5vh;
+        background-color: #f1f1f1!important;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2) !important;
+    }
+
+    .paperContainerHelp{
+        padding: 8px;
+        border-radius: 20px !important;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 45%;
+        height: 35vh;
+        margin-bottom: 2vh;
+        margin-left: 2vw;
+        background-color: #f1f1f1!important;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2) !important;
+    }
+
+    .paperContainerViewport:hover{
+        background-color: #C0C0C0; /* Dunkelgraue Hintergrundfarbe beim Hover */
+    }
+    .paperContainerLager:hover{
+        background-color: #C0C0C0; /* Dunkelgraue Hintergrundfarbe beim Hover */
+    }
+
+    .paperContainerUeberUns:hover{
+        background-color: #C0C0C0!important; /* Dunkelgraue Hintergrundfarbe beim Hover */
+    }
+
+    .paperContainerHelp:hover{
+        background-color: #C0C0C0!important; /* Dunkelgraue Hintergrundfarbe beim Hover */
+    }
+
+    .name-Willkommen {
+        display: flex;
+        justify-content: center;
+    }
+
+    .img {
+        font-size: 20vh !important;
+    }
 
 }
 
-@media (max-width: 900px) {
+@media (max-width: 700px) {
     .paperContainerViewport {
         padding: 8px;
         border-radius: 20px;
@@ -77,11 +108,13 @@
         height: 35vh;
         margin-bottom: 2vh;
         margin-left: -50px;
+        background-color: #f1f1f1;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
     }
 
     .paperContainerLager {
         padding: 8px;
-        border-radius: 20px;
+        border-radius: 20px !important;
         cursor: pointer;
         display: flex;
         flex-direction: column;
@@ -91,11 +124,13 @@
         height: 35vh;
         margin-bottom: 2vh;
         margin-left: -50px;
+        background-color: #f1f1f1!important;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
     }
 
     .paperContainerUeberUns {
         padding: 8px;
-        border-radius: 20px;
+        border-radius: 20px !important;
         cursor: pointer;
         display: flex;
         flex-direction: column;
@@ -105,11 +140,13 @@
         height: 35vh;
         margin-bottom: 2vh;
         margin-left: -50px;
+        background-color: #f1f1f1!important;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2) !important;
     }
 
     .paperContainerHelp {
         padding: 8px;
-        border-radius: 20px;
+        border-radius: 20px !important;
         cursor: pointer;
         display: flex;
         flex-direction: column;
@@ -118,84 +155,193 @@
         width: 100%;
         height: 35vh;
         margin-bottom: 2vh;
-        margin-left: -18%;
-    }
-
-    .paperContainer:hover {
-        background-color: #f1f1f1;
+        margin-left: -50px;
+        background-color: #f1f1f1!important;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2) !important;
     }
 
     .img {
-        font-size: 20vh!important;
+        font-size: 20vh !important;
     }
 
     .flexContainer {
         display: flex;
     }
 
-    .name-Willkommen{
-        margin-left: -18%;
+    .name-Willkommen {
+        margin-left: -50px;
     }
 }
 
-@media (max-height: 650px) {
+@media (max-height: 650px) and (max-width: 700px){
     .paperContainerViewport {
         padding: 8px;
         border-radius: 20px;
         cursor: pointer;
-        width: 85%;
+        width: 100%;
         height: 300px;
-        margin-bottom: 20px;
+        margin-bottom: 2vh;
+        margin-left: -50px;
+        background-color: #f1f1f1;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
     }
 
     .paperContainerLager {
         padding: 8px;
-        border-radius: 20px;
+        border-radius: 20px !important;
         cursor: pointer;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        width: 85%;
+        width: 100%;
         height: 300px;
-        margin-bottom: 20px;
+        margin-bottom: 2vh;
+        margin-left: -50px;
+        background-color: #f1f1f1!important;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
     }
 
     .paperContainerUeberUns {
         padding: 8px;
-        border-radius: 20px;
+        border-radius: 20px !important;
         cursor: pointer;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        width: 85%;
+        width: 100%;
         height: 300px;
-        margin-bottom: 20px;
+        margin-bottom: 2vh;
+        margin-left: -50px;
+        background-color: #f1f1f1!important;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2) !important;
     }
 
     .paperContainerHelp {
         padding: 8px;
-        border-radius: 20px;
+        border-radius: 20px !important;
         cursor: pointer;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        width: 85%;
+        width: 100%;
         height: 300px;
-        margin-bottom: 20px;
-    }
-
-    .paperContainer:hover {
-        background-color: #f1f1f1;
+        margin-bottom: 2vh;
+        margin-left: -50px;
+        background-color: #f1f1f1!important;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2) !important;
     }
 
     .img {
-        font-size: 200px !important;
+        font-size: 200px;
     }
 
     .flexContainer {
         display: flex;
     }
+
+}
+
+
+@media (max-height: 650px) and (min-width: 701px){
+    .flexContainer {
+        display: flex;
+    }
+
+    .container-wrapper {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .container-group {
+        display: flex;
+        justify-content: center;
+    }
+
+    .paperContainerViewport  {
+        padding: 8px;
+        border-radius: 20px;
+        cursor: pointer;
+        width: 45%;
+        height: 300px;
+        margin-bottom: 2vh;
+        margin-left: -5vh;
+        background-color: #f1f1f1;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .paperContainerLager{
+        padding: 8px;
+        border-radius: 20px !important;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 45%;
+        height: 300px;
+        margin-bottom: 2vh;
+        margin-left: 2vw;
+        background-color: #f1f1f1;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .paperContainerUeberUns{
+        padding: 8px;
+        border-radius: 20px !important;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 45%;
+        height: 300px;
+        margin-bottom: 2vh;
+        margin-left: -5vh;
+        background-color: #f1f1f1!important;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2) !important;
+    }
+
+    .paperContainerHelp{
+        padding: 8px;
+        border-radius: 20px !important;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 45%;
+        height: 300px;
+        margin-bottom: 2vh;
+        margin-left: 2vw;
+        background-color: #f1f1f1!important;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2) !important;
+    }
+
+    .paperContainerViewport:hover{
+        background-color: #C0C0C0; /* Dunkelgraue Hintergrundfarbe beim Hover */
+    }
+    .paperContainerLager:hover{
+        background-color: #C0C0C0; /* Dunkelgraue Hintergrundfarbe beim Hover */
+    }
+
+    .paperContainerUeberUns:hover{
+        background-color: #C0C0C0!important; /* Dunkelgraue Hintergrundfarbe beim Hover */
+    }
+
+    .paperContainerHelp:hover{
+        background-color: #C0C0C0!important; /* Dunkelgraue Hintergrundfarbe beim Hover */
+    }
+
+    .name-Willkommen {
+        display: flex;
+        justify-content: center;
+    }
+
+    .img {
+        font-size: 300px;
+    }
+
 }

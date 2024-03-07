@@ -23,33 +23,40 @@ function Dashboard() {
     const fullname = localStorage.getItem('fullname');
     const firstname = localStorage.getItem('firstname');
     const email = localStorage.getItem('email');
+
     return (
         <div className="flexContainer">
             <Sidebar/>
             <div className="content">
                 <h1 className="Titel">MSPL</h1>
                 <WelcomeMessage firstname={firstname}/>
-
                 <div className="specific-content">
-                    <Paper className="paperContainerViewport">
-                        <Typography variant="h6">Materialübersicht</Typography>
-                        <MaterialChart/>
-                    </Paper>
-                    <Paper className="paperContainerLager" onClick={() => handleNavigateTo('/Materialansicht')}>
-                        <WarehouseIcon className="img"/>
-                        <Typography variant="h6">Lager</Typography>
-                    </Paper>
-                    <Paper className="paperContainerUeberUns" onClick={() => handleNavigateTo('/Ueberuns')}>
-                        <InfoIcon className="img"/>
-                        <Typography variant="h6">Über uns</Typography>
-                    </Paper>
-                    <Paper className="paperContainerHelp" onClick={() => handleNavigateTo('/Help')}>
-                        <HelpIcon className="img"/>
-                        <Typography variant="h6">FAQ</Typography>
-                    </Paper>
+                    <div className="container-wrapper">
+                        <div className="container-group">
+                            <div className="paperContainerViewport" onClick={() => handleNavigateTo('/Materialansicht')}>
+                                <Typography variant="h6">Materialübersicht</Typography>
+                                <MaterialChart/>
+                            </div>
+                            <div className="paperContainerLager" onClick={() => handleNavigateTo('/Materialansicht')}>
+                                <WarehouseIcon className="img"/>
+                                <Typography variant="h6">Lager</Typography>
+                            </div>
+                        </div>
+                        <div className="container-group">
+                            <Paper className="paperContainerUeberUns" onClick={() => handleNavigateTo('/Ueberuns')}>
+                                <InfoIcon className="img"/>
+                                <Typography variant="h6">Über uns</Typography>
+                            </Paper>
+                            <Paper className="paperContainerHelp" onClick={() => handleNavigateTo('/Help')}>
+                                <HelpIcon className="img"/>
+                                <Typography variant="h6">FAQ</Typography>
+                            </Paper>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+
     );
 }
 

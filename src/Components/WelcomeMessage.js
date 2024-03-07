@@ -4,7 +4,7 @@ import '../CSS/Dashboard.css';
 const WelcomeMessage = ({ firstname }) => {
     const [displayedText, setDisplayedText] = useState('');
     const [index, setIndex] = useState(0);
-    const text = `Willkommen ${firstname}.`;
+    const text = `Willkommen ${firstname}`;
 
     useEffect(() => {
         if (index < text.length) {
