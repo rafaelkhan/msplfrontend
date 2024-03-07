@@ -6,7 +6,7 @@ import '../CSS/Help.css'
 function Help() {
 
     const data = {
-        title: "FAQ",
+        title: "Häufige Fragen",
         rows: [
             {
                 title: "Wie funktioniert die Webapplikation?",

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import '../CSS/Dashboard.css';
 
 const WelcomeMessage = ({ firstname }) => {
     const [displayedText, setDisplayedText] = useState('');
