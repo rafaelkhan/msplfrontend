@@ -17,7 +17,7 @@ const WelcomeMessage = ({ firstname }) => {
         }
     }, [index, text]);
 
-    return <h2 className="name-Willkommen">{displayedText}</h2>;
+    return <span className="name-Willkommen">{displayedText}</span>;
 };
 
 export default WelcomeMessage;

@@ -28,8 +28,7 @@ function Dashboard() {
         <div className="flexContainer">
             <Sidebar/>
             <div className="content">
-                <h1 className="Titel">MSPL</h1>
-                <WelcomeMessage firstname={firstname}/>
+                <h1 className="Titel">MSPL, <WelcomeMessage firstname={firstname}/></h1>
                 <div className="specific-content">
                     <div className="container-wrapper">
                         <div className="container-group">

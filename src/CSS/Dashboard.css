@@ -88,11 +88,6 @@
         background-color: #C0C0C0!important; /* Dunkelgraue Hintergrundfarbe beim Hover */
     }
 
-    .name-Willkommen {
-        display: flex;
-        justify-content: center;
-    }
-
     .img {
         font-size: 20vh !important;
     }
@@ -168,9 +163,7 @@
         display: flex;
     }
 
-    .name-Willkommen {
-        margin-left: -50px;
-    }
+
 }
 
 @media (max-height: 650px) and (max-width: 700px){
@@ -333,11 +326,6 @@
 
     .paperContainerHelp:hover{
         background-color: #C0C0C0!important; /* Dunkelgraue Hintergrundfarbe beim Hover */
-    }
-
-    .name-Willkommen {
-        display: flex;
-        justify-content: center;
     }
 
     .img {
