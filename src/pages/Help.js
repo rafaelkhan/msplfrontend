@@ -9,26 +9,23 @@ function Help() {
         title: "Häufige Fragen",
         rows: [
             {
-                title: "Wie funktioniert die Webapplikation?",
-                content: `Die Website ist mit einer Datenbank im Backend verbunden. In der Datenbank sind Materialien des SPL 
-                des SZU gespeichert. Wenn Sie ein Material entnehmen, dann kennzeichnen Sie dies bitte in der Materialverwaltung.`,
+                title: "Wie ist die Webanwendung anzuwenden?",
+                content: `Beginnen Sie mit der Anmeldung über Ihren Edu-Microsoft Account. 
+                Anschließend gelangen Sie zum Dashboard, von wo aus Sie auf verschiedene Seiten zugreifen können. 
+                Bei Fragen besuchen Sie bitte unseren FAQ Bereich, und wenn Sie mehr über unsere Entwickler erfahren möchten, finden Sie weitere Informationen auf der Seite "Über Uns". 
+                Zum Zugriff auf Materialien navigieren Sie zum Lager und klicken Sie auf die visuelle Box, die jene Box repräsentiert, in der das Material gelagert ist. 
+                Die folgenden Schritte sollten intuitiv verständlich sein.`,
             },
             {
-                title: "Wie ist die Webanwendung anzuwenden.",
-                content: `Sie melden sich mit Ihrem Schul-Microsoft Account an und gehen zur Materialübersicht. Dort suchen 
-                Sie dann die ID oder den Namen des Materials, welches Sie genommen haben, und kennzeichnen das mit einem 
-                Klick auf das "-".`,
+                title: "Was soll ich tun, wenn ich vergesse, ein entnommenes Produkt zu erfassen?",
+                content: `Besprechen Sie näheres mit der Lehrperson. Im Notfall tragen Sie die Materialien einfach nachträglich ein. `,
             },
             {
-                title: "Was tun, wenn ich vergesse, ein genommenes Produkt zu erfassen?",
-                content: `Besprechen Sie Näheres mit der Lehrperson. Im Notfall tragen Sie es einfach nachträglich ein. `,
-            },
-            {
-                title: "Warum muss ich die entnommenen Produkte kennzeichnen?",
-                content: `Die Produkte im MSPL sind für Projekte gedacht. Dass immer Produkte zur verfügung stehen,
-                 muss rechtzeitig nachbestellt werden. Anhand der Datenbank sieht man dann wie viele Produkte noch zur Verfügung
-                  stehen und wann nachbestellt werden muss.`,
-            },
+                title: "Warum muss ich die entnommenen Materialien eintragen?",
+                content: `Die Materialien im MSPL sind für schulspezifische Projekte bestimmt. 
+                Um sicherzustellen, dass stets ausreichend Materialien vorhanden sind, ist es wichtig, rechtzeitig neue Bestellungen aufzugeben. 
+                Das Lehrpersonal erhält regelmäßig Einblick in den aktuellen Materialbestand, um rechtzeitig Nachbestellungen zu tätigen. `,
+                },
             {
                 title: "Wie viele Materialien darf ich entnehmen?",
                 content: `Die Anzahl ist mit dem entsprechenden Lehrpersonal zu klären. `,
@@ -36,10 +33,10 @@ function Help() {
             {
                 title: "Kann ich die Webanwendung auf mobilen Geräten verwenden?",
                 content: `Ja, Sie können auch mithilfe eines QR-Codes das Material scannenn und werden sofort 
-                zur Materialverwaltung weitergeleitet. `,
+                zum richtigen Material weitergeleitet. `,
             },
             {
-                title: "Was tun, wenn ich für eine andere Person ein Produkt entnehmen muss?",
+                title: "Wie soll ich es kennzeichnen, wenn ich für eine andere Person ein Material entnehmen muss?",
                 content: `Kennzeichnen Sie bitte, wie viele Produkte Sie entnommen haben und geben Sie dem Lehrpersonal 
                 bescheid.`,
             },
