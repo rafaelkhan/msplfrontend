@@ -208,31 +208,43 @@ module.exports = function(db) {
 
     router.delete('/delete/:id', (req, res) => {
         const { id } = req.params;
-        db.query('DELETE FROM MaterialEntnahmeRecht WHERE MaterialtypID = ?', [id], (err, result) => {
+
+        db.query('DELETE FROM Accessed WHERE BoxID IN (SELECT BoxID FROM Box WHERE MaterialtypID = ?)', [id], (err, result) => {
             if (err) {
-                console.error('Fehler beim Löschen in MaterialEntnahmeRecht: ', err);
+                console.error('Fehler beim Löschen in Accessed: ', err);
                 res.status(500).send('Interner Serverfehler');
                 return;
             }
-            db.query('DELETE FROM Box WHERE MaterialtypID = ?', [id], (err, result) => {
+
+            db.query('DELETE FROM MaterialEntnahmeRecht WHERE MaterialtypID = ?', [id], (err, result) => {
                 if (err) {
-                    console.error('Fehler beim Löschen in Box: ', err);
+                    console.error('Fehler beim Löschen in MaterialEntnahmeRecht: ', err);
                     res.status(500).send('Interner Serverfehler');
                     return;
                 }
-                db.query('DELETE FROM Materialtyp_Materialattribute WHERE MaterialtypID = ?', [id], (err, result) => {
+
+                db.query('DELETE FROM Box WHERE MaterialtypID = ?', [id], (err, result) => {
                     if (err) {
-                        console.error('Fehler beim Löschen in Materialtyp_Materialattribute: ', err);
+                        console.error('Fehler beim Löschen in Box: ', err);
                         res.status(500).send('Interner Serverfehler');
                         return;
                     }
-                    db.query('DELETE FROM Materialtyp WHERE MaterialtypID = ?', [id], (err, result) => {
+
+                    db.query('DELETE FROM Materialtyp_Materialattribute WHERE MaterialtypID = ?', [id], (err, result) => {
                         if (err) {
-                            console.error('Fehler beim Löschen des Materials: ', err);
+                            console.error('Fehler beim Löschen in Materialtyp_Materialattribute: ', err);
                             res.status(500).send('Interner Serverfehler');
-                        } else {
-                            res.status(200).send('Material erfolgreich gelöscht');
+                            return;
                         }
+
+                        db.query('DELETE FROM Materialtyp WHERE MaterialtypID = ?', [id], (err, result) => {
+                            if (err) {
+                                console.error('Fehler beim Löschen des Materials: ', err);
+                                res.status(500).send('Interner Serverfehler');
+                            } else {
+                                res.status(200).send('Material erfolgreich gelöscht');
+                            }
+                        });
                     });
                 });
             });
