@@ -27,7 +27,7 @@ export const signIn = async () => {
             console.error('Fehler beim Abrufen der Nutzerklasse', error);
         }
 
-        const preAuthPath = localStorage.getItem('preAuthPath') || '/dashboard';
+        const preAuthPath = sessionStorage.getItem('preAuthPath') || '/dashboard';
         await window.location.replace(preAuthPath);
         sessionStorage.removeItem('preAuthPath');
 
