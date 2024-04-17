@@ -20,6 +20,13 @@ export const signIn = async () => {
         localStorage.setItem('email', user.username);
 
         const email = user.username;
+        try {
+            const classResponse = await axios.get(`${process.env.REACT_APP_API_URL}/api/user/class`, { params: { email } });
+            localStorage.setItem('accessToken', classResponse.data.accessToken);
+        } catch (error) {
+            console.error('Fehler beim Abrufen der Nutzerklasse', error);
+        }
+
         const preAuthPath = localStorage.getItem('preAuthPath') || '/dashboard';
         window.location.href = preAuthPath;
         localStorage.removeItem('preAuthPath');
@@ -37,13 +44,6 @@ export const signIn = async () => {
             lastName: lastName
         });
 
-        try {
-            const classResponse = await axios.get(`${process.env.REACT_APP_API_URL}/api/user/class`, { params: { email } });
-            localStorage.setItem('accessToken', classResponse.data.accessToken);
-        } catch (error) {
-            console.error('Fehler beim Abrufen der Nutzerklasse', error);
-        }
-        
         return user;
     } catch (error) {
         console.error('An error occurred during login:', error);
