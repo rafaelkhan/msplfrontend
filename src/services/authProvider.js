@@ -21,7 +21,7 @@ export const signIn = async () => {
 
         const email = user.username;
         try {
-            const classResponse = await axios.get('${process.env.REACT_APP_API_URL}/api/user/class', { params: { email } });
+            const classResponse = await axios.get(`${process.env.REACT_APP_API_URL}/api/user/class`, { params: { email } });
             localStorage.setItem('accessToken', classResponse.data.accessToken);
         } catch (error) {
             console.error('Fehler beim Abrufen der Nutzerklasse', error);
