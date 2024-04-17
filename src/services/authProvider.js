@@ -57,6 +57,7 @@ export const signOut = async () => {
         sessionStorage.removeItem("msal.interaction.status")
         sessionStorage.removeItem('user');
         sessionStorage.removeItem('userClass');
+        localStorage.removeItem('preAuthPath');
         window.location.href = '/';
     } catch (error) {
         console.error('An error occurred during sign out:', error);
