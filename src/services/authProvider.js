@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { PublicClientApplication } from '@azure/msal-browser';
 import { msalConfig } from './authConfig';
-import { useNavigate } from 'react-router-dom';
 
 const msalInstance = new PublicClientApplication(msalConfig);
 
@@ -11,7 +10,6 @@ export const signIn = async () => {
     const loginRequest = {
         scopes: ['user.read'],
     };
-    const navigate = useNavigate();
 
     try {
         sessionStorage.removeItem("msal.interaction.status")
@@ -30,8 +28,8 @@ export const signIn = async () => {
         }
 
         const preAuthPath = localStorage.getItem('preAuthPath') || '/dashboard';
-        localStorage.removeItem('preAuthPath');
-        navigate(preAuthPath);
+        await window.location.replace(preAuthPath);
+        sessionStorage.removeItem('preAuthPath');
 
         const fullName = user.name;
         const splitName = fullName.split(' ');
