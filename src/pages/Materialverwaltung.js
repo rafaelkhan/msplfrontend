@@ -57,7 +57,7 @@ function Materialverwaltung() {
             try {
                 const responses = await Promise.all(
                     materialien.map(material =>
-                        await axios.get(`${process.env.REACT_APP_API_URL}/api/Materialtyp/access/${material.MaterialtypID}`)
+                        axios.get(`${process.env.REACT_APP_API_URL}/api/Materialtyp/access/${material.MaterialtypID}`)
                     )
                 );
 

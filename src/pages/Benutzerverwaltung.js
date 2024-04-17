@@ -50,7 +50,7 @@ function Benutzerverwaltung() {
             });
     }, []);
 
-    const handleKlasseChange = (event, userId) => {
+    const handleKlasseChange = async (event, userId) => {
         const selectedClass = event.target.value;
         setSelectedKlasse((prevSelected) => ({
             ...prevSelected,
@@ -111,7 +111,7 @@ function Benutzerverwaltung() {
     };
 
     const updateAccount = (userId, zugabe, entnahmeLimit) => {
-        await axios.put(`${process.env.REACT_APP_API_URL}/api/account/${userId}`, {
+        axios.put(`${process.env.REACT_APP_API_URL}/api/account/${userId}`, {
             zugabe: zugabe ? 1 : 0,
             entnahmeLimit: entnahmeLimit ? 1 : 0
         })
@@ -140,7 +140,7 @@ function Benutzerverwaltung() {
 
     const handleNeueKlasseHinzufuegen = () => {
         if (!neueKlasse) return;
-        await axios.post(`${process.env.REACT_APP_API_URL}/api/schulklassen`, { Schulklasse: neueKlasse })
+        axios.post(`${process.env.REACT_APP_API_URL}/api/schulklassen`, { Schulklasse: neueKlasse })
             .then(() => {
                 const aktualisierteKlassen = [...schulklassen, { Schulklasse: neueKlasse }];
                 setSchulklassen(aktualisierteKlassen);
@@ -151,7 +151,7 @@ function Benutzerverwaltung() {
     };
 
     const handleKlasseLoeschen = (klasse) => {
-        await axios.delete(`${process.env.REACT_APP_API_URL}/api/schulklassen/${klasse}`)
+        axios.delete(`${process.env.REACT_APP_API_URL}/api/schulklassen/${klasse}`)
             .then(() => {
                 setSchulklassen(schulklassen.filter(k => k.Schulklasse !== klasse));
                 setSelectedVerwaltungsKlasse('');
