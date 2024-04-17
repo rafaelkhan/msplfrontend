@@ -38,7 +38,7 @@ export const signIn = async () => {
 
         localStorage.setItem("firstname", firstName);
 
-        await axios.post('${process.env.REACT_APP_API_URL}/api/user/login', {
+        await axios.post(`${process.env.REACT_APP_API_URL}/api/user/login`, {
             email: user.username,
             firstName: firstName,
             lastName: lastName

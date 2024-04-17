@@ -11,7 +11,7 @@ function MaterialChart() {
 
     useEffect(() => {
         // Hier API-Aufruf für alle Materialien
-        axios.get('${process.env.REACT_APP_API_URL}/api/BoxMaterial/boxes')
+        axios.get(`${process.env.REACT_APP_API_URL}/api/BoxMaterial/boxes`)
             .then(response => {
                 // Annahme: Sortiere die Materialien nach SollBestand und wähle die Top 5
                 const sortedMaterialien = response.data.sort((a, b) => b.Menge - a.Menge);

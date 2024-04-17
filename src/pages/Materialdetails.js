@@ -74,7 +74,7 @@ const handleDazugeben = () => {
                 BoxID,
                 change: currentChange
             });
-            await axios.post('${process.env.REACT_APP_API_URL}/api/user/saveAccessedChange', {
+            await axios.post(`${process.env.REACT_APP_API_URL}/api/user/saveAccessedChange`, {
                 email,
                 boxID: BoxID,
                 change: currentChange

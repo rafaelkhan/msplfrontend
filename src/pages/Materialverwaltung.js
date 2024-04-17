@@ -28,11 +28,11 @@ function Materialverwaltung() {
     const updateTriggeredByEnter = useRef(false);
 
     useEffect(() => {
-        axios.get('${process.env.REACT_APP_API_URL}/api/Materialtyp').then(response => {
+        axios.get(`${process.env.REACT_APP_API_URL}/api/Materialtyp`).then(response => {
             setMaterialien(response.data);
         }).catch(error => console.error('Fehler beim Abrufen der Materialdaten:', error));
 
-        axios.get('${process.env.REACT_APP_API_URL}/api/Materialtyp/Box').then(response => {
+        axios.get(`${process.env.REACT_APP_API_URL}/api/Materialtyp/Box`).then(response => {
             const bestandObj = {};
             const initialBoxAssignments = {};
             response.data.forEach(box => {
@@ -43,11 +43,11 @@ function Materialverwaltung() {
             setBoxAssignments(initialBoxAssignments);
         }).catch(error => console.error('Fehler beim Abrufen des aktuellen Bestands:', error));
 
-        axios.get('${process.env.REACT_APP_API_URL}/api/schulklassen').then(response => {
+        axios.get(`${process.env.REACT_APP_API_URL}/api/schulklassen`).then(response => {
             setSchulKlassen(response.data);
         }).catch(error => console.error('Fehler beim Abrufen der Schulklassen:', error));
 
-        axios.get('${process.env.REACT_APP_API_URL}/api/Materialtyp/occupiedBoxes').then(response => {
+        axios.get(`${process.env.REACT_APP_API_URL}/api/Materialtyp/occupiedBoxes`).then(response => {
             setOccupiedBoxes(response.data);
         }).catch(error => console.error('Fehler beim Abrufen besetzter Boxen:', error));
     }, []);
@@ -57,7 +57,7 @@ function Materialverwaltung() {
             try {
                 const responses = await Promise.all(
                     materialien.map(material =>
-                        axios.get(`/api/Materialtyp/access/${material.MaterialtypID}`)
+                        axios.get(`${process.env.REACT_APP_API_URL}/api/Materialtyp/access/${material.MaterialtypID}`)
                     )
                 );
 
@@ -124,16 +124,16 @@ function Materialverwaltung() {
             return;
         }
         await axios.delete(`${process.env.REACT_APP_API_URL}/api/Materialtyp/delete/${id}`);
-        const response = await axios.get('/api/Materialtyp');
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/Materialtyp`);
         setMaterialien(response.data);
-        axios.get('/api/Materialtyp/occupiedBoxes').then(response => {
+        axios.get(`${process.env.REACT_APP_API_URL}/api/Materialtyp/occupiedBoxes`).then(response => {
             setOccupiedBoxes(response.data);
         }).catch(error => console.error('Fehler beim Abrufen besetzter Boxen:', error));
     };
 
     const updateTargetStock = async (materialId, newTargetStock) => {
         await axios.put(`${process.env.REACT_APP_API_URL}/api/Materialtyp/${materialId}/updateTargetStock`, { newTargetStock });
-        const response = await axios.get('/api/Materialtyp');
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/Materialtyp`);
         setMaterialien(response.data);
     };
 
@@ -162,7 +162,7 @@ function Materialverwaltung() {
 
                 const userEmail = localStorage.getItem('email');
 
-                await axios.post('${process.env.REACT_APP_API_URL}/api/user/saveAccessedChange', {
+                await axios.post(`${process.env.REACT_APP_API_URL}/api/user/saveAccessedChange`, {
                     email: userEmail,
                     boxID: boxAssignments[materialtypId],
                     change: stockDifference
@@ -177,10 +177,10 @@ function Materialverwaltung() {
 
     const updateBoxAssignment = (materialId, newBoxId) => {
         setBoxAssignments(prev => ({ ...prev, [materialId]: newBoxId }));
-        axios.put('${process.env.REACT_APP_API_URL}/api/Materialtyp/updateBoxAssignment', { materialtypId: materialId, boxId: newBoxId })
+        axios.put(`${process.env.REACT_APP_API_URL}/api/Materialtyp/updateBoxAssignment`, { materialtypId: materialId, boxId: newBoxId })
             .then(response => console.log('Box-Zuweisung erfolgreich aktualisiert'))
             .catch(error => console.error('Fehler beim Aktualisieren der Box-Zuweisung', error));
-        axios.get('${process.env.REACT_APP_API_URL}/api/Materialtyp/occupiedBoxes').then(response => {
+        axios.get(`${process.env.REACT_APP_API_URL}/api/Materialtyp/occupiedBoxes`).then(response => {
             setOccupiedBoxes(response.data);
         }).catch(error => console.error('Fehler beim Abrufen besetzter Boxen:', error));
     };
