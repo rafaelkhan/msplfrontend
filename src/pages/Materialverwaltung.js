@@ -28,11 +28,11 @@ function Materialverwaltung() {
     const updateTriggeredByEnter = useRef(false);
 
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_API_URL}/api/Materialtyp`).then(response => {
+        await axios.get(`${process.env.REACT_APP_API_URL}/api/Materialtyp`).then(response => {
             setMaterialien(response.data);
         }).catch(error => console.error('Fehler beim Abrufen der Materialdaten:', error));
 
-        axios.get(`${process.env.REACT_APP_API_URL}/api/Materialtyp/Box`).then(response => {
+        await axios.get(`${process.env.REACT_APP_API_URL}/api/Materialtyp/Box`).then(response => {
             const bestandObj = {};
             const initialBoxAssignments = {};
             response.data.forEach(box => {
@@ -43,11 +43,11 @@ function Materialverwaltung() {
             setBoxAssignments(initialBoxAssignments);
         }).catch(error => console.error('Fehler beim Abrufen des aktuellen Bestands:', error));
 
-        axios.get(`${process.env.REACT_APP_API_URL}/api/schulklassen`).then(response => {
+        await axios.get(`${process.env.REACT_APP_API_URL}/api/schulklassen`).then(response => {
             setSchulKlassen(response.data);
         }).catch(error => console.error('Fehler beim Abrufen der Schulklassen:', error));
 
-        axios.get(`${process.env.REACT_APP_API_URL}/api/Materialtyp/occupiedBoxes`).then(response => {
+        await axios.get(`${process.env.REACT_APP_API_URL}/api/Materialtyp/occupiedBoxes`).then(response => {
             setOccupiedBoxes(response.data);
         }).catch(error => console.error('Fehler beim Abrufen besetzter Boxen:', error));
     }, []);
@@ -57,7 +57,7 @@ function Materialverwaltung() {
             try {
                 const responses = await Promise.all(
                     materialien.map(material =>
-                        axios.get(`${process.env.REACT_APP_API_URL}/api/Materialtyp/access/${material.MaterialtypID}`)
+                        await axios.get(`${process.env.REACT_APP_API_URL}/api/Materialtyp/access/${material.MaterialtypID}`)
                     )
                 );
 
@@ -77,7 +77,7 @@ function Materialverwaltung() {
             fetchAccessRights();
         }
         materialien.forEach(material => {
-            axios.get(`${process.env.REACT_APP_API_URL}/api/Materialtyp/access/${material.MaterialtypID}`)
+            await axios.get(`${process.env.REACT_APP_API_URL}/api/Materialtyp/access/${material.MaterialtypID}`)
                 .then(response => {
                     setMaterialAccess(prev => ({
                         ...prev,
@@ -126,7 +126,7 @@ function Materialverwaltung() {
         await axios.delete(`${process.env.REACT_APP_API_URL}/api/Materialtyp/delete/${id}`);
         const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/Materialtyp`);
         setMaterialien(response.data);
-        axios.get(`${process.env.REACT_APP_API_URL}/api/Materialtyp/occupiedBoxes`).then(response => {
+        await axios.get(`${process.env.REACT_APP_API_URL}/api/Materialtyp/occupiedBoxes`).then(response => {
             setOccupiedBoxes(response.data);
         }).catch(error => console.error('Fehler beim Abrufen besetzter Boxen:', error));
     };

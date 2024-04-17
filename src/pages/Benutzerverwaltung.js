@@ -23,7 +23,7 @@ function Benutzerverwaltung() {
     const [neueKlasse, setNeueKlasse] = useState('');
 
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_API_URL}/api/benutzer`)
+        await axios.get(`${process.env.REACT_APP_API_URL}/api/benutzer`)
             .then((response) => {
                 setBenutzer(response.data);
 
@@ -41,7 +41,7 @@ function Benutzerverwaltung() {
                 console.error(error);
             });
 
-        axios.get(`${process.env.REACT_APP_API_URL}/api/schulklassen`)
+        await axios.get(`${process.env.REACT_APP_API_URL}/api/schulklassen`)
             .then((response) => {
                 setSchulklassen(response.data);
             })
@@ -57,11 +57,11 @@ function Benutzerverwaltung() {
             [userId]: selectedClass
         }));
 
-        axios.put(`${process.env.REACT_APP_API_URL}/api/benutzer/${userId}`, { schulklasse: selectedClass })
+        await axios.put(`${process.env.REACT_APP_API_URL}/api/benutzer/${userId}`, { schulklasse: selectedClass })
             .catch((error) => {
                 console.error(error);
             });
-        axios.get(`${process.env.REACT_APP_API_URL}/api/benutzer`)
+        await axios.get(`${process.env.REACT_APP_API_URL}/api/benutzer`)
             .then((response) => {
                 setBenutzer(response.data);
 
@@ -78,7 +78,7 @@ function Benutzerverwaltung() {
             .catch((error) => {
                 console.error(error);
             });
-        axios.get(`${process.env.REACT_APP_API_URL}/api/schulklassen`)
+        await axios.get(`${process.env.REACT_APP_API_URL}/api/schulklassen`)
             .then((response) => {
                 setSchulklassen(response.data);
             })
@@ -111,7 +111,7 @@ function Benutzerverwaltung() {
     };
 
     const updateAccount = (userId, zugabe, entnahmeLimit) => {
-        axios.put(`${process.env.REACT_APP_API_URL}/api/account/${userId}`, {
+        await axios.put(`${process.env.REACT_APP_API_URL}/api/account/${userId}`, {
             zugabe: zugabe ? 1 : 0,
             entnahmeLimit: entnahmeLimit ? 1 : 0
         })
@@ -140,7 +140,7 @@ function Benutzerverwaltung() {
 
     const handleNeueKlasseHinzufuegen = () => {
         if (!neueKlasse) return;
-        axios.post(`${process.env.REACT_APP_API_URL}/api/schulklassen`, { Schulklasse: neueKlasse })
+        await axios.post(`${process.env.REACT_APP_API_URL}/api/schulklassen`, { Schulklasse: neueKlasse })
             .then(() => {
                 const aktualisierteKlassen = [...schulklassen, { Schulklasse: neueKlasse }];
                 setSchulklassen(aktualisierteKlassen);
@@ -151,7 +151,7 @@ function Benutzerverwaltung() {
     };
 
     const handleKlasseLoeschen = (klasse) => {
-        axios.delete(`${process.env.REACT_APP_API_URL}/api/schulklassen/${klasse}`)
+        await axios.delete(`${process.env.REACT_APP_API_URL}/api/schulklassen/${klasse}`)
             .then(() => {
                 setSchulklassen(schulklassen.filter(k => k.Schulklasse !== klasse));
                 setSelectedVerwaltungsKlasse('');
