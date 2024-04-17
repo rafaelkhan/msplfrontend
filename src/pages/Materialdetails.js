@@ -30,23 +30,23 @@ function Materialdetails() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const materialDetailsResponse = await axios.get(`/api/BoxMaterial/materialdaten/${BoxID}`);
+            const materialDetailsResponse = await axios.get(`${process.env.REACT_APP_API_URL}/api/BoxMaterial/materialdaten/${BoxID}`);
             setMaterialDetails(materialDetailsResponse.data[0]);
             setKontingent(materialDetailsResponse.data[0].Kontingent);
 
-            const userRightsResponse = await axios.get(`/api/BoxMaterial/userRights/${email}`);
+            const userRightsResponse = await axios.get(`${process.env.REACT_APP_API_URL}/api/BoxMaterial/userRights/${email}`);
             setUserRights(userRightsResponse.data);
 
             if (userClass !== 'LEHRER') {
-                const entnommeneMengeResponse = await axios.get(`/api/BoxMaterial/entnommeneMenge/${BoxID}/${email}`);
+                const entnommeneMengeResponse = await axios.get(`${process.env.REACT_APP_API_URL}/api/BoxMaterial/entnommeneMenge/${BoxID}/${email}`);
                 setEntnommeneMenge(Math.abs(entnommeneMengeResponse.data.entnommeneMenge));
             }
 
             if (materialDetailsResponse.data[0]) {
-                const materialAttributesResponse = await axios.get(`/api/BoxMaterial/materialAttributes/${materialDetailsResponse.data[0].MaterialtypID}`);
+                const materialAttributesResponse = await axios.get(`${process.env.REACT_APP_API_URL}/api/BoxMaterial/materialAttributes/${materialDetailsResponse.data[0].MaterialtypID}`);
                 setMaterialAttributes(materialAttributesResponse.data);
 
-                const entnahmeRechtResponse = await axios.get(`/api/BoxMaterial/entnahmeRecht/${materialDetailsResponse.data[0].MaterialtypID}`);
+                const entnahmeRechtResponse = await axios.get(`${process.env.REACT_APP_API_URL}/api/BoxMaterial/entnahmeRecht/${materialDetailsResponse.data[0].MaterialtypID}`);
                 const berechtigteKlassen = entnahmeRechtResponse.data.map(item => item.Schulklasse);
                 setIsEntnahmeBerechtigt(berechtigteKlassen.includes(userClass));
             }
@@ -70,11 +70,11 @@ const handleDazugeben = () => {
         }
 
         try {
-            await axios.post(`/api/BoxMaterial/submitChanges`, {
+            await axios.post(`${process.env.REACT_APP_API_URL}/api/BoxMaterial/submitChanges`, {
                 BoxID,
                 change: currentChange
             });
-            await axios.post('/api/user/saveAccessedChange', {
+            await axios.post('${process.env.REACT_APP_API_URL}/api/user/saveAccessedChange', {
                 email,
                 boxID: BoxID,
                 change: currentChange
@@ -85,7 +85,7 @@ const handleDazugeben = () => {
             }));
 
             // Nach dem Aktualisieren der Daten, aktualisiere die entnommene Menge
-            const response = await axios.get(`/api/BoxMaterial/entnommeneMenge/${BoxID}/${email}`);
+            const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/BoxMaterial/entnommeneMenge/${BoxID}/${email}`);
             setEntnommeneMenge(Math.abs(response.data.entnommeneMenge));
 
             setSnackbarMessage(`Erfolgreich ${Math.abs(currentChange)} ${currentChange > 0 ? 'dazugegeben' : 'entnommen'}`);

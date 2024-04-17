@@ -21,7 +21,7 @@ const NewMaterial = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get('/api/Materialtyp/occupiedBoxes')
+        axios.get('${process.env.REACT_APP_API_URL}/api/Materialtyp/occupiedBoxes')
             .then(response => {
                 setOccupiedBoxes(response.data);
             })
@@ -36,13 +36,13 @@ const NewMaterial = () => {
     const handleFormSubmit = async (e) => {
         e.preventDefault();
         try {
-            const checkDuplicateResponse = await axios.get('/api/Materialtyp/check-duplicate', {params: {Bezeichnung: materialData.Bezeichnung}});
+            const checkDuplicateResponse = await axios.get('${process.env.REACT_APP_API_URL}/api/Materialtyp/check-duplicate', {params: {Bezeichnung: materialData.Bezeichnung}});
             if (checkDuplicateResponse.data.duplicate) {
                 setSnackbarMessage('Bezeichnung already exists');
                 setSnackbarOpen(true);
             } else {
                 const materialWithBox = {...materialData, BoxID: selectedBox, Menge: 0};
-                const response = await axios.post('/api/Materialtyp/create', materialWithBox);
+                const response = await axios.post('${process.env.REACT_APP_API_URL}/api/Materialtyp/create', materialWithBox);
                 if (response.status === 201) {
                     setSnackbarMessage('Material erfolgreich hinzugefügt');
                     setSnackbarOpen(true);

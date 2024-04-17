@@ -28,11 +28,11 @@ function Materialverwaltung() {
     const updateTriggeredByEnter = useRef(false);
 
     useEffect(() => {
-        axios.get('/api/Materialtyp').then(response => {
+        axios.get('${process.env.REACT_APP_API_URL}/api/Materialtyp').then(response => {
             setMaterialien(response.data);
         }).catch(error => console.error('Fehler beim Abrufen der Materialdaten:', error));
 
-        axios.get('/api/Materialtyp/Box').then(response => {
+        axios.get('${process.env.REACT_APP_API_URL}/api/Materialtyp/Box').then(response => {
             const bestandObj = {};
             const initialBoxAssignments = {};
             response.data.forEach(box => {
@@ -43,11 +43,11 @@ function Materialverwaltung() {
             setBoxAssignments(initialBoxAssignments);
         }).catch(error => console.error('Fehler beim Abrufen des aktuellen Bestands:', error));
 
-        axios.get('/api/schulklassen').then(response => {
+        axios.get('${process.env.REACT_APP_API_URL}/api/schulklassen').then(response => {
             setSchulKlassen(response.data);
         }).catch(error => console.error('Fehler beim Abrufen der Schulklassen:', error));
 
-        axios.get('/api/Materialtyp/occupiedBoxes').then(response => {
+        axios.get('${process.env.REACT_APP_API_URL}/api/Materialtyp/occupiedBoxes').then(response => {
             setOccupiedBoxes(response.data);
         }).catch(error => console.error('Fehler beim Abrufen besetzter Boxen:', error));
     }, []);
@@ -77,7 +77,7 @@ function Materialverwaltung() {
             fetchAccessRights();
         }
         materialien.forEach(material => {
-            axios.get(`/api/Materialtyp/access/${material.MaterialtypID}`)
+            axios.get(`${process.env.REACT_APP_API_URL}/api/Materialtyp/access/${material.MaterialtypID}`)
                 .then(response => {
                     setMaterialAccess(prev => ({
                         ...prev,
@@ -96,7 +96,7 @@ function Materialverwaltung() {
 
     const updateMaterial = async (materialData) => {
         try {
-            const response = await axios.put(`/api/Materialtyp/update/${materialData.MaterialtypID}`, materialData);
+            const response = await axios.put(`${process.env.REACT_APP_API_URL}/api/Materialtyp/update/${materialData.MaterialtypID}`, materialData);
             if (response.status === 200) {
                 console.log('Material und seine Attribute erfolgreich aktualisiert');
                 setMaterialien(materialien.map(material => {
@@ -123,7 +123,7 @@ function Materialverwaltung() {
             setSnackbarOpen(true);
             return;
         }
-        await axios.delete(`/api/Materialtyp/delete/${id}`);
+        await axios.delete(`${process.env.REACT_APP_API_URL}/api/Materialtyp/delete/${id}`);
         const response = await axios.get('/api/Materialtyp');
         setMaterialien(response.data);
         axios.get('/api/Materialtyp/occupiedBoxes').then(response => {
@@ -132,7 +132,7 @@ function Materialverwaltung() {
     };
 
     const updateTargetStock = async (materialId, newTargetStock) => {
-        await axios.put(`/api/Materialtyp/${materialId}/updateTargetStock`, { newTargetStock });
+        await axios.put(`${process.env.REACT_APP_API_URL}/api/Materialtyp/${materialId}/updateTargetStock`, { newTargetStock });
         const response = await axios.get('/api/Materialtyp');
         setMaterialien(response.data);
     };
@@ -151,7 +151,7 @@ function Materialverwaltung() {
                 return;
             }
 
-            const response = await axios.put(`/api/Materialtyp/Box/updateStock`, { materialtypId, newStock });
+            const response = await axios.put(`${process.env.REACT_APP_API_URL}/api/Materialtyp/Box/updateStock`, { materialtypId, newStock });
             if (response.status === 200) {
                 setBestaende(prevBestaende => ({
                     ...prevBestaende,
@@ -162,7 +162,7 @@ function Materialverwaltung() {
 
                 const userEmail = localStorage.getItem('email');
 
-                await axios.post('/api/user/saveAccessedChange', {
+                await axios.post('${process.env.REACT_APP_API_URL}/api/user/saveAccessedChange', {
                     email: userEmail,
                     boxID: boxAssignments[materialtypId],
                     change: stockDifference
@@ -177,10 +177,10 @@ function Materialverwaltung() {
 
     const updateBoxAssignment = (materialId, newBoxId) => {
         setBoxAssignments(prev => ({ ...prev, [materialId]: newBoxId }));
-        axios.put('/api/Materialtyp/updateBoxAssignment', { materialtypId: materialId, boxId: newBoxId })
+        axios.put('${process.env.REACT_APP_API_URL}/api/Materialtyp/updateBoxAssignment', { materialtypId: materialId, boxId: newBoxId })
             .then(response => console.log('Box-Zuweisung erfolgreich aktualisiert'))
             .catch(error => console.error('Fehler beim Aktualisieren der Box-Zuweisung', error));
-        axios.get('/api/Materialtyp/occupiedBoxes').then(response => {
+        axios.get('${process.env.REACT_APP_API_URL}/api/Materialtyp/occupiedBoxes').then(response => {
             setOccupiedBoxes(response.data);
         }).catch(error => console.error('Fehler beim Abrufen besetzter Boxen:', error));
     };
@@ -248,12 +248,12 @@ function Materialverwaltung() {
         try {
             // Hinzufügen neuer Rechte
             if (accessToAdd.length > 0) {
-                await axios.post(`/api/Materialtyp/access/${materialId}`, { schulklassen: accessToAdd });
+                await axios.post(`${process.env.REACT_APP_API_URL}/api/Materialtyp/access/${materialId}`, { schulklassen: accessToAdd });
             }
 
             // Entfernen nicht mehr benötigter Rechte
             if (accessToRemove.length > 0) {
-                await axios.delete(`/api/Materialtyp/access/${materialId}`, { data: { schulklassen: accessToRemove } });
+                await axios.delete(`${process.env.REACT_APP_API_URL}/api/Materialtyp/access/${materialId}`, { data: { schulklassen: accessToRemove } });
             }
 
             setSnackbarMessage('Zugriffsrechte erfolgreich aktualisiert.');
@@ -272,7 +272,7 @@ function Materialverwaltung() {
         }
 
         try {
-            await axios.put(`/api/Materialtyp/${materialId}/updateKontingent`, { newKontingent: kontingentValue });
+            await axios.put(`${process.env.REACT_APP_API_URL}/api/Materialtyp/${materialId}/updateKontingent`, { newKontingent: kontingentValue });
             setSnackbarMessage(`Kontingent erfolgreich aktualisiert.`);
             setSnackbarOpen(true);
 

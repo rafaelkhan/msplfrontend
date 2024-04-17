@@ -1,7 +1,6 @@
 {
   "name": "mspl",
   "version": "0.1.0",
-  "proxy": "http://localhost:3100",
   "private": true,
   "dependencies": {
     "@azure/msal-browser": "^3.6.0",
