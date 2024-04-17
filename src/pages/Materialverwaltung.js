@@ -175,14 +175,22 @@ function Materialverwaltung() {
     };
 
 
-    const updateBoxAssignment = (materialId, newBoxId) => {
+    const updateBoxAssignment = async (materialId, newBoxId) => {
         setBoxAssignments(prev => ({ ...prev, [materialId]: newBoxId }));
-        axios.put(`${process.env.REACT_APP_API_URL}/api/Materialtyp/updateBoxAssignment`, { materialtypId: materialId, boxId: newBoxId })
-            .then(response => console.log('Box-Zuweisung erfolgreich aktualisiert'))
-            .catch(error => console.error('Fehler beim Aktualisieren der Box-Zuweisung', error));
-        axios.get(`${process.env.REACT_APP_API_URL}/api/Materialtyp/occupiedBoxes`).then(response => {
-            setOccupiedBoxes(response.data);
-        }).catch(error => console.error('Fehler beim Abrufen besetzter Boxen:', error));
+
+        try {
+            const updateResponse = await axios.put(`${process.env.REACT_APP_API_URL}/api/Materialtyp/updateBoxAssignment`, {
+                materialtypId: materialId,
+                boxId: newBoxId
+            });
+            console.log('Box-Zuweisung erfolgreich aktualisiert', updateResponse.data);
+
+            const occupiedResponse = await axios.get(`${process.env.REACT_APP_API_URL}/api/Materialtyp/occupiedBoxes`);
+            setOccupiedBoxes(occupiedResponse.data);
+            console.log('Boxen wurden refreshed', occupiedResponse.data);
+        } catch (error) {
+            console.error('Fehler bei der API-Anfrage:', error);
+        }
     };
 
     const handleStockChange = (materialId, newValue, updateFunction) => {
