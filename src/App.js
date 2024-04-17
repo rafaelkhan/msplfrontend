@@ -23,15 +23,10 @@ function App() {
         userClass = decodedToken.userClass;
     }
 
-    const handlePrivateRoute = (Component) => {
+    const handlePrivateRoute = (Component) => () => {
         if (!isAuthenticated()) {
             const currentPath = window.location.pathname;
-            if(currentPath=='/'){
-                localStorage.setItem('preAuthPath', '/dashboard');
-            }
-            else {
-                localStorage.setItem('preAuthPath', currentPath);
-            }
+            localStorage.setItem('preAuthPath', currentPath === '/' ? '/dashboard' : currentPath);
             return <Navigate replace to="/" />;
         }
         return <Component />;
@@ -42,15 +37,15 @@ function App() {
             <div>
                 <Routes>
                     <Route path="/" element={<Homepage />} />
-                    <Route path="/dashboard" element={handlePrivateRoute(Dashboard)} />
-                    <Route path="/materialansicht" element={handlePrivateRoute(Materialansicht)} />
-                    <Route path="/material-detail/:BoxID" element={handlePrivateRoute(Materialdetails)} />
-                    {userClass === 'LEHRER' && <Route path="/materialverwaltung" element={handlePrivateRoute(Materialverwaltung)} />}
-                    {userClass === 'LEHRER' && <Route path="/benutzerverwaltung" element={handlePrivateRoute(Benutzerverwaltung)} />}
-                    {userClass === 'LEHRER' && <Route path="/accessed" element={handlePrivateRoute(Accessed)} />}
+                    <Route path="/dashboard" element={handlePrivateRoute(Dashboard)()} />
+                    <Route path="/materialansicht" element={handlePrivateRoute(Materialansicht)()} />
+                    <Route path="/material-detail/:BoxID" element={handlePrivateRoute(Materialdetails)()} />
+                    {userClass === 'LEHRER' && <Route path="/materialverwaltung" element={handlePrivateRoute(Materialverwaltung)()} />}
+                    {userClass === 'LEHRER' && <Route path="/benutzerverwaltung" element={handlePrivateRoute(Benutzerverwaltung)()} />}
+                    {userClass === 'LEHRER' && <Route path="/accessed" element={handlePrivateRoute(Accessed)()} />}
                     <Route path="/ueberuns" element={<Ueberuns />} />
                     <Route path="/help" element={<Help />} />
-                    <Route path="/newmaterial" element={handlePrivateRoute(NewMaterial)} />
+                    <Route path="/newmaterial" element={handlePrivateRoute(NewMaterial)()} />
                     <Route path="*" element={<NotFoundPage />} />
                 </Routes>
             </div>
