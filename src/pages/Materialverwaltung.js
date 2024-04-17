@@ -77,7 +77,7 @@ function Materialverwaltung() {
             fetchAccessRights();
         }
         materialien.forEach(material => {
-            await axios.get(`${process.env.REACT_APP_API_URL}/api/Materialtyp/access/${material.MaterialtypID}`)
+            axios.get(`${process.env.REACT_APP_API_URL}/api/Materialtyp/access/${material.MaterialtypID}`)
                 .then(response => {
                     setMaterialAccess(prev => ({
                         ...prev,
