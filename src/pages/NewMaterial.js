@@ -36,7 +36,7 @@ const NewMaterial = () => {
     const handleFormSubmit = async (e) => {
         e.preventDefault();
         try {
-            const checkDuplicateResponse = await axios.get(c, {params: {Bezeichnung: materialData.Bezeichnung}});
+            const checkDuplicateResponse = await axios.get(`${process.env.REACT_APP_API_URL}/api/Materialtyp/check-duplicate`, {params: {Bezeichnung: materialData.Bezeichnung}});
             if (checkDuplicateResponse.data.duplicate) {
                 setSnackbarMessage('Bezeichnung already exists');
                 setSnackbarOpen(true);
