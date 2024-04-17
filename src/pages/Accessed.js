@@ -11,7 +11,7 @@ function Accessed() {
     const [dateSearchTerm, setDateSearchTerm] = useState('');
 
     useEffect(() => {
-        await axios.get(`${process.env.REACT_APP_API_URL}/api/user/getChanges`)
+        axios.get(`${process.env.REACT_APP_API_URL}/api/user/getChanges`)
             .then(response => {
                 setChanges(response.data);
             })

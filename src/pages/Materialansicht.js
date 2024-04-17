@@ -13,7 +13,7 @@ function Materialansicht() {
     const navigate = useNavigate(); // Hook für die Navigation
 
     useEffect(() => {
-        await axios.get(`${process.env.REACT_APP_API_URL}/api/BoxMaterial/boxes`)
+        axios.get(`${process.env.REACT_APP_API_URL}/api/BoxMaterial/boxes`)
             .then(response => {
                 const fullArray = new Array(208).fill(null).map((item, index) => {
                     return response.data.find(box => box.BoxID === index + 1) || { BoxID: index + 1, Menge: 0 };
@@ -25,7 +25,7 @@ function Materialansicht() {
 
     const handleSearch = (searchTerm) => {
         if (searchTerm) {
-            await axios.get(`${process.env.REACT_APP_API_URL}/api/BoxMaterial/search/${searchTerm}`)
+            axios.get(`${process.env.REACT_APP_API_URL}/api/BoxMaterial/search/${searchTerm}`)
                 .then(response => {
                     setSearchResults(response.data);
                 })

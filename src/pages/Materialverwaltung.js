@@ -28,11 +28,11 @@ function Materialverwaltung() {
     const updateTriggeredByEnter = useRef(false);
 
     useEffect(() => {
-        await axios.get(`${process.env.REACT_APP_API_URL}/api/Materialtyp`).then(response => {
+        axios.get(`${process.env.REACT_APP_API_URL}/api/Materialtyp`).then(response => {
             setMaterialien(response.data);
         }).catch(error => console.error('Fehler beim Abrufen der Materialdaten:', error));
 
-        await axios.get(`${process.env.REACT_APP_API_URL}/api/Materialtyp/Box`).then(response => {
+        axios.get(`${process.env.REACT_APP_API_URL}/api/Materialtyp/Box`).then(response => {
             const bestandObj = {};
             const initialBoxAssignments = {};
             response.data.forEach(box => {
@@ -43,11 +43,11 @@ function Materialverwaltung() {
             setBoxAssignments(initialBoxAssignments);
         }).catch(error => console.error('Fehler beim Abrufen des aktuellen Bestands:', error));
 
-        await axios.get(`${process.env.REACT_APP_API_URL}/api/schulklassen`).then(response => {
+        axios.get(`${process.env.REACT_APP_API_URL}/api/schulklassen`).then(response => {
             setSchulKlassen(response.data);
         }).catch(error => console.error('Fehler beim Abrufen der Schulklassen:', error));
 
-        await axios.get(`${process.env.REACT_APP_API_URL}/api/Materialtyp/occupiedBoxes`).then(response => {
+        axios.get(`${process.env.REACT_APP_API_URL}/api/Materialtyp/occupiedBoxes`).then(response => {
             setOccupiedBoxes(response.data);
         }).catch(error => console.error('Fehler beim Abrufen besetzter Boxen:', error));
     }, []);

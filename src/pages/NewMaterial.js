@@ -21,7 +21,7 @@ const NewMaterial = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        await axios.get(`${process.env.REACT_APP_API_URL}/api/Materialtyp/occupiedBoxes`)
+        axios.get(`${process.env.REACT_APP_API_URL}/api/Materialtyp/occupiedBoxes`)
             .then(response => {
                 setOccupiedBoxes(response.data);
             })

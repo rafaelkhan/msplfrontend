@@ -23,7 +23,7 @@ function Benutzerverwaltung() {
     const [neueKlasse, setNeueKlasse] = useState('');
 
     useEffect(() => {
-        await axios.get(`${process.env.REACT_APP_API_URL}/api/benutzer`)
+        axios.get(`${process.env.REACT_APP_API_URL}/api/benutzer`)
             .then((response) => {
                 setBenutzer(response.data);
 
@@ -41,7 +41,7 @@ function Benutzerverwaltung() {
                 console.error(error);
             });
 
-        await axios.get(`${process.env.REACT_APP_API_URL}/api/schulklassen`)
+        axios.get(`${process.env.REACT_APP_API_URL}/api/schulklassen`)
             .then((response) => {
                 setSchulklassen(response.data);
             })
